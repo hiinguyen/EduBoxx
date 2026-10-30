@@ -23,8 +23,8 @@ import 'package:serverpod_auth_idp_client/serverpod_auth_idp_client.dart'
         RefreshTokenNotFoundException;
 
 import '../contract/backend_result.dart';
-import '../local/platform_transport_error_io.dart'
-    if (dart.library.js_interop) '../local/platform_transport_error_web.dart';
+import 'platform_transport_error_io.dart'
+    if (dart.library.js_interop) 'platform_transport_error_web.dart';
 
 /// Maps a server or transport exception to the contract's typed error
 /// (contract.md section 2.4). Never throws.
