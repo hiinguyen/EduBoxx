@@ -4,6 +4,7 @@ import 'package:edubox_flutter/src/contract/network_controller.dart';
 import 'package:edubox_flutter/src/fake/fake_backend.dart';
 import 'package:edubox_flutter/src/screens/sign_in/sign_in_screen.dart';
 import 'package:edubox_flutter/src/screens/teacher_home/teacher_home_screen.dart';
+import 'package:edubox_flutter/src/shell/edu_mark.dart';
 import 'package:edubox_flutter/src/shell/role_shell.dart';
 import 'package:edubox_flutter/src/theme/tokens.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,64 @@ void main() {
     expect(find.text('9A'), findsNothing); // Another teacher's class.
     await expectAccessibilityGuidelines(tester);
   });
+
+  testWidgets('a class without subjects omits the subjects segment', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await pumpEduApp(tester, signedInAs: FixtureKeys.teacherLan);
+    final label = tester.getSemantics(find.text('8A')).getSemanticsData().label;
+    expect(label, isNot(contains('môn')));
+    expect(label, isNot(contains(vi.valueMissing)));
+    expect(label, isNot(endsWith(',')));
+    expect(
+      label,
+      [
+        '8A',
+        vi.classGradeValue(8),
+        vi.classStudentCount(0),
+      ].join(', '),
+    );
+    semantics.dispose();
+  });
+
+  testWidgets('only the panel title is a header, never the whole panel', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await pumpEduApp(tester, signedInAs: FixtureKeys.teacherLan);
+    final panel = tester
+        .getSemantics(find.byKey(TeacherHomeKeys.panel))
+        .getSemanticsData();
+    expect(panel.flagsCollection.isHeader, isFalse);
+    final title = tester
+        .getSemantics(find.text(vi.teacherClassesTitle))
+        .getSemanticsData();
+    expect(title.flagsCollection.isHeader, isTrue);
+    semantics.dispose();
+  });
+
+  testWidgets(
+    'phone app bar: mark on the grid, title one lockup gap after it',
+    (
+      tester,
+    ) async {
+      await pumpEduApp(
+        tester,
+        size: TestSizes.phone,
+        signedInAs: FixtureKeys.teacherLan,
+      );
+      final mark = find.descendant(
+        of: find.byType(AppBar),
+        matching: find.byType(EduMarkGlyph),
+      );
+      expect(mark, findsOneWidget);
+      final markRect = tester.getRect(mark);
+      final titleRect = tester.getRect(find.text(vi.navTeacherOverview));
+      expect(markRect.left, EduSpace.s16);
+      expect(titleRect.left - markRect.right, EduSpace.s8);
+    },
+  );
 
   testWidgets('loading: header, column heads and skeleton rows', (
     tester,

@@ -167,6 +167,7 @@ class _ClassesPanel extends StatelessWidget {
               children: [
                 Expanded(
                   child: Semantics(
+                    container: true,
                     header: true,
                     child: Text(
                       l10n.teacherClassesTitle,
@@ -175,9 +176,13 @@ class _ClassesPanel extends StatelessWidget {
                   ),
                 ),
                 if (value != null)
-                  Text(
-                    l10n.teacherClassesCount(value.length),
-                    style: extras.timestamp,
+                  // The loaded live region already speaks the count; keeping
+                  // it out of the tree leaves the panel title as the header.
+                  ExcludeSemantics(
+                    child: Text(
+                      l10n.teacherClassesCount(value.length),
+                      style: extras.timestamp,
+                    ),
                   ),
               ],
             ),
@@ -429,15 +434,22 @@ class _Subjects extends StatelessWidget {
   }
 }
 
-String _rowLabel(AppLocalizations l10n, ClassSummary item) =>
-    l10n.classRowSemantics(
+String _rowLabel(AppLocalizations l10n, ClassSummary item) {
+  if (item.subjects.isEmpty) {
+    // No subjects segment: never read the visible "-" as "môn -".
+    return [
       item.name,
-      item.gradeLevel,
-      item.subjects.isEmpty
-          ? l10n.valueMissing
-          : EduFormat.joinValues(item.subjects),
-      item.studentCount,
-    );
+      l10n.classGradeValue(item.gradeLevel),
+      l10n.classStudentCount(item.studentCount),
+    ].join(', ');
+  }
+  return l10n.classRowSemantics(
+    item.name,
+    item.gradeLevel,
+    EduFormat.joinValues(item.subjects),
+    item.studentCount,
+  );
+}
 
 class _Skeleton extends StatelessWidget {
   const _Skeleton({required this.compact});

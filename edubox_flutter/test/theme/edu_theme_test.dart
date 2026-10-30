@@ -13,14 +13,14 @@ void main() {
   test('colour scheme is the explicit ledger palette, never a seed', () {
     final scheme = theme.colorScheme;
     expect(scheme.primary, EduColors.accent);
-    expect(scheme.primary, const Color(0xFF1F4C8F));
-    expect(scheme.surface, const Color(0xFFF4F5F8));
-    expect(scheme.onSurface, const Color(0xFF191E29));
-    expect(scheme.onSurfaceVariant, const Color(0xFF4E5666));
+    expect(scheme.primary, const Color(0xFF1D4ED8));
+    expect(scheme.surface, const Color(0xFFEEF2FA));
+    expect(scheme.onSurface, const Color(0xFF161B29));
+    expect(scheme.onSurfaceVariant, const Color(0xFF4A5468));
     expect(scheme.surfaceContainerLowest, const Color(0xFFFFFFFF));
-    expect(scheme.secondaryContainer, const Color(0xFFE6E9EF));
-    expect(scheme.outline, const Color(0xFF7D8594));
-    expect(scheme.outlineVariant, const Color(0xFFDFE3EA));
+    expect(scheme.secondaryContainer, const Color(0xFFE2E8F4));
+    expect(scheme.outline, const Color(0xFF6C7891));
+    expect(scheme.outlineVariant, const Color(0xFFDCE2EF));
     expect(scheme.error, const Color(0xFFB3261E));
     expect(scheme.surfaceTint, Colors.transparent);
     expect(theme.scaffoldBackgroundColor, EduColors.paper);

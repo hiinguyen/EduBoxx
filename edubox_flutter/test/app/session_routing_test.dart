@@ -329,7 +329,7 @@ void main() {
       final app = tester.widget<MaterialApp>(find.byType(MaterialApp));
       expect(app.locale, const Locale('vi'));
       expect(app.themeMode, ThemeMode.light);
-      expect(app.theme!.colorScheme.primary, const Color(0xFF1F4C8F));
+      expect(app.theme!.colorScheme.primary, const Color(0xFF1D4ED8));
     });
 
     testWidgets('a stage change pops an open dialog', (tester) async {

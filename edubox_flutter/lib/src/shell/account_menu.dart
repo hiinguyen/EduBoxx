@@ -61,12 +61,70 @@ class AccountMenuButton extends StatelessWidget {
           child: Text(busy ? l10n.signOutBusy : l10n.signOut),
         ),
       ],
-      builder: (context, controller, _) => IconButton(
-        key: const Key('shell.accountMenu'),
-        tooltip: tooltip,
-        icon: icon,
-        onPressed: () =>
-            controller.isOpen ? controller.close() : controller.open(),
+      builder: (context, controller, _) => Tooltip(
+        // Keeps the control findable by its tooltip and is the accessible
+        // name's single source: the tooltip itself is excluded from
+        // semantics. Its own bubble is held back; the themed bubble below
+        // is the one users see, and it carries no semantics.
+        message: tooltip,
+        excludeFromSemantics: true,
+        triggerMode: TooltipTriggerMode.manual,
+        waitDuration: const Duration(days: 1),
+        child: RawTooltip(
+          semanticsTooltip: null,
+          tooltipBuilder: (context, animation) =>
+              _UnspokenTooltip(animation: animation, message: tooltip),
+          child: IconButton(
+            key: const Key('shell.accountMenu'),
+            icon: Semantics(label: tooltip, child: icon),
+            onPressed: () =>
+                controller.isOpen ? controller.close() : controller.open(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The themed tooltip bubble, excluded from semantics: the account button
+/// already exposes exactly one accessible name.
+class _UnspokenTooltip extends StatelessWidget {
+  const _UnspokenTooltip({required this.animation, required this.message});
+
+  final Animation<double> animation;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final tooltipTheme = theme.tooltipTheme;
+    return FadeTransition(
+      opacity: animation,
+      child: ExcludeSemantics(
+        child: ConstrainedBox(
+          constraints:
+              tooltipTheme.constraints ??
+              const BoxConstraints(minHeight: EduSpace.s24),
+          child: Container(
+            decoration: tooltipTheme.decoration,
+            padding:
+                tooltipTheme.padding ??
+                const EdgeInsets.symmetric(
+                  horizontal: EduSpace.s8,
+                  vertical: EduSpace.s4,
+                ),
+            margin: tooltipTheme.margin,
+            child: Center(
+              widthFactor: 1,
+              heightFactor: 1,
+              child: Text(
+                message,
+                textAlign: tooltipTheme.textAlign ?? TextAlign.start,
+                style: tooltipTheme.textStyle ?? theme.textTheme.bodySmall,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

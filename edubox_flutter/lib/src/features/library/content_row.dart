@@ -14,6 +14,20 @@ String contentTypeLabel(AppLocalizations l10n, ContentType type) =>
       ContentType.exercise => l10n.contentTypeExercise,
     };
 
+/// The row's one semantics label, built from the parts that exist: the
+/// subject segment (and its separator) appears only when there is a subject.
+String contentRowLabel(
+  AppLocalizations l10n,
+  LibraryItem item, {
+  String? subject,
+}) {
+  final type = contentTypeLabel(l10n, item.type);
+  final value = subject?.trim() ?? '';
+  return value.isEmpty
+      ? l10n.libraryItemSemantics(item.title, type)
+      : l10n.contentRowSemantics(item.title, type, value);
+}
+
 IconData _typeGlyph(ContentType type) => switch (type) {
   ContentType.ebook => Icons.menu_book_outlined,
   ContentType.video => Icons.play_circle_outline,
@@ -28,15 +42,10 @@ class ContentRow extends StatelessWidget {
   const ContentRow({
     super.key,
     required this.item,
-    required this.semanticsLabel,
     this.subject,
   });
 
   final LibraryItem item;
-
-  /// `contentRowSemantics` on the home, `libraryItemSemantics` in the
-  /// library.
-  final String semanticsLabel;
 
   /// Shown after the type word on the home ("Sách · Toán"); null in the
   /// library, where the subject is the group heading.
@@ -49,9 +58,10 @@ class ContentRow extends StatelessWidget {
     final text = Theme.of(context).textTheme;
     final scale = MediaQuery.textScalerOf(context).scale(1);
     final meta = text.bodyMedium!.copyWith(color: palette.muted);
+    final hasSubject = subject != null && subject!.trim().isNotEmpty;
     return Semantics(
       container: true,
-      label: semanticsLabel,
+      label: contentRowLabel(l10n, item, subject: subject),
       excludeSemantics: true,
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -91,9 +101,9 @@ class ContentRow extends StatelessWidget {
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
                         Text(contentTypeLabel(l10n, item.type), style: meta),
-                        if (subject != null && subject!.isNotEmpty) ...[
+                        if (hasSubject) ...[
                           const MetaDot(),
-                          Text(subject!, style: meta),
+                          Text(subject!.trim(), style: meta),
                         ],
                       ],
                     ),

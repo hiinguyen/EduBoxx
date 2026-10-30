@@ -6,30 +6,30 @@ import 'package:flutter/painting.dart';
 /// theme extensions in `theme_extensions.dart`. Only `edu_theme.dart` and the
 /// extensions read this file.
 abstract final class EduColors {
-  static const paper = Color(0xFFF4F5F8);
+  static const paper = Color(0xFFEEF2FA);
   static const sheet = Color(0xFFFFFFFF);
-  static const ink = Color(0xFF191E29);
-  static const muted = Color(0xFF4E5666);
-  static const accent = Color(0xFF1F4C8F);
-  static const accentPale = Color(0xFFE5ECF6);
-  static const accentInk = Color(0xFF13305C);
-  static const active = Color(0xFFE6E9EF);
-  static const rule = Color(0xFFDFE3EA);
-  static const control = Color(0xFF7D8594);
-  static const disabled = Color(0xFF8C93A0);
-  static const inverseAccent = Color(0xFFA8C1EA);
-  static const hover = Color(0xFFF9FAFB);
-  static const surfaceFallback = Color(0xFFEFF1F4);
-  static const surfaceDim = Color(0xFFE9EBF0);
+  static const ink = Color(0xFF161B29);
+  static const muted = Color(0xFF4A5468);
+  static const accent = Color(0xFF1D4ED8);
+  static const accentPale = Color(0xFFDEE8FE);
+  static const accentInk = Color(0xFF14318F);
+  static const active = Color(0xFFE2E8F4);
+  static const rule = Color(0xFFDCE2EF);
+  static const control = Color(0xFF6C7891);
+  static const disabled = Color(0xFF8B93A5);
+  static const inverseAccent = Color(0xFFBBD0FF);
+  static const hover = Color(0xFFF7F9FE);
+  static const surfaceFallback = Color(0xFFE7EDF8);
+  static const surfaceDim = Color(0xFFDFE6F3);
 
   // Status families (section 3.4): fg, fill, ink, border.
   static const negative = Color(0xFFB3261E);
   static const negativeFill = Color(0xFFFBE9E7);
   static const negativeInk = Color(0xFF7A1A14);
   static const negativeBorder = Color(0xFFEDB9B3);
-  static const neutralFill = Color(0xFFECEEF2);
-  static const neutralInk = Color(0xFF2E3440);
-  static const neutralBorder = Color(0xFFCDD2DB);
+  static const neutralFill = Color(0xFFE7EBF3);
+  static const neutralInk = Color(0xFF2A3242);
+  static const neutralBorder = Color(0xFFC9D0DE);
 }
 
 /// Font family names; they must match `flutter: fonts:` in pubspec.yaml.

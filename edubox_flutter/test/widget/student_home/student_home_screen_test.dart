@@ -1,12 +1,12 @@
-import 'dart:ui' show SemanticsAction;
-
 import 'package:edubox_fixtures/edubox_fixtures.dart';
 import 'package:edubox_flutter/src/contract/backend_result.dart';
 import 'package:edubox_flutter/src/features/library/content_row.dart';
 import 'package:edubox_flutter/src/screens/sign_in/sign_in_screen.dart';
 import 'package:edubox_flutter/src/screens/student_home/student_home_screen.dart';
 import 'package:edubox_flutter/src/shell/role_shell.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../support/app_harness.dart';
@@ -33,6 +33,79 @@ void main() {
     expect(find.text('Chuyển động cơ học'), findsNothing);
     expect(find.byKey(StudentHomeKeys.openLibrary), findsOneWidget);
     await expectAccessibilityGuidelines(tester);
+  });
+
+  testWidgets('rows: present parts only, never a dangling separator', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await pumpEduApp(tester, signedInAs: FixtureKeys.studentAn);
+    SemanticsData rowLabel(String title) => tester
+        .getSemantics(
+          find.ancestor(
+            of: find.text(title),
+            matching: find.byType(ContentRow),
+          ),
+        )
+        .getSemanticsData();
+    // An empty subject contributes no segment and no trailing comma.
+    expect(
+      rowLabel('Nội quy lớp học').label,
+      vi.libraryItemSemantics('Nội quy lớp học', vi.contentTypeEbook),
+    );
+    // A present subject is still read.
+    expect(
+      rowLabel('Từ vựng Tiếng Anh 7 - Unit 1').label,
+      vi.contentRowSemantics(
+        'Từ vựng Tiếng Anh 7 - Unit 1',
+        vi.contentTypeEbook,
+        'Tiếng Anh',
+      ),
+    );
+    semantics.dispose();
+  });
+
+  testWidgets('account menu has one accessible name with its tooltip shown', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await pumpEduApp(
+      tester,
+      size: TestSizes.phone,
+      signedInAs: FixtureKeys.studentAn,
+    );
+    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+    await gesture.moveTo(
+      tester.getCenter(find.byKey(const Key('shell.accountMenu'))),
+    );
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    final names = <String>[];
+    void visit(SemanticsNode node) {
+      final data = node.getSemanticsData();
+      if (data.label == vi.accountMenuTooltip ||
+          data.tooltip == vi.accountMenuTooltip) {
+        names.add(data.label.isNotEmpty ? data.label : data.tooltip);
+      }
+      node.visitChildren((child) {
+        visit(child);
+        return true;
+      });
+    }
+
+    visit(
+      tester
+          .binding
+          .renderViews
+          .first
+          .owner!
+          .semanticsOwner!
+          .rootSemanticsNode!,
+    );
+    expect(names, [vi.accountMenuTooltip]);
+    semantics.dispose();
   });
 
   testWidgets('loading: skeleton rows, header and enabled button', (

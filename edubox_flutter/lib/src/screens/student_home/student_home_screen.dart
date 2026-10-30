@@ -194,15 +194,7 @@ class _LibraryPanel extends StatelessWidget {
             ),
           for (final (index, item) in newest.indexed) ...[
             if (index > 0) const Divider(),
-            ContentRow(
-              item: item,
-              subject: item.subject,
-              semanticsLabel: l10n.contentRowSemantics(
-                item.title,
-                contentTypeLabel(l10n, item.type),
-                item.subject,
-              ),
-            ),
+            ContentRow(item: item, subject: item.subject),
           ],
         ],
       );

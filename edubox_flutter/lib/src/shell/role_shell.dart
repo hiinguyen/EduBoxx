@@ -125,17 +125,25 @@ class RoleShell extends StatelessWidget {
     if (title != null) {
       return AppBar(
         toolbarHeight: 56,
-        // The h1 shares the canvas's left edge with the first panel.
-        titleSpacing: window.isCompact ? null : window.gutter,
+        // The h1 shares the canvas's left edge with the first panel. On
+        // compact the mark takes that edge and the title follows at the
+        // lockup's 8dp gap, so the pair still starts on the grid.
+        titleSpacing: window.isCompact ? EduSpace.s16 : window.gutter,
         titleTextStyle: Theme.of(context).textTheme.headlineMedium,
-        leading: window.isCompact
-            ? const Padding(
-                padding: EdgeInsets.all(EduSpace.s16),
-                child: EduMarkGlyph(),
-              )
-            : null,
         automaticallyImplyLeading: false,
-        title: Semantics(header: true, child: Text(title!)),
+        title: Semantics(
+          header: true,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (window.isCompact) ...[
+                const EduMarkGlyph(),
+                const SizedBox(width: EduSpace.s8),
+              ],
+              Flexible(child: Text(title!)),
+            ],
+          ),
+        ),
         actions: [
           if (showAccount) accountButton,
           const SizedBox(width: EduSpace.s8),

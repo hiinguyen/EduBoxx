@@ -5,6 +5,7 @@ import 'package:edubox_flutter/src/screens/student_home/student_home_screen.dart
 import 'package:edubox_flutter/src/screens/student_library/student_library_screen.dart';
 import 'package:edubox_flutter/src/shell/block_states.dart';
 import 'package:edubox_flutter/src/shell/role_shell.dart';
+import 'package:edubox_flutter/src/theme/tokens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -191,6 +192,28 @@ void main() {
     expect(phanSo.dx, greaterThan(luyenTap.dx));
     expect(phanSo.dy, luyenTap.dy);
     await expectAccessibilityGuidelines(tester);
+  });
+
+  testWidgets('1920x1080: home and library share one capped content column', (
+    tester,
+  ) async {
+    const size = Size(1920, 1080);
+    await pumpEduApp(tester, size: size, signedInAs: FixtureKeys.studentAn);
+    final homePanel = tester.getRect(find.byKey(StudentHomeKeys.panel));
+    expect(homePanel.width, EduSize.readingMaxWidth);
+
+    await tester.tap(find.text(vi.navLibrary).last);
+    await tester.pumpAndSettle();
+    final libraryPanel = tester.getRect(find.byType(EduPanel).first);
+    expect(libraryPanel.width, closeTo(homePanel.width, 0.1));
+    expect(libraryPanel.left, closeTo(homePanel.left, 0.1));
+    final h1 = tester.getRect(
+      find.descendant(
+        of: find.byKey(StudentLibraryKeys.header),
+        matching: find.text(vi.libraryTitle),
+      ),
+    );
+    expect(h1.left, closeTo(homePanel.left, 0.1));
   });
 
   testWidgets('panel padding: 16 on compact, 24 on tablet', (tester) async {

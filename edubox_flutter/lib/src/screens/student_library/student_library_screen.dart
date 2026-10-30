@@ -41,7 +41,9 @@ class StudentLibraryScreen extends StatelessWidget {
             MediaQuery.textScalerOf(context).scale(1) < 1.5
         ? 2
         : 1;
-    final maxWidth = columns == 2 ? double.infinity : EduSize.readingMaxWidth;
+    // The catalogue keeps the same capped, centred reading column as the
+    // home (app-direction section 5); two columns fit inside that cap.
+    const maxWidth = EduSize.readingMaxWidth;
     final padding = EdgeInsets.symmetric(horizontal: window.gutter);
 
     return Column(
@@ -268,18 +270,11 @@ class _Rows extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
     return Column(
       children: [
         for (final (index, item) in items.indexed) ...[
           if (index > 0) const Divider(),
-          ContentRow(
-            item: item,
-            semanticsLabel: l10n.libraryItemSemantics(
-              item.title,
-              contentTypeLabel(l10n, item.type),
-            ),
-          ),
+          ContentRow(item: item),
         ],
       ],
     );
