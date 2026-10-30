@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
 import 'package:edubox_client/edubox_client.dart';
 
 import '../contract/outbox.dart';
 import '../contract/session.dart';
+import 'local_store_platform_io.dart'
+    if (dart.library.js_interop) 'local_store_platform_web.dart';
 
 part 'local_store.g.dart';
 
@@ -108,12 +108,14 @@ class OutboxEntries extends Table {
 class EduBoxDatabase extends _$EduBoxDatabase {
   EduBoxDatabase(super.e);
 
-  /// A throwaway database for tests and previews.
-  factory EduBoxDatabase.inMemory() => EduBoxDatabase(NativeDatabase.memory());
+  /// A throwaway database for tests and previews. Native-only; on the web it
+  /// throws [UnsupportedError].
+  factory EduBoxDatabase.inMemory() => EduBoxDatabase(openInMemoryExecutor());
 
-  /// Opens the on-disk phase 1 store.
-  factory EduBoxDatabase.open(File file) =>
-      EduBoxDatabase(NativeDatabase.createInBackground(file));
+  /// Opens the phase 1 store. Native builds pass a `File`; the web build
+  /// passes the browser database name.
+  factory EduBoxDatabase.open(DatabaseLocation location) =>
+      EduBoxDatabase(openDatabaseExecutor(location));
 
   @override
   int get schemaVersion => 1;

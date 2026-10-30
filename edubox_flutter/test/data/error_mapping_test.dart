@@ -5,6 +5,7 @@ import 'package:edubox_client/edubox_client.dart';
 import 'package:edubox_flutter/src/contract/backend_result.dart';
 import 'package:edubox_flutter/src/data/error_mapping.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' show ClientException;
 import 'package:serverpod_auth_idp_client/serverpod_auth_idp_client.dart'
     show
         AuthUserBlockedException,
@@ -145,6 +146,20 @@ void main() {
     );
     expect(
       mapApiError(const HttpException('bad response')),
+      isA<BackendUnreachableError>(),
+    );
+  });
+
+  test('browser transport failures are backendUnreachable', () {
+    // package:http's BrowserClient raises ClientException when the fetch
+    // fails; this mapping must work off the web too (every platform uses the
+    // same package:http exception type where relevant).
+    expect(
+      mapApiError(ClientException('XMLHttpRequest error')),
+      isA<BackendUnreachableError>(),
+    );
+    expect(
+      mapApiError(ClientException('Connection closed before full header')),
       isA<BackendUnreachableError>(),
     );
   });
