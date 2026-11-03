@@ -1574,6 +1574,65 @@ class $CachedLibraryItemsTable extends CachedLibraryItems
     type: DriftSqlType.dateTime,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _hasFileMeta = const VerificationMeta(
+    'hasFile',
+  );
+  @override
+  late final GeneratedColumn<bool> hasFile = GeneratedColumn<bool>(
+    'has_file',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("has_file" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _mimeTypeMeta = const VerificationMeta(
+    'mimeType',
+  );
+  @override
+  late final GeneratedColumn<String> mimeType = GeneratedColumn<String>(
+    'mime_type',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _sizeBytesMeta = const VerificationMeta(
+    'sizeBytes',
+  );
+  @override
+  late final GeneratedColumn<int> sizeBytes = GeneratedColumn<int>(
+    'size_bytes',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _pageCountMeta = const VerificationMeta(
+    'pageCount',
+  );
+  @override
+  late final GeneratedColumn<int> pageCount = GeneratedColumn<int>(
+    'page_count',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _durationSecondsMeta = const VerificationMeta(
+    'durationSeconds',
+  );
+  @override
+  late final GeneratedColumn<int> durationSeconds = GeneratedColumn<int>(
+    'duration_seconds',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _positionMeta = const VerificationMeta(
     'position',
   );
@@ -1593,6 +1652,11 @@ class $CachedLibraryItemsTable extends CachedLibraryItems
     subject,
     gradeLevel,
     createdAt,
+    hasFile,
+    mimeType,
+    sizeBytes,
+    pageCount,
+    durationSeconds,
     position,
   ];
   @override
@@ -1650,6 +1714,39 @@ class $CachedLibraryItemsTable extends CachedLibraryItems
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
+    if (data.containsKey('has_file')) {
+      context.handle(
+        _hasFileMeta,
+        hasFile.isAcceptableOrUnknown(data['has_file']!, _hasFileMeta),
+      );
+    }
+    if (data.containsKey('mime_type')) {
+      context.handle(
+        _mimeTypeMeta,
+        mimeType.isAcceptableOrUnknown(data['mime_type']!, _mimeTypeMeta),
+      );
+    }
+    if (data.containsKey('size_bytes')) {
+      context.handle(
+        _sizeBytesMeta,
+        sizeBytes.isAcceptableOrUnknown(data['size_bytes']!, _sizeBytesMeta),
+      );
+    }
+    if (data.containsKey('page_count')) {
+      context.handle(
+        _pageCountMeta,
+        pageCount.isAcceptableOrUnknown(data['page_count']!, _pageCountMeta),
+      );
+    }
+    if (data.containsKey('duration_seconds')) {
+      context.handle(
+        _durationSecondsMeta,
+        durationSeconds.isAcceptableOrUnknown(
+          data['duration_seconds']!,
+          _durationSecondsMeta,
+        ),
+      );
+    }
     if (data.containsKey('position')) {
       context.handle(
         _positionMeta,
@@ -1691,6 +1788,26 @@ class $CachedLibraryItemsTable extends CachedLibraryItems
         DriftSqlType.dateTime,
         data['${effectivePrefix}created_at'],
       )!,
+      hasFile: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}has_file'],
+      )!,
+      mimeType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}mime_type'],
+      ),
+      sizeBytes: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}size_bytes'],
+      ),
+      pageCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}page_count'],
+      ),
+      durationSeconds: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}duration_seconds'],
+      ),
       position: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}position'],
@@ -1712,6 +1829,11 @@ class CachedLibraryItem extends DataClass
   final String subject;
   final int gradeLevel;
   final DateTime createdAt;
+  final bool hasFile;
+  final String? mimeType;
+  final int? sizeBytes;
+  final int? pageCount;
+  final int? durationSeconds;
   final int position;
   const CachedLibraryItem({
     required this.id,
@@ -1720,6 +1842,11 @@ class CachedLibraryItem extends DataClass
     required this.subject,
     required this.gradeLevel,
     required this.createdAt,
+    required this.hasFile,
+    this.mimeType,
+    this.sizeBytes,
+    this.pageCount,
+    this.durationSeconds,
     required this.position,
   });
   @override
@@ -1731,6 +1858,19 @@ class CachedLibraryItem extends DataClass
     map['subject'] = Variable<String>(subject);
     map['grade_level'] = Variable<int>(gradeLevel);
     map['created_at'] = Variable<DateTime>(createdAt);
+    map['has_file'] = Variable<bool>(hasFile);
+    if (!nullToAbsent || mimeType != null) {
+      map['mime_type'] = Variable<String>(mimeType);
+    }
+    if (!nullToAbsent || sizeBytes != null) {
+      map['size_bytes'] = Variable<int>(sizeBytes);
+    }
+    if (!nullToAbsent || pageCount != null) {
+      map['page_count'] = Variable<int>(pageCount);
+    }
+    if (!nullToAbsent || durationSeconds != null) {
+      map['duration_seconds'] = Variable<int>(durationSeconds);
+    }
     map['position'] = Variable<int>(position);
     return map;
   }
@@ -1743,6 +1883,19 @@ class CachedLibraryItem extends DataClass
       subject: Value(subject),
       gradeLevel: Value(gradeLevel),
       createdAt: Value(createdAt),
+      hasFile: Value(hasFile),
+      mimeType: mimeType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(mimeType),
+      sizeBytes: sizeBytes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sizeBytes),
+      pageCount: pageCount == null && nullToAbsent
+          ? const Value.absent()
+          : Value(pageCount),
+      durationSeconds: durationSeconds == null && nullToAbsent
+          ? const Value.absent()
+          : Value(durationSeconds),
       position: Value(position),
     );
   }
@@ -1759,6 +1912,11 @@ class CachedLibraryItem extends DataClass
       subject: serializer.fromJson<String>(json['subject']),
       gradeLevel: serializer.fromJson<int>(json['gradeLevel']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      hasFile: serializer.fromJson<bool>(json['hasFile']),
+      mimeType: serializer.fromJson<String?>(json['mimeType']),
+      sizeBytes: serializer.fromJson<int?>(json['sizeBytes']),
+      pageCount: serializer.fromJson<int?>(json['pageCount']),
+      durationSeconds: serializer.fromJson<int?>(json['durationSeconds']),
       position: serializer.fromJson<int>(json['position']),
     );
   }
@@ -1772,6 +1930,11 @@ class CachedLibraryItem extends DataClass
       'subject': serializer.toJson<String>(subject),
       'gradeLevel': serializer.toJson<int>(gradeLevel),
       'createdAt': serializer.toJson<DateTime>(createdAt),
+      'hasFile': serializer.toJson<bool>(hasFile),
+      'mimeType': serializer.toJson<String?>(mimeType),
+      'sizeBytes': serializer.toJson<int?>(sizeBytes),
+      'pageCount': serializer.toJson<int?>(pageCount),
+      'durationSeconds': serializer.toJson<int?>(durationSeconds),
       'position': serializer.toJson<int>(position),
     };
   }
@@ -1783,6 +1946,11 @@ class CachedLibraryItem extends DataClass
     String? subject,
     int? gradeLevel,
     DateTime? createdAt,
+    bool? hasFile,
+    Value<String?> mimeType = const Value.absent(),
+    Value<int?> sizeBytes = const Value.absent(),
+    Value<int?> pageCount = const Value.absent(),
+    Value<int?> durationSeconds = const Value.absent(),
     int? position,
   }) => CachedLibraryItem(
     id: id ?? this.id,
@@ -1791,6 +1959,13 @@ class CachedLibraryItem extends DataClass
     subject: subject ?? this.subject,
     gradeLevel: gradeLevel ?? this.gradeLevel,
     createdAt: createdAt ?? this.createdAt,
+    hasFile: hasFile ?? this.hasFile,
+    mimeType: mimeType.present ? mimeType.value : this.mimeType,
+    sizeBytes: sizeBytes.present ? sizeBytes.value : this.sizeBytes,
+    pageCount: pageCount.present ? pageCount.value : this.pageCount,
+    durationSeconds: durationSeconds.present
+        ? durationSeconds.value
+        : this.durationSeconds,
     position: position ?? this.position,
   );
   CachedLibraryItem copyWithCompanion(CachedLibraryItemsCompanion data) {
@@ -1803,6 +1978,13 @@ class CachedLibraryItem extends DataClass
           ? data.gradeLevel.value
           : this.gradeLevel,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      hasFile: data.hasFile.present ? data.hasFile.value : this.hasFile,
+      mimeType: data.mimeType.present ? data.mimeType.value : this.mimeType,
+      sizeBytes: data.sizeBytes.present ? data.sizeBytes.value : this.sizeBytes,
+      pageCount: data.pageCount.present ? data.pageCount.value : this.pageCount,
+      durationSeconds: data.durationSeconds.present
+          ? data.durationSeconds.value
+          : this.durationSeconds,
       position: data.position.present ? data.position.value : this.position,
     );
   }
@@ -1816,14 +1998,31 @@ class CachedLibraryItem extends DataClass
           ..write('subject: $subject, ')
           ..write('gradeLevel: $gradeLevel, ')
           ..write('createdAt: $createdAt, ')
+          ..write('hasFile: $hasFile, ')
+          ..write('mimeType: $mimeType, ')
+          ..write('sizeBytes: $sizeBytes, ')
+          ..write('pageCount: $pageCount, ')
+          ..write('durationSeconds: $durationSeconds, ')
           ..write('position: $position')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, type, title, subject, gradeLevel, createdAt, position);
+  int get hashCode => Object.hash(
+    id,
+    type,
+    title,
+    subject,
+    gradeLevel,
+    createdAt,
+    hasFile,
+    mimeType,
+    sizeBytes,
+    pageCount,
+    durationSeconds,
+    position,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1834,6 +2033,11 @@ class CachedLibraryItem extends DataClass
           other.subject == this.subject &&
           other.gradeLevel == this.gradeLevel &&
           other.createdAt == this.createdAt &&
+          other.hasFile == this.hasFile &&
+          other.mimeType == this.mimeType &&
+          other.sizeBytes == this.sizeBytes &&
+          other.pageCount == this.pageCount &&
+          other.durationSeconds == this.durationSeconds &&
           other.position == this.position);
 }
 
@@ -1844,6 +2048,11 @@ class CachedLibraryItemsCompanion extends UpdateCompanion<CachedLibraryItem> {
   final Value<String> subject;
   final Value<int> gradeLevel;
   final Value<DateTime> createdAt;
+  final Value<bool> hasFile;
+  final Value<String?> mimeType;
+  final Value<int?> sizeBytes;
+  final Value<int?> pageCount;
+  final Value<int?> durationSeconds;
   final Value<int> position;
   const CachedLibraryItemsCompanion({
     this.id = const Value.absent(),
@@ -1852,6 +2061,11 @@ class CachedLibraryItemsCompanion extends UpdateCompanion<CachedLibraryItem> {
     this.subject = const Value.absent(),
     this.gradeLevel = const Value.absent(),
     this.createdAt = const Value.absent(),
+    this.hasFile = const Value.absent(),
+    this.mimeType = const Value.absent(),
+    this.sizeBytes = const Value.absent(),
+    this.pageCount = const Value.absent(),
+    this.durationSeconds = const Value.absent(),
     this.position = const Value.absent(),
   });
   CachedLibraryItemsCompanion.insert({
@@ -1861,6 +2075,11 @@ class CachedLibraryItemsCompanion extends UpdateCompanion<CachedLibraryItem> {
     required String subject,
     required int gradeLevel,
     required DateTime createdAt,
+    this.hasFile = const Value.absent(),
+    this.mimeType = const Value.absent(),
+    this.sizeBytes = const Value.absent(),
+    this.pageCount = const Value.absent(),
+    this.durationSeconds = const Value.absent(),
     required int position,
   }) : type = Value(type),
        title = Value(title),
@@ -1875,6 +2094,11 @@ class CachedLibraryItemsCompanion extends UpdateCompanion<CachedLibraryItem> {
     Expression<String>? subject,
     Expression<int>? gradeLevel,
     Expression<DateTime>? createdAt,
+    Expression<bool>? hasFile,
+    Expression<String>? mimeType,
+    Expression<int>? sizeBytes,
+    Expression<int>? pageCount,
+    Expression<int>? durationSeconds,
     Expression<int>? position,
   }) {
     return RawValuesInsertable({
@@ -1884,6 +2108,11 @@ class CachedLibraryItemsCompanion extends UpdateCompanion<CachedLibraryItem> {
       if (subject != null) 'subject': subject,
       if (gradeLevel != null) 'grade_level': gradeLevel,
       if (createdAt != null) 'created_at': createdAt,
+      if (hasFile != null) 'has_file': hasFile,
+      if (mimeType != null) 'mime_type': mimeType,
+      if (sizeBytes != null) 'size_bytes': sizeBytes,
+      if (pageCount != null) 'page_count': pageCount,
+      if (durationSeconds != null) 'duration_seconds': durationSeconds,
       if (position != null) 'position': position,
     });
   }
@@ -1895,6 +2124,11 @@ class CachedLibraryItemsCompanion extends UpdateCompanion<CachedLibraryItem> {
     Value<String>? subject,
     Value<int>? gradeLevel,
     Value<DateTime>? createdAt,
+    Value<bool>? hasFile,
+    Value<String?>? mimeType,
+    Value<int?>? sizeBytes,
+    Value<int?>? pageCount,
+    Value<int?>? durationSeconds,
     Value<int>? position,
   }) {
     return CachedLibraryItemsCompanion(
@@ -1904,6 +2138,11 @@ class CachedLibraryItemsCompanion extends UpdateCompanion<CachedLibraryItem> {
       subject: subject ?? this.subject,
       gradeLevel: gradeLevel ?? this.gradeLevel,
       createdAt: createdAt ?? this.createdAt,
+      hasFile: hasFile ?? this.hasFile,
+      mimeType: mimeType ?? this.mimeType,
+      sizeBytes: sizeBytes ?? this.sizeBytes,
+      pageCount: pageCount ?? this.pageCount,
+      durationSeconds: durationSeconds ?? this.durationSeconds,
       position: position ?? this.position,
     );
   }
@@ -1929,6 +2168,21 @@ class CachedLibraryItemsCompanion extends UpdateCompanion<CachedLibraryItem> {
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
     }
+    if (hasFile.present) {
+      map['has_file'] = Variable<bool>(hasFile.value);
+    }
+    if (mimeType.present) {
+      map['mime_type'] = Variable<String>(mimeType.value);
+    }
+    if (sizeBytes.present) {
+      map['size_bytes'] = Variable<int>(sizeBytes.value);
+    }
+    if (pageCount.present) {
+      map['page_count'] = Variable<int>(pageCount.value);
+    }
+    if (durationSeconds.present) {
+      map['duration_seconds'] = Variable<int>(durationSeconds.value);
+    }
     if (position.present) {
       map['position'] = Variable<int>(position.value);
     }
@@ -1944,6 +2198,11 @@ class CachedLibraryItemsCompanion extends UpdateCompanion<CachedLibraryItem> {
           ..write('subject: $subject, ')
           ..write('gradeLevel: $gradeLevel, ')
           ..write('createdAt: $createdAt, ')
+          ..write('hasFile: $hasFile, ')
+          ..write('mimeType: $mimeType, ')
+          ..write('sizeBytes: $sizeBytes, ')
+          ..write('pageCount: $pageCount, ')
+          ..write('durationSeconds: $durationSeconds, ')
           ..write('position: $position')
           ..write(')'))
         .toString();
@@ -2208,6 +2467,1311 @@ class CachedParentHomesCompanion extends UpdateCompanion<CachedParentHome> {
           ..write('id: $id, ')
           ..write('linkedStudentName: $linkedStudentName, ')
           ..write('cachedAt: $cachedAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $CachedDocumentsTable extends CachedDocuments
+    with TableInfo<$CachedDocumentsTable, CachedDocument> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CachedDocumentsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _kindMeta = const VerificationMeta('kind');
+  @override
+  late final GeneratedColumn<String> kind = GeneratedColumn<String>(
+    'kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _keyMeta = const VerificationMeta('key');
+  @override
+  late final GeneratedColumn<String> key = GeneratedColumn<String>(
+    'key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _payloadJsonMeta = const VerificationMeta(
+    'payloadJson',
+  );
+  @override
+  late final GeneratedColumn<String> payloadJson = GeneratedColumn<String>(
+    'payload_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _cachedAtMeta = const VerificationMeta(
+    'cachedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> cachedAt = GeneratedColumn<DateTime>(
+    'cached_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [kind, key, payloadJson, cachedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'cached_documents';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<CachedDocument> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('kind')) {
+      context.handle(
+        _kindMeta,
+        kind.isAcceptableOrUnknown(data['kind']!, _kindMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_kindMeta);
+    }
+    if (data.containsKey('key')) {
+      context.handle(
+        _keyMeta,
+        key.isAcceptableOrUnknown(data['key']!, _keyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_keyMeta);
+    }
+    if (data.containsKey('payload_json')) {
+      context.handle(
+        _payloadJsonMeta,
+        payloadJson.isAcceptableOrUnknown(
+          data['payload_json']!,
+          _payloadJsonMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_payloadJsonMeta);
+    }
+    if (data.containsKey('cached_at')) {
+      context.handle(
+        _cachedAtMeta,
+        cachedAt.isAcceptableOrUnknown(data['cached_at']!, _cachedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_cachedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {kind, key};
+  @override
+  CachedDocument map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CachedDocument(
+      kind: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}kind'],
+      )!,
+      key: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}key'],
+      )!,
+      payloadJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}payload_json'],
+      )!,
+      cachedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}cached_at'],
+      )!,
+    );
+  }
+
+  @override
+  $CachedDocumentsTable createAlias(String alias) {
+    return $CachedDocumentsTable(attachedDatabase, alias);
+  }
+}
+
+class CachedDocument extends DataClass implements Insertable<CachedDocument> {
+  final String kind;
+  final String key;
+  final String payloadJson;
+  final DateTime cachedAt;
+  const CachedDocument({
+    required this.kind,
+    required this.key,
+    required this.payloadJson,
+    required this.cachedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['kind'] = Variable<String>(kind);
+    map['key'] = Variable<String>(key);
+    map['payload_json'] = Variable<String>(payloadJson);
+    map['cached_at'] = Variable<DateTime>(cachedAt);
+    return map;
+  }
+
+  CachedDocumentsCompanion toCompanion(bool nullToAbsent) {
+    return CachedDocumentsCompanion(
+      kind: Value(kind),
+      key: Value(key),
+      payloadJson: Value(payloadJson),
+      cachedAt: Value(cachedAt),
+    );
+  }
+
+  factory CachedDocument.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CachedDocument(
+      kind: serializer.fromJson<String>(json['kind']),
+      key: serializer.fromJson<String>(json['key']),
+      payloadJson: serializer.fromJson<String>(json['payloadJson']),
+      cachedAt: serializer.fromJson<DateTime>(json['cachedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'kind': serializer.toJson<String>(kind),
+      'key': serializer.toJson<String>(key),
+      'payloadJson': serializer.toJson<String>(payloadJson),
+      'cachedAt': serializer.toJson<DateTime>(cachedAt),
+    };
+  }
+
+  CachedDocument copyWith({
+    String? kind,
+    String? key,
+    String? payloadJson,
+    DateTime? cachedAt,
+  }) => CachedDocument(
+    kind: kind ?? this.kind,
+    key: key ?? this.key,
+    payloadJson: payloadJson ?? this.payloadJson,
+    cachedAt: cachedAt ?? this.cachedAt,
+  );
+  CachedDocument copyWithCompanion(CachedDocumentsCompanion data) {
+    return CachedDocument(
+      kind: data.kind.present ? data.kind.value : this.kind,
+      key: data.key.present ? data.key.value : this.key,
+      payloadJson: data.payloadJson.present
+          ? data.payloadJson.value
+          : this.payloadJson,
+      cachedAt: data.cachedAt.present ? data.cachedAt.value : this.cachedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CachedDocument(')
+          ..write('kind: $kind, ')
+          ..write('key: $key, ')
+          ..write('payloadJson: $payloadJson, ')
+          ..write('cachedAt: $cachedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(kind, key, payloadJson, cachedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CachedDocument &&
+          other.kind == this.kind &&
+          other.key == this.key &&
+          other.payloadJson == this.payloadJson &&
+          other.cachedAt == this.cachedAt);
+}
+
+class CachedDocumentsCompanion extends UpdateCompanion<CachedDocument> {
+  final Value<String> kind;
+  final Value<String> key;
+  final Value<String> payloadJson;
+  final Value<DateTime> cachedAt;
+  final Value<int> rowid;
+  const CachedDocumentsCompanion({
+    this.kind = const Value.absent(),
+    this.key = const Value.absent(),
+    this.payloadJson = const Value.absent(),
+    this.cachedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  CachedDocumentsCompanion.insert({
+    required String kind,
+    required String key,
+    required String payloadJson,
+    required DateTime cachedAt,
+    this.rowid = const Value.absent(),
+  }) : kind = Value(kind),
+       key = Value(key),
+       payloadJson = Value(payloadJson),
+       cachedAt = Value(cachedAt);
+  static Insertable<CachedDocument> custom({
+    Expression<String>? kind,
+    Expression<String>? key,
+    Expression<String>? payloadJson,
+    Expression<DateTime>? cachedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (kind != null) 'kind': kind,
+      if (key != null) 'key': key,
+      if (payloadJson != null) 'payload_json': payloadJson,
+      if (cachedAt != null) 'cached_at': cachedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  CachedDocumentsCompanion copyWith({
+    Value<String>? kind,
+    Value<String>? key,
+    Value<String>? payloadJson,
+    Value<DateTime>? cachedAt,
+    Value<int>? rowid,
+  }) {
+    return CachedDocumentsCompanion(
+      kind: kind ?? this.kind,
+      key: key ?? this.key,
+      payloadJson: payloadJson ?? this.payloadJson,
+      cachedAt: cachedAt ?? this.cachedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (kind.present) {
+      map['kind'] = Variable<String>(kind.value);
+    }
+    if (key.present) {
+      map['key'] = Variable<String>(key.value);
+    }
+    if (payloadJson.present) {
+      map['payload_json'] = Variable<String>(payloadJson.value);
+    }
+    if (cachedAt.present) {
+      map['cached_at'] = Variable<DateTime>(cachedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CachedDocumentsCompanion(')
+          ..write('kind: $kind, ')
+          ..write('key: $key, ')
+          ..write('payloadJson: $payloadJson, ')
+          ..write('cachedAt: $cachedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $DownloadedContentsTable extends DownloadedContents
+    with TableInfo<$DownloadedContentsTable, DownloadedContent> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DownloadedContentsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _contentIdMeta = const VerificationMeta(
+    'contentId',
+  );
+  @override
+  late final GeneratedColumn<int> contentId = GeneratedColumn<int>(
+    'content_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _localPathMeta = const VerificationMeta(
+    'localPath',
+  );
+  @override
+  late final GeneratedColumn<String> localPath = GeneratedColumn<String>(
+    'local_path',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+    'title',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _typeMeta = const VerificationMeta('type');
+  @override
+  late final GeneratedColumn<String> type = GeneratedColumn<String>(
+    'type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _mimeTypeMeta = const VerificationMeta(
+    'mimeType',
+  );
+  @override
+  late final GeneratedColumn<String> mimeType = GeneratedColumn<String>(
+    'mime_type',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _pageCountMeta = const VerificationMeta(
+    'pageCount',
+  );
+  @override
+  late final GeneratedColumn<int> pageCount = GeneratedColumn<int>(
+    'page_count',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _durationSecondsMeta = const VerificationMeta(
+    'durationSeconds',
+  );
+  @override
+  late final GeneratedColumn<int> durationSeconds = GeneratedColumn<int>(
+    'duration_seconds',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _downloadedAtMeta = const VerificationMeta(
+    'downloadedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> downloadedAt = GeneratedColumn<DateTime>(
+    'downloaded_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    contentId,
+    localPath,
+    title,
+    type,
+    mimeType,
+    pageCount,
+    durationSeconds,
+    downloadedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'downloaded_contents';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DownloadedContent> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('content_id')) {
+      context.handle(
+        _contentIdMeta,
+        contentId.isAcceptableOrUnknown(data['content_id']!, _contentIdMeta),
+      );
+    }
+    if (data.containsKey('local_path')) {
+      context.handle(
+        _localPathMeta,
+        localPath.isAcceptableOrUnknown(data['local_path']!, _localPathMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_localPathMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_titleMeta);
+    }
+    if (data.containsKey('type')) {
+      context.handle(
+        _typeMeta,
+        type.isAcceptableOrUnknown(data['type']!, _typeMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_typeMeta);
+    }
+    if (data.containsKey('mime_type')) {
+      context.handle(
+        _mimeTypeMeta,
+        mimeType.isAcceptableOrUnknown(data['mime_type']!, _mimeTypeMeta),
+      );
+    }
+    if (data.containsKey('page_count')) {
+      context.handle(
+        _pageCountMeta,
+        pageCount.isAcceptableOrUnknown(data['page_count']!, _pageCountMeta),
+      );
+    }
+    if (data.containsKey('duration_seconds')) {
+      context.handle(
+        _durationSecondsMeta,
+        durationSeconds.isAcceptableOrUnknown(
+          data['duration_seconds']!,
+          _durationSecondsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('downloaded_at')) {
+      context.handle(
+        _downloadedAtMeta,
+        downloadedAt.isAcceptableOrUnknown(
+          data['downloaded_at']!,
+          _downloadedAtMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_downloadedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {contentId};
+  @override
+  DownloadedContent map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DownloadedContent(
+      contentId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}content_id'],
+      )!,
+      localPath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}local_path'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
+      type: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}type'],
+      )!,
+      mimeType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}mime_type'],
+      ),
+      pageCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}page_count'],
+      ),
+      durationSeconds: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}duration_seconds'],
+      ),
+      downloadedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}downloaded_at'],
+      )!,
+    );
+  }
+
+  @override
+  $DownloadedContentsTable createAlias(String alias) {
+    return $DownloadedContentsTable(attachedDatabase, alias);
+  }
+}
+
+class DownloadedContent extends DataClass
+    implements Insertable<DownloadedContent> {
+  final int contentId;
+  final String localPath;
+  final String title;
+  final String type;
+  final String? mimeType;
+  final int? pageCount;
+  final int? durationSeconds;
+  final DateTime downloadedAt;
+  const DownloadedContent({
+    required this.contentId,
+    required this.localPath,
+    required this.title,
+    required this.type,
+    this.mimeType,
+    this.pageCount,
+    this.durationSeconds,
+    required this.downloadedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['content_id'] = Variable<int>(contentId);
+    map['local_path'] = Variable<String>(localPath);
+    map['title'] = Variable<String>(title);
+    map['type'] = Variable<String>(type);
+    if (!nullToAbsent || mimeType != null) {
+      map['mime_type'] = Variable<String>(mimeType);
+    }
+    if (!nullToAbsent || pageCount != null) {
+      map['page_count'] = Variable<int>(pageCount);
+    }
+    if (!nullToAbsent || durationSeconds != null) {
+      map['duration_seconds'] = Variable<int>(durationSeconds);
+    }
+    map['downloaded_at'] = Variable<DateTime>(downloadedAt);
+    return map;
+  }
+
+  DownloadedContentsCompanion toCompanion(bool nullToAbsent) {
+    return DownloadedContentsCompanion(
+      contentId: Value(contentId),
+      localPath: Value(localPath),
+      title: Value(title),
+      type: Value(type),
+      mimeType: mimeType == null && nullToAbsent
+          ? const Value.absent()
+          : Value(mimeType),
+      pageCount: pageCount == null && nullToAbsent
+          ? const Value.absent()
+          : Value(pageCount),
+      durationSeconds: durationSeconds == null && nullToAbsent
+          ? const Value.absent()
+          : Value(durationSeconds),
+      downloadedAt: Value(downloadedAt),
+    );
+  }
+
+  factory DownloadedContent.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DownloadedContent(
+      contentId: serializer.fromJson<int>(json['contentId']),
+      localPath: serializer.fromJson<String>(json['localPath']),
+      title: serializer.fromJson<String>(json['title']),
+      type: serializer.fromJson<String>(json['type']),
+      mimeType: serializer.fromJson<String?>(json['mimeType']),
+      pageCount: serializer.fromJson<int?>(json['pageCount']),
+      durationSeconds: serializer.fromJson<int?>(json['durationSeconds']),
+      downloadedAt: serializer.fromJson<DateTime>(json['downloadedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'contentId': serializer.toJson<int>(contentId),
+      'localPath': serializer.toJson<String>(localPath),
+      'title': serializer.toJson<String>(title),
+      'type': serializer.toJson<String>(type),
+      'mimeType': serializer.toJson<String?>(mimeType),
+      'pageCount': serializer.toJson<int?>(pageCount),
+      'durationSeconds': serializer.toJson<int?>(durationSeconds),
+      'downloadedAt': serializer.toJson<DateTime>(downloadedAt),
+    };
+  }
+
+  DownloadedContent copyWith({
+    int? contentId,
+    String? localPath,
+    String? title,
+    String? type,
+    Value<String?> mimeType = const Value.absent(),
+    Value<int?> pageCount = const Value.absent(),
+    Value<int?> durationSeconds = const Value.absent(),
+    DateTime? downloadedAt,
+  }) => DownloadedContent(
+    contentId: contentId ?? this.contentId,
+    localPath: localPath ?? this.localPath,
+    title: title ?? this.title,
+    type: type ?? this.type,
+    mimeType: mimeType.present ? mimeType.value : this.mimeType,
+    pageCount: pageCount.present ? pageCount.value : this.pageCount,
+    durationSeconds: durationSeconds.present
+        ? durationSeconds.value
+        : this.durationSeconds,
+    downloadedAt: downloadedAt ?? this.downloadedAt,
+  );
+  DownloadedContent copyWithCompanion(DownloadedContentsCompanion data) {
+    return DownloadedContent(
+      contentId: data.contentId.present ? data.contentId.value : this.contentId,
+      localPath: data.localPath.present ? data.localPath.value : this.localPath,
+      title: data.title.present ? data.title.value : this.title,
+      type: data.type.present ? data.type.value : this.type,
+      mimeType: data.mimeType.present ? data.mimeType.value : this.mimeType,
+      pageCount: data.pageCount.present ? data.pageCount.value : this.pageCount,
+      durationSeconds: data.durationSeconds.present
+          ? data.durationSeconds.value
+          : this.durationSeconds,
+      downloadedAt: data.downloadedAt.present
+          ? data.downloadedAt.value
+          : this.downloadedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DownloadedContent(')
+          ..write('contentId: $contentId, ')
+          ..write('localPath: $localPath, ')
+          ..write('title: $title, ')
+          ..write('type: $type, ')
+          ..write('mimeType: $mimeType, ')
+          ..write('pageCount: $pageCount, ')
+          ..write('durationSeconds: $durationSeconds, ')
+          ..write('downloadedAt: $downloadedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    contentId,
+    localPath,
+    title,
+    type,
+    mimeType,
+    pageCount,
+    durationSeconds,
+    downloadedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DownloadedContent &&
+          other.contentId == this.contentId &&
+          other.localPath == this.localPath &&
+          other.title == this.title &&
+          other.type == this.type &&
+          other.mimeType == this.mimeType &&
+          other.pageCount == this.pageCount &&
+          other.durationSeconds == this.durationSeconds &&
+          other.downloadedAt == this.downloadedAt);
+}
+
+class DownloadedContentsCompanion extends UpdateCompanion<DownloadedContent> {
+  final Value<int> contentId;
+  final Value<String> localPath;
+  final Value<String> title;
+  final Value<String> type;
+  final Value<String?> mimeType;
+  final Value<int?> pageCount;
+  final Value<int?> durationSeconds;
+  final Value<DateTime> downloadedAt;
+  const DownloadedContentsCompanion({
+    this.contentId = const Value.absent(),
+    this.localPath = const Value.absent(),
+    this.title = const Value.absent(),
+    this.type = const Value.absent(),
+    this.mimeType = const Value.absent(),
+    this.pageCount = const Value.absent(),
+    this.durationSeconds = const Value.absent(),
+    this.downloadedAt = const Value.absent(),
+  });
+  DownloadedContentsCompanion.insert({
+    this.contentId = const Value.absent(),
+    required String localPath,
+    required String title,
+    required String type,
+    this.mimeType = const Value.absent(),
+    this.pageCount = const Value.absent(),
+    this.durationSeconds = const Value.absent(),
+    required DateTime downloadedAt,
+  }) : localPath = Value(localPath),
+       title = Value(title),
+       type = Value(type),
+       downloadedAt = Value(downloadedAt);
+  static Insertable<DownloadedContent> custom({
+    Expression<int>? contentId,
+    Expression<String>? localPath,
+    Expression<String>? title,
+    Expression<String>? type,
+    Expression<String>? mimeType,
+    Expression<int>? pageCount,
+    Expression<int>? durationSeconds,
+    Expression<DateTime>? downloadedAt,
+  }) {
+    return RawValuesInsertable({
+      if (contentId != null) 'content_id': contentId,
+      if (localPath != null) 'local_path': localPath,
+      if (title != null) 'title': title,
+      if (type != null) 'type': type,
+      if (mimeType != null) 'mime_type': mimeType,
+      if (pageCount != null) 'page_count': pageCount,
+      if (durationSeconds != null) 'duration_seconds': durationSeconds,
+      if (downloadedAt != null) 'downloaded_at': downloadedAt,
+    });
+  }
+
+  DownloadedContentsCompanion copyWith({
+    Value<int>? contentId,
+    Value<String>? localPath,
+    Value<String>? title,
+    Value<String>? type,
+    Value<String?>? mimeType,
+    Value<int?>? pageCount,
+    Value<int?>? durationSeconds,
+    Value<DateTime>? downloadedAt,
+  }) {
+    return DownloadedContentsCompanion(
+      contentId: contentId ?? this.contentId,
+      localPath: localPath ?? this.localPath,
+      title: title ?? this.title,
+      type: type ?? this.type,
+      mimeType: mimeType ?? this.mimeType,
+      pageCount: pageCount ?? this.pageCount,
+      durationSeconds: durationSeconds ?? this.durationSeconds,
+      downloadedAt: downloadedAt ?? this.downloadedAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (contentId.present) {
+      map['content_id'] = Variable<int>(contentId.value);
+    }
+    if (localPath.present) {
+      map['local_path'] = Variable<String>(localPath.value);
+    }
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (type.present) {
+      map['type'] = Variable<String>(type.value);
+    }
+    if (mimeType.present) {
+      map['mime_type'] = Variable<String>(mimeType.value);
+    }
+    if (pageCount.present) {
+      map['page_count'] = Variable<int>(pageCount.value);
+    }
+    if (durationSeconds.present) {
+      map['duration_seconds'] = Variable<int>(durationSeconds.value);
+    }
+    if (downloadedAt.present) {
+      map['downloaded_at'] = Variable<DateTime>(downloadedAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DownloadedContentsCompanion(')
+          ..write('contentId: $contentId, ')
+          ..write('localPath: $localPath, ')
+          ..write('title: $title, ')
+          ..write('type: $type, ')
+          ..write('mimeType: $mimeType, ')
+          ..write('pageCount: $pageCount, ')
+          ..write('durationSeconds: $durationSeconds, ')
+          ..write('downloadedAt: $downloadedAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $TestAttemptsTable extends TestAttempts
+    with TableInfo<$TestAttemptsTable, TestAttempt> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TestAttemptsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _assignmentIdMeta = const VerificationMeta(
+    'assignmentId',
+  );
+  @override
+  late final GeneratedColumn<int> assignmentId = GeneratedColumn<int>(
+    'assignment_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _clientSubmissionIdMeta =
+      const VerificationMeta('clientSubmissionId');
+  @override
+  late final GeneratedColumn<String> clientSubmissionId =
+      GeneratedColumn<String>(
+        'client_submission_id',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _startedAtMeta = const VerificationMeta(
+    'startedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> startedAt = GeneratedColumn<DateTime>(
+    'started_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _deadlineMeta = const VerificationMeta(
+    'deadline',
+  );
+  @override
+  late final GeneratedColumn<DateTime> deadline = GeneratedColumn<DateTime>(
+    'deadline',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _answersJsonMeta = const VerificationMeta(
+    'answersJson',
+  );
+  @override
+  late final GeneratedColumn<String> answersJson = GeneratedColumn<String>(
+    'answers_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _submittedMeta = const VerificationMeta(
+    'submitted',
+  );
+  @override
+  late final GeneratedColumn<bool> submitted = GeneratedColumn<bool>(
+    'submitted',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("submitted" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    assignmentId,
+    clientSubmissionId,
+    startedAt,
+    deadline,
+    answersJson,
+    submitted,
+    updatedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'test_attempts';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<TestAttempt> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('assignment_id')) {
+      context.handle(
+        _assignmentIdMeta,
+        assignmentId.isAcceptableOrUnknown(
+          data['assignment_id']!,
+          _assignmentIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('client_submission_id')) {
+      context.handle(
+        _clientSubmissionIdMeta,
+        clientSubmissionId.isAcceptableOrUnknown(
+          data['client_submission_id']!,
+          _clientSubmissionIdMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_clientSubmissionIdMeta);
+    }
+    if (data.containsKey('started_at')) {
+      context.handle(
+        _startedAtMeta,
+        startedAt.isAcceptableOrUnknown(data['started_at']!, _startedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_startedAtMeta);
+    }
+    if (data.containsKey('deadline')) {
+      context.handle(
+        _deadlineMeta,
+        deadline.isAcceptableOrUnknown(data['deadline']!, _deadlineMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_deadlineMeta);
+    }
+    if (data.containsKey('answers_json')) {
+      context.handle(
+        _answersJsonMeta,
+        answersJson.isAcceptableOrUnknown(
+          data['answers_json']!,
+          _answersJsonMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_answersJsonMeta);
+    }
+    if (data.containsKey('submitted')) {
+      context.handle(
+        _submittedMeta,
+        submitted.isAcceptableOrUnknown(data['submitted']!, _submittedMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {assignmentId};
+  @override
+  TestAttempt map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TestAttempt(
+      assignmentId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}assignment_id'],
+      )!,
+      clientSubmissionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}client_submission_id'],
+      )!,
+      startedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}started_at'],
+      )!,
+      deadline: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deadline'],
+      )!,
+      answersJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}answers_json'],
+      )!,
+      submitted: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}submitted'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $TestAttemptsTable createAlias(String alias) {
+    return $TestAttemptsTable(attachedDatabase, alias);
+  }
+}
+
+class TestAttempt extends DataClass implements Insertable<TestAttempt> {
+  final int assignmentId;
+  final String clientSubmissionId;
+  final DateTime startedAt;
+  final DateTime deadline;
+  final String answersJson;
+  final bool submitted;
+  final DateTime updatedAt;
+  const TestAttempt({
+    required this.assignmentId,
+    required this.clientSubmissionId,
+    required this.startedAt,
+    required this.deadline,
+    required this.answersJson,
+    required this.submitted,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['assignment_id'] = Variable<int>(assignmentId);
+    map['client_submission_id'] = Variable<String>(clientSubmissionId);
+    map['started_at'] = Variable<DateTime>(startedAt);
+    map['deadline'] = Variable<DateTime>(deadline);
+    map['answers_json'] = Variable<String>(answersJson);
+    map['submitted'] = Variable<bool>(submitted);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  TestAttemptsCompanion toCompanion(bool nullToAbsent) {
+    return TestAttemptsCompanion(
+      assignmentId: Value(assignmentId),
+      clientSubmissionId: Value(clientSubmissionId),
+      startedAt: Value(startedAt),
+      deadline: Value(deadline),
+      answersJson: Value(answersJson),
+      submitted: Value(submitted),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory TestAttempt.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TestAttempt(
+      assignmentId: serializer.fromJson<int>(json['assignmentId']),
+      clientSubmissionId: serializer.fromJson<String>(
+        json['clientSubmissionId'],
+      ),
+      startedAt: serializer.fromJson<DateTime>(json['startedAt']),
+      deadline: serializer.fromJson<DateTime>(json['deadline']),
+      answersJson: serializer.fromJson<String>(json['answersJson']),
+      submitted: serializer.fromJson<bool>(json['submitted']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'assignmentId': serializer.toJson<int>(assignmentId),
+      'clientSubmissionId': serializer.toJson<String>(clientSubmissionId),
+      'startedAt': serializer.toJson<DateTime>(startedAt),
+      'deadline': serializer.toJson<DateTime>(deadline),
+      'answersJson': serializer.toJson<String>(answersJson),
+      'submitted': serializer.toJson<bool>(submitted),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  TestAttempt copyWith({
+    int? assignmentId,
+    String? clientSubmissionId,
+    DateTime? startedAt,
+    DateTime? deadline,
+    String? answersJson,
+    bool? submitted,
+    DateTime? updatedAt,
+  }) => TestAttempt(
+    assignmentId: assignmentId ?? this.assignmentId,
+    clientSubmissionId: clientSubmissionId ?? this.clientSubmissionId,
+    startedAt: startedAt ?? this.startedAt,
+    deadline: deadline ?? this.deadline,
+    answersJson: answersJson ?? this.answersJson,
+    submitted: submitted ?? this.submitted,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
+  TestAttempt copyWithCompanion(TestAttemptsCompanion data) {
+    return TestAttempt(
+      assignmentId: data.assignmentId.present
+          ? data.assignmentId.value
+          : this.assignmentId,
+      clientSubmissionId: data.clientSubmissionId.present
+          ? data.clientSubmissionId.value
+          : this.clientSubmissionId,
+      startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
+      deadline: data.deadline.present ? data.deadline.value : this.deadline,
+      answersJson: data.answersJson.present
+          ? data.answersJson.value
+          : this.answersJson,
+      submitted: data.submitted.present ? data.submitted.value : this.submitted,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TestAttempt(')
+          ..write('assignmentId: $assignmentId, ')
+          ..write('clientSubmissionId: $clientSubmissionId, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('deadline: $deadline, ')
+          ..write('answersJson: $answersJson, ')
+          ..write('submitted: $submitted, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    assignmentId,
+    clientSubmissionId,
+    startedAt,
+    deadline,
+    answersJson,
+    submitted,
+    updatedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TestAttempt &&
+          other.assignmentId == this.assignmentId &&
+          other.clientSubmissionId == this.clientSubmissionId &&
+          other.startedAt == this.startedAt &&
+          other.deadline == this.deadline &&
+          other.answersJson == this.answersJson &&
+          other.submitted == this.submitted &&
+          other.updatedAt == this.updatedAt);
+}
+
+class TestAttemptsCompanion extends UpdateCompanion<TestAttempt> {
+  final Value<int> assignmentId;
+  final Value<String> clientSubmissionId;
+  final Value<DateTime> startedAt;
+  final Value<DateTime> deadline;
+  final Value<String> answersJson;
+  final Value<bool> submitted;
+  final Value<DateTime> updatedAt;
+  const TestAttemptsCompanion({
+    this.assignmentId = const Value.absent(),
+    this.clientSubmissionId = const Value.absent(),
+    this.startedAt = const Value.absent(),
+    this.deadline = const Value.absent(),
+    this.answersJson = const Value.absent(),
+    this.submitted = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+  });
+  TestAttemptsCompanion.insert({
+    this.assignmentId = const Value.absent(),
+    required String clientSubmissionId,
+    required DateTime startedAt,
+    required DateTime deadline,
+    required String answersJson,
+    this.submitted = const Value.absent(),
+    required DateTime updatedAt,
+  }) : clientSubmissionId = Value(clientSubmissionId),
+       startedAt = Value(startedAt),
+       deadline = Value(deadline),
+       answersJson = Value(answersJson),
+       updatedAt = Value(updatedAt);
+  static Insertable<TestAttempt> custom({
+    Expression<int>? assignmentId,
+    Expression<String>? clientSubmissionId,
+    Expression<DateTime>? startedAt,
+    Expression<DateTime>? deadline,
+    Expression<String>? answersJson,
+    Expression<bool>? submitted,
+    Expression<DateTime>? updatedAt,
+  }) {
+    return RawValuesInsertable({
+      if (assignmentId != null) 'assignment_id': assignmentId,
+      if (clientSubmissionId != null)
+        'client_submission_id': clientSubmissionId,
+      if (startedAt != null) 'started_at': startedAt,
+      if (deadline != null) 'deadline': deadline,
+      if (answersJson != null) 'answers_json': answersJson,
+      if (submitted != null) 'submitted': submitted,
+      if (updatedAt != null) 'updated_at': updatedAt,
+    });
+  }
+
+  TestAttemptsCompanion copyWith({
+    Value<int>? assignmentId,
+    Value<String>? clientSubmissionId,
+    Value<DateTime>? startedAt,
+    Value<DateTime>? deadline,
+    Value<String>? answersJson,
+    Value<bool>? submitted,
+    Value<DateTime>? updatedAt,
+  }) {
+    return TestAttemptsCompanion(
+      assignmentId: assignmentId ?? this.assignmentId,
+      clientSubmissionId: clientSubmissionId ?? this.clientSubmissionId,
+      startedAt: startedAt ?? this.startedAt,
+      deadline: deadline ?? this.deadline,
+      answersJson: answersJson ?? this.answersJson,
+      submitted: submitted ?? this.submitted,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (assignmentId.present) {
+      map['assignment_id'] = Variable<int>(assignmentId.value);
+    }
+    if (clientSubmissionId.present) {
+      map['client_submission_id'] = Variable<String>(clientSubmissionId.value);
+    }
+    if (startedAt.present) {
+      map['started_at'] = Variable<DateTime>(startedAt.value);
+    }
+    if (deadline.present) {
+      map['deadline'] = Variable<DateTime>(deadline.value);
+    }
+    if (answersJson.present) {
+      map['answers_json'] = Variable<String>(answersJson.value);
+    }
+    if (submitted.present) {
+      map['submitted'] = Variable<bool>(submitted.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TestAttemptsCompanion(')
+          ..write('assignmentId: $assignmentId, ')
+          ..write('clientSubmissionId: $clientSubmissionId, ')
+          ..write('startedAt: $startedAt, ')
+          ..write('deadline: $deadline, ')
+          ..write('answersJson: $answersJson, ')
+          ..write('submitted: $submitted, ')
+          ..write('updatedAt: $updatedAt')
           ..write(')'))
         .toString();
   }
@@ -2683,6 +4247,12 @@ abstract class _$EduBoxDatabase extends GeneratedDatabase {
       $CachedLibraryItemsTable(this);
   late final $CachedParentHomesTable cachedParentHomes =
       $CachedParentHomesTable(this);
+  late final $CachedDocumentsTable cachedDocuments = $CachedDocumentsTable(
+    this,
+  );
+  late final $DownloadedContentsTable downloadedContents =
+      $DownloadedContentsTable(this);
+  late final $TestAttemptsTable testAttempts = $TestAttemptsTable(this);
   late final $OutboxEntriesTable outboxEntries = $OutboxEntriesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
@@ -2695,6 +4265,9 @@ abstract class _$EduBoxDatabase extends GeneratedDatabase {
     cachedLibraryClasses,
     cachedLibraryItems,
     cachedParentHomes,
+    cachedDocuments,
+    downloadedContents,
+    testAttempts,
     outboxEntries,
   ];
 }
@@ -3566,6 +5139,11 @@ typedef $$CachedLibraryItemsTableCreateCompanionBuilder =
       required String subject,
       required int gradeLevel,
       required DateTime createdAt,
+      Value<bool> hasFile,
+      Value<String?> mimeType,
+      Value<int?> sizeBytes,
+      Value<int?> pageCount,
+      Value<int?> durationSeconds,
       required int position,
     });
 typedef $$CachedLibraryItemsTableUpdateCompanionBuilder =
@@ -3576,6 +5154,11 @@ typedef $$CachedLibraryItemsTableUpdateCompanionBuilder =
       Value<String> subject,
       Value<int> gradeLevel,
       Value<DateTime> createdAt,
+      Value<bool> hasFile,
+      Value<String?> mimeType,
+      Value<int?> sizeBytes,
+      Value<int?> pageCount,
+      Value<int?> durationSeconds,
       Value<int> position,
     });
 
@@ -3615,6 +5198,31 @@ class $$CachedLibraryItemsTableFilterComposer
 
   ColumnFilters<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get hasFile => $composableBuilder(
+    column: $table.hasFile,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mimeType => $composableBuilder(
+    column: $table.mimeType,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get sizeBytes => $composableBuilder(
+    column: $table.sizeBytes,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get pageCount => $composableBuilder(
+    column: $table.pageCount,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get durationSeconds => $composableBuilder(
+    column: $table.durationSeconds,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -3663,6 +5271,31 @@ class $$CachedLibraryItemsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<bool> get hasFile => $composableBuilder(
+    column: $table.hasFile,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mimeType => $composableBuilder(
+    column: $table.mimeType,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get sizeBytes => $composableBuilder(
+    column: $table.sizeBytes,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get pageCount => $composableBuilder(
+    column: $table.pageCount,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get durationSeconds => $composableBuilder(
+    column: $table.durationSeconds,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<int> get position => $composableBuilder(
     column: $table.position,
     builder: (column) => ColumnOrderings(column),
@@ -3697,6 +5330,23 @@ class $$CachedLibraryItemsTableAnnotationComposer
 
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get hasFile =>
+      $composableBuilder(column: $table.hasFile, builder: (column) => column);
+
+  GeneratedColumn<String> get mimeType =>
+      $composableBuilder(column: $table.mimeType, builder: (column) => column);
+
+  GeneratedColumn<int> get sizeBytes =>
+      $composableBuilder(column: $table.sizeBytes, builder: (column) => column);
+
+  GeneratedColumn<int> get pageCount =>
+      $composableBuilder(column: $table.pageCount, builder: (column) => column);
+
+  GeneratedColumn<int> get durationSeconds => $composableBuilder(
+    column: $table.durationSeconds,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<int> get position =>
       $composableBuilder(column: $table.position, builder: (column) => column);
@@ -3748,6 +5398,11 @@ class $$CachedLibraryItemsTableTableManager
                 Value<String> subject = const Value.absent(),
                 Value<int> gradeLevel = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
+                Value<bool> hasFile = const Value.absent(),
+                Value<String?> mimeType = const Value.absent(),
+                Value<int?> sizeBytes = const Value.absent(),
+                Value<int?> pageCount = const Value.absent(),
+                Value<int?> durationSeconds = const Value.absent(),
                 Value<int> position = const Value.absent(),
               }) => CachedLibraryItemsCompanion(
                 id: id,
@@ -3756,6 +5411,11 @@ class $$CachedLibraryItemsTableTableManager
                 subject: subject,
                 gradeLevel: gradeLevel,
                 createdAt: createdAt,
+                hasFile: hasFile,
+                mimeType: mimeType,
+                sizeBytes: sizeBytes,
+                pageCount: pageCount,
+                durationSeconds: durationSeconds,
                 position: position,
               ),
           createCompanionCallback:
@@ -3766,6 +5426,11 @@ class $$CachedLibraryItemsTableTableManager
                 required String subject,
                 required int gradeLevel,
                 required DateTime createdAt,
+                Value<bool> hasFile = const Value.absent(),
+                Value<String?> mimeType = const Value.absent(),
+                Value<int?> sizeBytes = const Value.absent(),
+                Value<int?> pageCount = const Value.absent(),
+                Value<int?> durationSeconds = const Value.absent(),
                 required int position,
               }) => CachedLibraryItemsCompanion.insert(
                 id: id,
@@ -3774,6 +5439,11 @@ class $$CachedLibraryItemsTableTableManager
                 subject: subject,
                 gradeLevel: gradeLevel,
                 createdAt: createdAt,
+                hasFile: hasFile,
+                mimeType: mimeType,
+                sizeBytes: sizeBytes,
+                pageCount: pageCount,
+                durationSeconds: durationSeconds,
                 position: position,
               ),
           withReferenceMapper: (p0) => p0
@@ -3974,6 +5644,701 @@ typedef $$CachedParentHomesTableProcessedTableManager =
         >,
       ),
       CachedParentHome,
+      PrefetchHooks Function()
+    >;
+typedef $$CachedDocumentsTableCreateCompanionBuilder =
+    CachedDocumentsCompanion Function({
+      required String kind,
+      required String key,
+      required String payloadJson,
+      required DateTime cachedAt,
+      Value<int> rowid,
+    });
+typedef $$CachedDocumentsTableUpdateCompanionBuilder =
+    CachedDocumentsCompanion Function({
+      Value<String> kind,
+      Value<String> key,
+      Value<String> payloadJson,
+      Value<DateTime> cachedAt,
+      Value<int> rowid,
+    });
+
+class $$CachedDocumentsTableFilterComposer
+    extends Composer<_$EduBoxDatabase, $CachedDocumentsTable> {
+  $$CachedDocumentsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get payloadJson => $composableBuilder(
+    column: $table.payloadJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get cachedAt => $composableBuilder(
+    column: $table.cachedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$CachedDocumentsTableOrderingComposer
+    extends Composer<_$EduBoxDatabase, $CachedDocumentsTable> {
+  $$CachedDocumentsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get kind => $composableBuilder(
+    column: $table.kind,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get key => $composableBuilder(
+    column: $table.key,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get payloadJson => $composableBuilder(
+    column: $table.payloadJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get cachedAt => $composableBuilder(
+    column: $table.cachedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$CachedDocumentsTableAnnotationComposer
+    extends Composer<_$EduBoxDatabase, $CachedDocumentsTable> {
+  $$CachedDocumentsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get kind =>
+      $composableBuilder(column: $table.kind, builder: (column) => column);
+
+  GeneratedColumn<String> get key =>
+      $composableBuilder(column: $table.key, builder: (column) => column);
+
+  GeneratedColumn<String> get payloadJson => $composableBuilder(
+    column: $table.payloadJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get cachedAt =>
+      $composableBuilder(column: $table.cachedAt, builder: (column) => column);
+}
+
+class $$CachedDocumentsTableTableManager
+    extends
+        RootTableManager<
+          _$EduBoxDatabase,
+          $CachedDocumentsTable,
+          CachedDocument,
+          $$CachedDocumentsTableFilterComposer,
+          $$CachedDocumentsTableOrderingComposer,
+          $$CachedDocumentsTableAnnotationComposer,
+          $$CachedDocumentsTableCreateCompanionBuilder,
+          $$CachedDocumentsTableUpdateCompanionBuilder,
+          (
+            CachedDocument,
+            BaseReferences<
+              _$EduBoxDatabase,
+              $CachedDocumentsTable,
+              CachedDocument
+            >,
+          ),
+          CachedDocument,
+          PrefetchHooks Function()
+        > {
+  $$CachedDocumentsTableTableManager(
+    _$EduBoxDatabase db,
+    $CachedDocumentsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$CachedDocumentsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$CachedDocumentsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$CachedDocumentsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> kind = const Value.absent(),
+                Value<String> key = const Value.absent(),
+                Value<String> payloadJson = const Value.absent(),
+                Value<DateTime> cachedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => CachedDocumentsCompanion(
+                kind: kind,
+                key: key,
+                payloadJson: payloadJson,
+                cachedAt: cachedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String kind,
+                required String key,
+                required String payloadJson,
+                required DateTime cachedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => CachedDocumentsCompanion.insert(
+                kind: kind,
+                key: key,
+                payloadJson: payloadJson,
+                cachedAt: cachedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$CachedDocumentsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$EduBoxDatabase,
+      $CachedDocumentsTable,
+      CachedDocument,
+      $$CachedDocumentsTableFilterComposer,
+      $$CachedDocumentsTableOrderingComposer,
+      $$CachedDocumentsTableAnnotationComposer,
+      $$CachedDocumentsTableCreateCompanionBuilder,
+      $$CachedDocumentsTableUpdateCompanionBuilder,
+      (
+        CachedDocument,
+        BaseReferences<_$EduBoxDatabase, $CachedDocumentsTable, CachedDocument>,
+      ),
+      CachedDocument,
+      PrefetchHooks Function()
+    >;
+typedef $$DownloadedContentsTableCreateCompanionBuilder =
+    DownloadedContentsCompanion Function({
+      Value<int> contentId,
+      required String localPath,
+      required String title,
+      required String type,
+      Value<String?> mimeType,
+      Value<int?> pageCount,
+      Value<int?> durationSeconds,
+      required DateTime downloadedAt,
+    });
+typedef $$DownloadedContentsTableUpdateCompanionBuilder =
+    DownloadedContentsCompanion Function({
+      Value<int> contentId,
+      Value<String> localPath,
+      Value<String> title,
+      Value<String> type,
+      Value<String?> mimeType,
+      Value<int?> pageCount,
+      Value<int?> durationSeconds,
+      Value<DateTime> downloadedAt,
+    });
+
+class $$DownloadedContentsTableFilterComposer
+    extends Composer<_$EduBoxDatabase, $DownloadedContentsTable> {
+  $$DownloadedContentsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get contentId => $composableBuilder(
+    column: $table.contentId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get localPath => $composableBuilder(
+    column: $table.localPath,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get mimeType => $composableBuilder(
+    column: $table.mimeType,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get pageCount => $composableBuilder(
+    column: $table.pageCount,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get durationSeconds => $composableBuilder(
+    column: $table.durationSeconds,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get downloadedAt => $composableBuilder(
+    column: $table.downloadedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$DownloadedContentsTableOrderingComposer
+    extends Composer<_$EduBoxDatabase, $DownloadedContentsTable> {
+  $$DownloadedContentsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get contentId => $composableBuilder(
+    column: $table.contentId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get localPath => $composableBuilder(
+    column: $table.localPath,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get title => $composableBuilder(
+    column: $table.title,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get mimeType => $composableBuilder(
+    column: $table.mimeType,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get pageCount => $composableBuilder(
+    column: $table.pageCount,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get durationSeconds => $composableBuilder(
+    column: $table.durationSeconds,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get downloadedAt => $composableBuilder(
+    column: $table.downloadedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$DownloadedContentsTableAnnotationComposer
+    extends Composer<_$EduBoxDatabase, $DownloadedContentsTable> {
+  $$DownloadedContentsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get contentId =>
+      $composableBuilder(column: $table.contentId, builder: (column) => column);
+
+  GeneratedColumn<String> get localPath =>
+      $composableBuilder(column: $table.localPath, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<String> get mimeType =>
+      $composableBuilder(column: $table.mimeType, builder: (column) => column);
+
+  GeneratedColumn<int> get pageCount =>
+      $composableBuilder(column: $table.pageCount, builder: (column) => column);
+
+  GeneratedColumn<int> get durationSeconds => $composableBuilder(
+    column: $table.durationSeconds,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get downloadedAt => $composableBuilder(
+    column: $table.downloadedAt,
+    builder: (column) => column,
+  );
+}
+
+class $$DownloadedContentsTableTableManager
+    extends
+        RootTableManager<
+          _$EduBoxDatabase,
+          $DownloadedContentsTable,
+          DownloadedContent,
+          $$DownloadedContentsTableFilterComposer,
+          $$DownloadedContentsTableOrderingComposer,
+          $$DownloadedContentsTableAnnotationComposer,
+          $$DownloadedContentsTableCreateCompanionBuilder,
+          $$DownloadedContentsTableUpdateCompanionBuilder,
+          (
+            DownloadedContent,
+            BaseReferences<
+              _$EduBoxDatabase,
+              $DownloadedContentsTable,
+              DownloadedContent
+            >,
+          ),
+          DownloadedContent,
+          PrefetchHooks Function()
+        > {
+  $$DownloadedContentsTableTableManager(
+    _$EduBoxDatabase db,
+    $DownloadedContentsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DownloadedContentsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DownloadedContentsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DownloadedContentsTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> contentId = const Value.absent(),
+                Value<String> localPath = const Value.absent(),
+                Value<String> title = const Value.absent(),
+                Value<String> type = const Value.absent(),
+                Value<String?> mimeType = const Value.absent(),
+                Value<int?> pageCount = const Value.absent(),
+                Value<int?> durationSeconds = const Value.absent(),
+                Value<DateTime> downloadedAt = const Value.absent(),
+              }) => DownloadedContentsCompanion(
+                contentId: contentId,
+                localPath: localPath,
+                title: title,
+                type: type,
+                mimeType: mimeType,
+                pageCount: pageCount,
+                durationSeconds: durationSeconds,
+                downloadedAt: downloadedAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> contentId = const Value.absent(),
+                required String localPath,
+                required String title,
+                required String type,
+                Value<String?> mimeType = const Value.absent(),
+                Value<int?> pageCount = const Value.absent(),
+                Value<int?> durationSeconds = const Value.absent(),
+                required DateTime downloadedAt,
+              }) => DownloadedContentsCompanion.insert(
+                contentId: contentId,
+                localPath: localPath,
+                title: title,
+                type: type,
+                mimeType: mimeType,
+                pageCount: pageCount,
+                durationSeconds: durationSeconds,
+                downloadedAt: downloadedAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$DownloadedContentsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$EduBoxDatabase,
+      $DownloadedContentsTable,
+      DownloadedContent,
+      $$DownloadedContentsTableFilterComposer,
+      $$DownloadedContentsTableOrderingComposer,
+      $$DownloadedContentsTableAnnotationComposer,
+      $$DownloadedContentsTableCreateCompanionBuilder,
+      $$DownloadedContentsTableUpdateCompanionBuilder,
+      (
+        DownloadedContent,
+        BaseReferences<
+          _$EduBoxDatabase,
+          $DownloadedContentsTable,
+          DownloadedContent
+        >,
+      ),
+      DownloadedContent,
+      PrefetchHooks Function()
+    >;
+typedef $$TestAttemptsTableCreateCompanionBuilder =
+    TestAttemptsCompanion Function({
+      Value<int> assignmentId,
+      required String clientSubmissionId,
+      required DateTime startedAt,
+      required DateTime deadline,
+      required String answersJson,
+      Value<bool> submitted,
+      required DateTime updatedAt,
+    });
+typedef $$TestAttemptsTableUpdateCompanionBuilder =
+    TestAttemptsCompanion Function({
+      Value<int> assignmentId,
+      Value<String> clientSubmissionId,
+      Value<DateTime> startedAt,
+      Value<DateTime> deadline,
+      Value<String> answersJson,
+      Value<bool> submitted,
+      Value<DateTime> updatedAt,
+    });
+
+class $$TestAttemptsTableFilterComposer
+    extends Composer<_$EduBoxDatabase, $TestAttemptsTable> {
+  $$TestAttemptsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get assignmentId => $composableBuilder(
+    column: $table.assignmentId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get clientSubmissionId => $composableBuilder(
+    column: $table.clientSubmissionId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get startedAt => $composableBuilder(
+    column: $table.startedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get deadline => $composableBuilder(
+    column: $table.deadline,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get answersJson => $composableBuilder(
+    column: $table.answersJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get submitted => $composableBuilder(
+    column: $table.submitted,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$TestAttemptsTableOrderingComposer
+    extends Composer<_$EduBoxDatabase, $TestAttemptsTable> {
+  $$TestAttemptsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get assignmentId => $composableBuilder(
+    column: $table.assignmentId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get clientSubmissionId => $composableBuilder(
+    column: $table.clientSubmissionId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get startedAt => $composableBuilder(
+    column: $table.startedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get deadline => $composableBuilder(
+    column: $table.deadline,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get answersJson => $composableBuilder(
+    column: $table.answersJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get submitted => $composableBuilder(
+    column: $table.submitted,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$TestAttemptsTableAnnotationComposer
+    extends Composer<_$EduBoxDatabase, $TestAttemptsTable> {
+  $$TestAttemptsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get assignmentId => $composableBuilder(
+    column: $table.assignmentId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get clientSubmissionId => $composableBuilder(
+    column: $table.clientSubmissionId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get startedAt =>
+      $composableBuilder(column: $table.startedAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get deadline =>
+      $composableBuilder(column: $table.deadline, builder: (column) => column);
+
+  GeneratedColumn<String> get answersJson => $composableBuilder(
+    column: $table.answersJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get submitted =>
+      $composableBuilder(column: $table.submitted, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$TestAttemptsTableTableManager
+    extends
+        RootTableManager<
+          _$EduBoxDatabase,
+          $TestAttemptsTable,
+          TestAttempt,
+          $$TestAttemptsTableFilterComposer,
+          $$TestAttemptsTableOrderingComposer,
+          $$TestAttemptsTableAnnotationComposer,
+          $$TestAttemptsTableCreateCompanionBuilder,
+          $$TestAttemptsTableUpdateCompanionBuilder,
+          (
+            TestAttempt,
+            BaseReferences<_$EduBoxDatabase, $TestAttemptsTable, TestAttempt>,
+          ),
+          TestAttempt,
+          PrefetchHooks Function()
+        > {
+  $$TestAttemptsTableTableManager(_$EduBoxDatabase db, $TestAttemptsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$TestAttemptsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$TestAttemptsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$TestAttemptsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> assignmentId = const Value.absent(),
+                Value<String> clientSubmissionId = const Value.absent(),
+                Value<DateTime> startedAt = const Value.absent(),
+                Value<DateTime> deadline = const Value.absent(),
+                Value<String> answersJson = const Value.absent(),
+                Value<bool> submitted = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+              }) => TestAttemptsCompanion(
+                assignmentId: assignmentId,
+                clientSubmissionId: clientSubmissionId,
+                startedAt: startedAt,
+                deadline: deadline,
+                answersJson: answersJson,
+                submitted: submitted,
+                updatedAt: updatedAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> assignmentId = const Value.absent(),
+                required String clientSubmissionId,
+                required DateTime startedAt,
+                required DateTime deadline,
+                required String answersJson,
+                Value<bool> submitted = const Value.absent(),
+                required DateTime updatedAt,
+              }) => TestAttemptsCompanion.insert(
+                assignmentId: assignmentId,
+                clientSubmissionId: clientSubmissionId,
+                startedAt: startedAt,
+                deadline: deadline,
+                answersJson: answersJson,
+                submitted: submitted,
+                updatedAt: updatedAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$TestAttemptsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$EduBoxDatabase,
+      $TestAttemptsTable,
+      TestAttempt,
+      $$TestAttemptsTableFilterComposer,
+      $$TestAttemptsTableOrderingComposer,
+      $$TestAttemptsTableAnnotationComposer,
+      $$TestAttemptsTableCreateCompanionBuilder,
+      $$TestAttemptsTableUpdateCompanionBuilder,
+      (
+        TestAttempt,
+        BaseReferences<_$EduBoxDatabase, $TestAttemptsTable, TestAttempt>,
+      ),
+      TestAttempt,
       PrefetchHooks Function()
     >;
 typedef $$OutboxEntriesTableCreateCompanionBuilder =
@@ -4228,6 +6593,12 @@ class $EduBoxDatabaseManager {
       $$CachedLibraryItemsTableTableManager(_db, _db.cachedLibraryItems);
   $$CachedParentHomesTableTableManager get cachedParentHomes =>
       $$CachedParentHomesTableTableManager(_db, _db.cachedParentHomes);
+  $$CachedDocumentsTableTableManager get cachedDocuments =>
+      $$CachedDocumentsTableTableManager(_db, _db.cachedDocuments);
+  $$DownloadedContentsTableTableManager get downloadedContents =>
+      $$DownloadedContentsTableTableManager(_db, _db.downloadedContents);
+  $$TestAttemptsTableTableManager get testAttempts =>
+      $$TestAttemptsTableTableManager(_db, _db.testAttempts);
   $$OutboxEntriesTableTableManager get outboxEntries =>
       $$OutboxEntriesTableTableManager(_db, _db.outboxEntries);
 }

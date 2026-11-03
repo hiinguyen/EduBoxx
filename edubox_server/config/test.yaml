@@ -36,3 +36,13 @@ edubox:
   # The test run mode is allowed to expose the token-guarded e2e control
   # route; production and staging are rejected by the run-mode gate.
   e2eControl: true
+  ai:
+    baseUrl: https://example.test/v1
+    model: mock
+    mock: true
+    dailyLimit: 30
+    timeoutSeconds: 5
+  learning:
+    maxEbookBytes: 20971520
+    maxVideoBytes: 125829120
+    lateGraceSeconds: 60

@@ -1,0 +1,9 @@
+class: AssignmentUpsert
+fields:
+  id: int?
+  classId: int
+  exerciseId: int
+  type: AssignmentType
+  title: String
+  dueAt: DateTime?
+  timeLimitSec: int?

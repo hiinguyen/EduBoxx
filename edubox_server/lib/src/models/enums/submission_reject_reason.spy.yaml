@@ -1,0 +1,7 @@
+enum: SubmissionRejectReason
+serialized: byName
+values:
+  - testNotStarted
+  - alreadySubmitted
+  - notFound
+  - assignmentChanged

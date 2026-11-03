@@ -1,0 +1,6 @@
+class: TutorMessage
+fields:
+  id: int
+  role: ChatRole
+  content: String
+  createdAt: DateTime

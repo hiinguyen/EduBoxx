@@ -1,0 +1,5 @@
+class: ProgressResult
+fields:
+  contentId: int
+  status: String
+  updatedAt: DateTime

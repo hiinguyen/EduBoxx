@@ -1,0 +1,10 @@
+# Named AI-tutor failures. The client maps these to l10n states.
+enum: TutorErrorCode
+serialized: byName
+values:
+  - dailyLimitReached
+  - subjectNotAllowed
+  - lockedDuringTest
+  - providerUnavailable
+  - emptyMessage
+  - noClass

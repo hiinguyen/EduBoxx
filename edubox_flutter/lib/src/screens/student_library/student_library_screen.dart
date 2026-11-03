@@ -11,6 +11,7 @@ import '../../features/library/catalogue.dart';
 import '../../features/library/content_row.dart';
 import '../../shell/block_states.dart';
 import '../../shell/student_shell.dart';
+import '../student_content/student_content_detail_screen.dart';
 import '../../theme/breakpoints.dart';
 import '../../theme/theme_extensions.dart';
 import '../../theme/tokens.dart';
@@ -274,7 +275,10 @@ class _Rows extends StatelessWidget {
       children: [
         for (final (index, item) in items.indexed) ...[
           if (index > 0) const Divider(),
-          ContentRow(item: item),
+          ContentRow(
+            item: item,
+            onTap: () => openStudentContent(context, item.id),
+          ),
         ],
       ],
     );

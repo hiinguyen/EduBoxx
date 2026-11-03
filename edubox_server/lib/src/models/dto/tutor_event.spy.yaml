@@ -1,0 +1,8 @@
+# One event of the streaming `tutor.ask` reply.
+class: TutorEvent
+fields:
+  type: TutorEventType
+  chatId: int?
+  delta: String?
+  errorCode: TutorErrorCode?
+  messageId: int?

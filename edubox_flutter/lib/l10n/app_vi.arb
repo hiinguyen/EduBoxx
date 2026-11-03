@@ -244,5 +244,499 @@
   },
   "parentHomeNoChild": "Tài khoản này chưa được liên kết với học sinh nào. Hãy liên hệ nhà trường để được hỗ trợ.",
   "parentHomeLoadError": "Không tải được thông tin học sinh.",
-  "parentHomeOfflineNoData": "Chưa có thông tin học sinh trên máy này. Hãy kết nối mạng để tải."
+  "parentHomeOfflineNoData": "Chưa có thông tin học sinh trên máy này. Hãy kết nối mạng để tải.",
+  "navAssignments": "Bài tập",
+  "navTutor": "Gia sư AI",
+  "navTeacherContent": "Nội dung",
+  "navTeacherAssignments": "Bài tập",
+  "navTeacherResults": "Kết quả",
+  "navTeacherChats": "Trò chuyện AI",
+  "save": "Lưu",
+  "delete": "Xóa",
+  "confirm": "Đồng ý",
+  "back": "Quay lại",
+  "contentStatusDraft": "Bản nháp",
+  "contentStatusApproved": "Đã duyệt",
+  "contentIngestProcessing": "Đang xử lý",
+  "contentIngestReady": "Chờ duyệt",
+  "contentIngestRejected": "Bị từ chối",
+  "teacherContentTitle": "Nội dung",
+  "teacherContentUpload": "Tải lên",
+  "teacherContentEmpty": "Chưa có tài liệu. Tải lên tài liệu đầu tiên.",
+  "teacherContentLoading": "Đang tải nội dung",
+  "teacherContentError": "Không tải được nội dung.",
+  "teacherContentClassLabel": "Lớp",
+  "teacherContentApprove": "Duyệt",
+  "teacherContentApprovedSnack": "Đã duyệt tài liệu.",
+  "teacherContentOfflineNoData": "Chưa có danh sách tài liệu trên máy. Kết nối mạng để tải.",
+  "contentUploadTitle": "Tải tài liệu lên",
+  "contentUploadPickFile": "Chọn tệp",
+  "contentUploadNoFile": "Chưa chọn tệp",
+  "contentUploadFormTitle": "Tên tài liệu",
+  "contentUploadSubject": "Môn học",
+  "contentUploadGrade": "Khối",
+  "contentUploadClass": "Lớp",
+  "contentUploadSubmit": "Tải lên",
+  "contentUploading": "Đang tải lên… {percent}%",
+  "@contentUploading": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "contentUploadFailed": "Tải lên thất bại",
+  "contentUploadSuccess": "Đã tải lên",
+  "contentUploadHint": "PDF tối đa 20 MB, MP4 tối đa 120 MB.",
+  "contentUploadFileRequired": "Chọn một tệp PDF hoặc MP4.",
+  "contentUploadTitleRequired": "Nhập tên tài liệu.",
+  "contentUploadSubjectRequired": "Nhập môn học.",
+  "contentUploadGradeRequired": "Chọn khối.",
+  "contentUploadClassRequired": "Chọn lớp.",
+  "contentUploadRejected": "Tệp bị từ chối: {reason}",
+  "@contentUploadRejected": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "contentReplaceFile": "Thay tệp khác",
+  "contentPreview": "Xem trước",
+  "contentFileInfo": "Thông tin tệp",
+  "contentPageCount": "{count} trang",
+  "@contentPageCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "contentOpen": "Mở",
+  "contentDownload": "Tải về máy",
+  "contentDownloading": "Đang tải về… {percent}%",
+  "@contentDownloading": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "contentDownloaded": "Đã tải về máy",
+  "contentAvailableOffline": "Đã tải về máy",
+  "contentNeedsInternet": "Cần kết nối mạng để mở",
+  "contentDownloadFailed": "Không tải về được tài liệu.",
+  "contentFileUnavailable": "Tài liệu này chưa có tệp.",
+  "contentDetailLoading": "Đang mở tài liệu",
+  "contentDetailError": "Không mở được tài liệu.",
+  "contentDetailOffline": "Tài liệu này chưa được tải về máy.",
+  "contentNotFound": "Không tìm thấy tài liệu.",
+  "ebookPageIndicator": "Trang {page} / {total}",
+  "@ebookPageIndicator": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "ebookPrevious": "Trang trước",
+  "ebookNext": "Trang sau",
+  "ebookLoading": "Đang mở trang",
+  "ebookError": "Không đọc được tệp PDF.",
+  "videoPlay": "Phát",
+  "videoPause": "Tạm dừng",
+  "videoLoading": "Đang mở video",
+  "videoError": "Không phát được video.",
+  "videoDuration": "Thời lượng {time}",
+  "@videoDuration": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "videoPosition": "{position} / {duration}",
+  "@videoPosition": {
+    "placeholders": {
+      "position": {
+        "type": "String"
+      },
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "exerciseEditorTitle": "Soạn bài tập",
+  "exerciseNew": "Bài tập mới",
+  "exerciseTitleField": "Tên bài tập",
+  "exerciseSubjectField": "Môn học",
+  "exerciseGradeField": "Khối",
+  "exerciseClassField": "Lớp",
+  "exerciseLessonField": "Bài học liên kết",
+  "exerciseQuestion": "Câu {number}",
+  "@exerciseQuestion": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "exerciseStem": "Đề bài",
+  "exerciseOption": "Lựa chọn {letter}",
+  "@exerciseOption": {
+    "placeholders": {
+      "letter": {
+        "type": "String"
+      }
+    }
+  },
+  "exerciseCorrect": "Đáp án đúng",
+  "exerciseMulti": "Cho phép chọn nhiều đáp án",
+  "exerciseAddQuestion": "Thêm câu hỏi",
+  "exerciseRemoveQuestion": "Xóa câu",
+  "exerciseSave": "Lưu",
+  "exerciseSaved": "Đã lưu bài tập.",
+  "exerciseValidation": "Kiểm tra lại đề bài và đáp án.",
+  "exerciseEmpty": "Chưa có bài tập nào.",
+  "exerciseLoading": "Đang tải bài tập",
+  "exerciseError": "Không tải được bài tập.",
+  "exerciseQuestionsCount": "{count} câu",
+  "@exerciseQuestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exercisePick": "Chọn bài tập",
+  "exerciseEdit": "Sửa bài tập",
+  "exerciseAnswerKeyHint": "Chọn vị trí đáp án đúng.",
+  "exerciseNoneLesson": "Không liên kết bài học",
+  "assignmentEditorTitle": "Giao bài",
+  "assignmentType": "Loại bài",
+  "assignmentTypePractice": "Luyện tập",
+  "assignmentTypeTest": "Kiểm tra",
+  "assignmentDue": "Hạn nộp",
+  "assignmentNoDue": "Không đặt hạn",
+  "assignmentTimeLimit": "Thời gian làm bài (phút)",
+  "assignmentClass": "Lớp",
+  "assignmentExercise": "Bài tập",
+  "assignmentAssign": "Giao bài",
+  "assignmentSaved": "Đã giao bài.",
+  "assignmentDelete": "Xóa bài giao",
+  "assignmentDeleted": "Đã xóa bài giao.",
+  "assignmentDeleteConfirmTitle": "Xóa bài giao?",
+  "assignmentDeleteConfirmBody": "Kết quả đã nộp của học sinh cũng sẽ bị xóa.",
+  "assignmentEmpty": "Chưa có bài tập nào được giao.",
+  "assignmentLoading": "Đang tải bài tập",
+  "assignmentError": "Không tải được danh sách bài tập.",
+  "assignmentTeacherTitle": "Bài đã giao",
+  "assignmentNew": "Giao bài mới",
+  "assignmentSubmissions": "{count} bài nộp",
+  "@assignmentSubmissions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "assignmentGradedCount": "{count} đã chấm",
+  "@assignmentGradedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "assignmentDueAt": "Hạn {date}",
+  "@assignmentDueAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "assignmentNoDueAt": "Không hạn",
+  "assignmentPickExercise": "Chọn bài tập",
+  "assignmentTimeLimitInvalid": "Thời gian phải lớn hơn 0.",
+  "assignmentTypeRequired": "Chọn loại bài.",
+  "assignmentOfflineNoData": "Chưa có danh sách bài giao trên máy. Kết nối mạng để tải.",
+  "assignmentsTitle": "Bài tập",
+  "assignmentsNeedsAction": "Cần làm",
+  "assignmentsDone": "Đã nộp",
+  "assignmentsEmpty": "Chưa có bài tập nào được giao.",
+  "assignmentsLoading": "Đang tải bài tập",
+  "assignmentsError": "Không tải được danh sách bài tập.",
+  "assignmentsOfflineNoData": "Chưa có danh sách bài tập trên máy. Kết nối mạng để tải.",
+  "assignmentsDue": "Hạn {date}",
+  "@assignmentsDue": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "assignmentsNoDue": "Không hạn",
+  "assignmentsOpen": "Mở bài",
+  "assignmentsStart": "Bắt đầu",
+  "assignmentsContinue": "Tiếp tục",
+  "assignmentsScore": "Điểm {score}/{max}",
+  "@assignmentsScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "assignmentsPendingSync": "Bài nộp đang chờ đồng bộ",
+  "lessonTitle": "Bài học",
+  "lessonCompleted": "Đã học xong",
+  "lessonMarkComplete": "Đánh dấu đã học xong",
+  "lessonOpen": "Mở bài học",
+  "lessonCompletedSnack": "Đã đánh dấu bài học hoàn thành.",
+  "lessonNeedsInternet": "Cần kết nối mạng để mở bài học.",
+  "lessonLoading": "Đang tải bài học",
+  "lessonError": "Không tải được bài học.",
+  "exerciseStart": "Bắt đầu làm bài",
+  "exerciseSubmit": "Nộp bài",
+  "exerciseSubmitting": "Đang nộp…",
+  "exerciseConfirmTitle": "Nộp bài?",
+  "exerciseConfirmBody": "Em còn {count} câu chưa trả lời. Vẫn nộp?",
+  "@exerciseConfirmBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "exerciseConfirmSubmit": "Nộp",
+  "exerciseQuestionOf": "Câu {current} / {total}",
+  "@exerciseQuestionOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "exerciseUnanswered": "Chưa trả lời",
+  "exerciseAnswered": "Đã trả lời",
+  "exerciseOptionsSemantics": "Câu {number}, lựa chọn {letter}",
+  "@exerciseOptionsSemantics": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "letter": {
+        "type": "String"
+      }
+    }
+  },
+  "exerciseSavedOffline": "Bài làm đã lưu trên máy.",
+  "exerciseScreenLoading": "Đang mở bài tập",
+  "exerciseScreenError": "Không mở được bài tập.",
+  "exerciseOfflineNoData": "Bài tập này chưa được tải về máy.",
+  "exerciseOptionsHint": "Chọn một đáp án",
+  "exerciseQuestionMultiHint": "Có thể chọn nhiều đáp án.",
+  "resultTitle": "Kết quả",
+  "resultScore": "Điểm",
+  "resultScoreValue": "{score}/{max}",
+  "@resultScoreValue": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "resultPending": "Bài nộp đang chờ đồng bộ",
+  "resultSubmitted": "Đã nộp, đang chờ chấm",
+  "resultGradingFailed": "Chưa chấm được",
+  "resultBack": "Về danh sách bài tập",
+  "resultCorrectCount": "{correct}/{total} câu đúng",
+  "@resultCorrectCount": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "resultLate": "Nộp muộn",
+  "resultLoading": "Đang tải kết quả",
+  "resultError": "Không tải được kết quả.",
+  "statusToDo": "Chưa làm",
+  "statusInProgress": "Đang làm bài",
+  "statusSubmittedAwaitingGrade": "Đã nộp, đang chờ chấm",
+  "statusPendingSync": "Chờ đồng bộ",
+  "statusGraded": "Đã chấm",
+  "statusLate": "Nộp muộn",
+  "statusGradingFailed": "Chưa chấm được",
+  "statusLessonDone": "Đã học xong",
+  "statusDraft": "Bản nháp",
+  "statusProcessing": "Đang xử lý",
+  "statusAwaitingApproval": "Chờ duyệt",
+  "statusApproved": "Đã duyệt",
+  "statusRejected": "Bị từ chối",
+  "resultsTitle": "Kết quả",
+  "resultsClass": "Lớp",
+  "resultsEmpty": "Chưa có bài nộp nào.",
+  "resultsLoading": "Đang tải kết quả",
+  "resultsError": "Không tải được kết quả.",
+  "resultsSummary": "{submitted} trên {total} em đã nộp · {late} bài nộp muộn",
+  "@resultsSummary": {
+    "placeholders": {
+      "submitted": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "late": {
+        "type": "int"
+      }
+    }
+  },
+  "resultsRegrade": "Chấm lại",
+  "resultsRegraded": "Đã chấm lại.",
+  "resultsCellNoSubmission": "–",
+  "tutorTitle": "Gia sư AI",
+  "tutorNewChat": "Cuộc trò chuyện mới",
+  "tutorConversations": "Cuộc trò chuyện",
+  "tutorNoConversations": "Chưa có cuộc trò chuyện nào.",
+  "tutorSubject": "Môn học",
+  "tutorMessageHint": "Hỏi gia sư về bài học…",
+  "tutorSend": "Gửi",
+  "tutorTutorLabel": "Gia sư",
+  "tutorStudentLabel": "Em",
+  "tutorThinking": "Gia sư đang trả lời…",
+  "tutorNeedsInternet": "Gia sư AI cần kết nối mạng",
+  "tutorDailyLimit": "Bạn đã dùng hết lượt hỏi hôm nay",
+  "tutorDailyLimitHint": "Lượt hỏi mới từ 0:00.",
+  "tutorPaused": "Gia sư AI tạm dừng trong lúc làm bài kiểm tra",
+  "tutorPausedHint": "Sẽ mở lại khi em nộp bài kiểm tra.",
+  "tutorError": "Gia sư chưa trả lời được. Thử lại nhé.",
+  "tutorSubjectNotAllowed": "Môn này ngoài phạm vi của gia sư.",
+  "tutorEmptySubject": "Chọn môn học trước khi hỏi.",
+  "tutorLoading": "Đang mở gia sư",
+  "tutorLoadError": "Không mở được gia sư.",
+  "tutorChatLoading": "Đang tải cuộc trò chuyện",
+  "tutorChatError": "Không tải được cuộc trò chuyện.",
+  "tutorOfflineNoData": "Chưa có cuộc trò chuyện nào trên máy.",
+  "tutorReadOnly": "Chỉ xem",
+  "tutorClassChatsTitle": "Trò chuyện AI của học sinh",
+  "tutorPickStudent": "Chọn học sinh",
+  "tutorNoChatsForStudent": "Học sinh này chưa trò chuyện với gia sư.",
+  "tutorStudentPicker": "Học sinh",
+  "testLobbyTitle": "Bài kiểm tra",
+  "testRules": "Quy định",
+  "testRulesBody": "Bài kiểm tra bắt đầu tính giờ ngay khi em bấm Bắt đầu. Hết giờ, bài sẽ tự nộp.",
+  "testTimeLimit": "{minutes} phút",
+  "@testTimeLimit": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "testStart": "Bắt đầu",
+  "testNeedsInternet": "Cần kết nối mạng để bắt đầu bài kiểm tra",
+  "testStarting": "Đang bắt đầu…",
+  "testStartFailed": "Không bắt đầu được bài kiểm tra.",
+  "testRoomTitle": "Đang làm bài",
+  "testRemaining": "Thời gian còn lại",
+  "testUnderMinute": "Còn dưới 1 phút",
+  "testAutoSubmitted": "Hết giờ, bài đã được nộp.",
+  "testSubmittedTitle": "Đã nộp bài",
+  "testSubmittedBody": "Bài làm đã được ghi nhận.",
+  "testScoreLabel": "Điểm",
+  "testSubmittedGraded": "Bài của em đã được chấm.",
+  "testSubmittedPending": "Bài của em đang chờ đồng bộ.",
+  "testSubmittedLate": "Bài nộp muộn",
+  "testBackToAssignments": "Về danh sách bài tập",
+  "testConfirmSubmit": "Nộp bài kiểm tra?",
+  "testSubmittedState": "Đã nộp",
+  "parentSummaryTitle": "Sổ liên lạc",
+  "parentResults": "Kết quả học tập",
+  "parentNoResults": "Chưa có kết quả nào.",
+  "parentAiChats": "Trò chuyện với gia sư AI",
+  "parentNoChats": "Chưa có cuộc trò chuyện nào.",
+  "parentSummaryLoading": "Đang tải sổ liên lạc",
+  "parentSummaryError": "Không tải được sổ liên lạc.",
+  "parentSummaryOfflineNoData": "Chưa có sổ liên lạc trên máy. Kết nối mạng để tải.",
+  "parentReadOnly": "Chỉ xem",
+  "parentChatTitle": "Trò chuyện của con",
+  "teacherChatReviewTitle": "Trò chuyện AI",
+  "teacherChatReviewEmpty": "Chưa có học sinh nào trong lớp.",
+  "teacherChatReviewPick": "Chọn học sinh để xem trò chuyện.",
+  "teacherChatReviewLoading": "Đang tải trò chuyện",
+  "teacherChatReviewError": "Không tải được trò chuyện.",
+  "teacherChatReviewHint": "Chỉ xem, không thể thay đổi.",
+  "aiChatMessageCount": "{count} tin nhắn",
+  "@aiChatMessageCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "contentUploadingSimple": "Đang tải lên…",
+  "statusSemantics": "Trạng thái: {word}",
+  "@statusSemantics": {
+    "placeholders": {
+      "word": {
+        "type": "String"
+      }
+    }
+  },
+  "contentDownloadingSimple": "Đang tải về…",
+  "exercisesTitle": "Bài tập",
+  "exerciseRowMeta": "{subject} · {count}",
+  "assignmentCounts": "{submissions} · {graded}",
+  "chatRowMeta": "{subject} · {date}",
+  "assignmentDefaultMinutes": "15",
+  "contentPunctuation": "·",
+  "@exerciseRowMeta": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "@assignmentCounts": {
+    "placeholders": {
+      "submissions": {
+        "type": "String"
+      },
+      "graded": {
+        "type": "String"
+      }
+    }
+  },
+  "@chatRowMeta": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "exerciseRetry": "Làm lại"
 }

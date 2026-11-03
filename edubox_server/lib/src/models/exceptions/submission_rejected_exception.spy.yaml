@@ -1,0 +1,4 @@
+# A business-rule rejection (not a role denial).
+exception: SubmissionRejectedException
+fields:
+  reason: SubmissionRejectReason

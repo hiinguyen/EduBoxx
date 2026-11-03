@@ -1,0 +1,13 @@
+class: AiChat
+serverOnly: true
+table: ai_chats
+fields:
+  studentId: int, relation(parent=users, onDelete=Cascade)
+  subject: String
+  classId: int?, relation(parent=classes, onDelete=SetNull)
+  title: String
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  ai_chats_student_idx:
+    fields: studentId, updatedAt

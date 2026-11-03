@@ -7,3 +7,8 @@ fields:
   subject: String
   gradeLevel: int
   createdAt: DateTime
+  hasFile: bool
+  mimeType: String?
+  sizeBytes: int?
+  pageCount: int?
+  durationSeconds: int?

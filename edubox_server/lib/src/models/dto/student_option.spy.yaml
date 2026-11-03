@@ -1,0 +1,6 @@
+# One answer option, student-facing (never carries correctness).
+class: StudentOption
+fields:
+  id: int
+  position: int
+  text: String

@@ -14,6 +14,7 @@ import '../../shell/offline_strip.dart';
 import '../../theme/breakpoints.dart';
 import '../../theme/theme_extensions.dart';
 import '../../theme/tokens.dart';
+import '../parent_summary/parent_summary_screen.dart';
 
 /// Stable keys for widget and E2E tests.
 abstract final class ParentHomeKeys {
@@ -200,31 +201,45 @@ class _RecordPanel extends StatelessWidget {
     final showLabel = !(value != null && value.hasLinkedChild);
     return Card(
       key: ParentHomeKeys.panel,
-      child: Padding(
-        padding: EdgeInsets.all(EduDensity.of(context).panelPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // The label is merged into the name's semantics when a name
-            // shows, so it is excluded there to avoid reading it twice.
-            ExcludeSemantics(
-              excluding: !showLabel,
-              child: Semantics(
-                container: true,
-                child: Text(
-                  l10n.parentHomeStudentLabel,
-                  // 500, not 400: an 8-letter muted label at 400 leaves too
-                  // few solid pixels for textContrastGuideline's sampling.
-                  style: text.bodyMedium!.copyWith(
-                    color: palette.muted,
-                    fontWeight: FontWeight.w500,
+      child: Semantics(
+        button: true,
+        label: l10n.parentSummaryTitle,
+        child: InkWell(
+          onTap: value != null && value.hasLinkedChild
+              ? () => Navigator.of(context).push<void>(
+                  MaterialPageRoute(
+                    builder: (_) => const ParentSummaryScreen(),
+                  ),
+                )
+              : null,
+          borderRadius: BorderRadius.circular(EduRadius.panel),
+          child: Padding(
+            padding: EdgeInsets.all(EduDensity.of(context).panelPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // The label is merged into the name's semantics when a name
+                // shows, so it is excluded there to avoid reading it twice.
+                ExcludeSemantics(
+                  excluding: !showLabel,
+                  child: Semantics(
+                    container: true,
+                    child: Text(
+                      l10n.parentHomeStudentLabel,
+                      // 500, not 400: an 8-letter muted label at 400 leaves too
+                      // few solid pixels for textContrastGuideline's sampling.
+                      style: text.bodyMedium!.copyWith(
+                        color: palette.muted,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                const SizedBox(height: EduSpace.s8),
+                body,
+              ],
             ),
-            const SizedBox(height: EduSpace.s8),
-            body,
-          ],
+          ),
         ),
       ),
     );

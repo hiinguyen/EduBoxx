@@ -10,7 +10,8 @@ import 'package:edubox_client/edubox_client.dart'
         ServerpodClientException,
         ServerpodClientForbidden,
         ServerpodClientNetworkException,
-        ServerpodClientUnauthorized;
+        ServerpodClientUnauthorized,
+        SubmissionRejectedException;
 import 'package:http/http.dart' show ClientException;
 import 'package:serverpod_auth_idp_client/serverpod_auth_idp_client.dart'
     show
@@ -45,6 +46,9 @@ BackendError mapApiError(Object error) {
       AccessDeniedReason.wrongRole => const PermissionDeniedError(),
       AccessDeniedReason.unauthenticated => const SessionExpiredError(),
     },
+    SubmissionRejectedException(:final reason) => SubmissionRejectedError(
+      reason,
+    ),
     OpenMethodStreamException(:final responseType) => switch (responseType) {
       OpenMethodStreamResponseType.authenticationFailed =>
         const SessionExpiredError(),

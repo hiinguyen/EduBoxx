@@ -1,3 +1,9 @@
+assignments:
+  - save:
+  - delete:
+  - mine:
+  - listForStudent:
+  - detailForStudent:
 emailIdp:
   - login:
 jwtRefresh:
@@ -6,9 +12,42 @@ classes:
   - mine:
 content:
   - library:
+  - detail:
+  - teacherList:
+  - createUpload:
+  - completeUpload:
+  - approve:
+  - fileUrl:
 diagnostics:
   - pingStream:
 e2e:
   - run:
+exercises:
+  - save:
+  - detail:
+  - mine:
+parent:
+  - summary:
+  - chats:
+  - chat:
 profile:
   - me:
+progress:
+  - markComplete:
+  - mine:
+results:
+  - classResults:
+submissions:
+  - submit:
+  - forAssignment:
+  - regrade:
+tests:
+  - start:
+  - active:
+tutor:
+  - state:
+  - chats:
+  - chat:
+  - ask:
+  - classChats:
+  - classChat:

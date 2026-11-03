@@ -1,5 +1,6 @@
-# Content metadata. `storagePath` points into the private object store
-# (phase 2); phase 1 fixtures have none.
+# Content metadata. `storagePath` points into the private object store for
+# uploaded e-books and videos; exercises store their questions in the
+# exercise tables and may have no file.
 class: ContentRecord
 serverOnly: true
 table: content
@@ -10,9 +11,18 @@ fields:
   gradeLevel: int
   title: String
   storagePath: String?
+  originalFileName: String?
+  mimeType: String?
+  sizeBytes: int?
+  pageCount: int?
+  durationSeconds: int?
+  ingestStatus: IngestStatus?
+  ingestReason: String?
   status: ContentStatus
   approvedBy: int?, relation(parent=users, onDelete=SetNull)
   createdAt: DateTime
 indexes:
   content_status_idx:
     fields: status
+  content_owner_idx:
+    fields: ownerTeacherId

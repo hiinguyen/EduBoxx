@@ -1,0 +1,16 @@
+# The student-facing metadata of one content item (`content.detail`).
+class: ContentDetail
+fields:
+  id: int
+  type: ContentType
+  title: String
+  subject: String
+  gradeLevel: int
+  hasFile: bool
+  mimeType: String?
+  sizeBytes: int?
+  pageCount: int?
+  durationSeconds: int?
+  createdAt: DateTime
+  # True when the caller already completed the linked lesson.
+  lessonCompleted: bool

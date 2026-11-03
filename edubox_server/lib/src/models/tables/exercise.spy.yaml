@@ -1,0 +1,17 @@
+# An exercise is a `content` row of type `exercise` plus its question set.
+class: Exercise
+serverOnly: true
+table: exercises
+fields:
+  contentId: int, relation(parent=content, onDelete=Cascade)
+  ownerTeacherId: int, relation(parent=users, onDelete=Restrict)
+  # Optional approved e-book or video the assignment asks the student to read
+  # before starting the exercise.
+  lessonContentId: int?, relation(parent=content, onDelete=SetNull)
+  answerKeyVersion: int
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  exercises_content_idx:
+    fields: contentId
+    unique: true

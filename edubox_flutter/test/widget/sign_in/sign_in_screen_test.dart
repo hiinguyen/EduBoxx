@@ -1,6 +1,7 @@
 import 'package:edubox_fixtures/edubox_fixtures.dart';
 import 'package:edubox_flutter/src/contract/backend.dart';
 import 'package:edubox_flutter/src/contract/backend_result.dart';
+import 'package:edubox_flutter/src/contract/learning_repositories.dart';
 import 'package:edubox_flutter/src/contract/network_controller.dart';
 import 'package:edubox_flutter/src/contract/repositories.dart';
 import 'package:edubox_flutter/src/contract/session.dart';
@@ -63,6 +64,15 @@ final class CountingBackend implements EduBoxBackend {
 
   @override
   ParentRepository get parent => fake.parent;
+
+  @override
+  ContentRepository get content => fake.content;
+
+  @override
+  AssignmentRepository get assignments => fake.assignments;
+
+  @override
+  TutorRepository get tutor => fake.tutor;
 
   @override
   DiagnosticsRepository get diagnostics => fake.diagnostics;

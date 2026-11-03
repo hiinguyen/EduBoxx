@@ -1,0 +1,6 @@
+class: TutorSubject
+fields:
+  classId: int
+  className: String
+  subject: String
+  gradeLevel: int

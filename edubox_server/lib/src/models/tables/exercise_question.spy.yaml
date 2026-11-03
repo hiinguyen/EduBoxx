@@ -1,0 +1,13 @@
+class: ExerciseQuestion
+serverOnly: true
+table: exercise_questions
+fields:
+  exerciseId: int, relation(parent=exercises, onDelete=Cascade)
+  position: int
+  stem: String
+  multiSelect: bool
+  imagePath: String?
+indexes:
+  exercise_questions_exercise_position_idx:
+    fields: exerciseId, position
+    unique: true

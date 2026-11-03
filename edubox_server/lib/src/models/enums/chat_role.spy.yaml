@@ -1,0 +1,6 @@
+# Author of one AI-tutor transcript message.
+enum: ChatRole
+serialized: byName
+values:
+  - student
+  - tutor

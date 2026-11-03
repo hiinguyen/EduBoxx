@@ -1,0 +1,7 @@
+class: ResultAssignment
+fields:
+  id: int
+  title: String
+  type: AssignmentType
+  dueAt: DateTime?
+  timeLimitSec: int?

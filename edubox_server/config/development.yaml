@@ -41,3 +41,13 @@ edubox:
     bucket: edubox-dev
     region: us-east-1
   e2eControl: false
+  ai:
+    baseUrl: https://opencode.ai/inference/go/openai/v1
+    model: deepseek-v4.1-flash
+    mock: false
+    dailyLimit: 30
+    timeoutSeconds: 60
+  learning:
+    maxEbookBytes: 20971520
+    maxVideoBytes: 125829120
+    lateGraceSeconds: 60

@@ -1,0 +1,13 @@
+# Per-student, per-day tutor counter. `day` is the Asia/Ho_Chi_Minh date as
+# yyyy-MM-dd. The counter is incremented atomically in PostgreSQL.
+class: AiUsage
+serverOnly: true
+table: ai_usage
+fields:
+  studentId: int, relation(parent=users, onDelete=Cascade)
+  day: String
+  messageCount: int
+indexes:
+  ai_usage_student_day_idx:
+    fields: studentId, day
+    unique: true

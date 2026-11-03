@@ -16,6 +16,12 @@ void main() {
       if (normalized.contains('${p.separator}l10n${p.separator}generated')) {
         continue;
       }
+      // The fake's fixture titles/messages are seeded data, not UI copy.
+      if (normalized.endsWith(
+        '${p.separator}fake${p.separator}fake_backend.dart',
+      )) {
+        continue;
+      }
       violations.addAll(
         findLiteralStrings(
           path: normalized,

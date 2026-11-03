@@ -13,7 +13,14 @@ class SeededFixtures {
     required this.userIds,
     required this.classIds,
     required this.contentIds,
-  });
+    Map<String, int>? exerciseIds,
+    Map<String, int>? assignmentIds,
+    Map<String, int>? submissionIds,
+    Map<String, int>? chatIds,
+  }) : exerciseIds = exerciseIds ?? {},
+       assignmentIds = assignmentIds ?? {},
+       submissionIds = submissionIds ?? {},
+       chatIds = chatIds ?? {};
 
   final FixtureSet fixtures;
 
@@ -24,6 +31,12 @@ class SeededFixtures {
   final Map<String, int> userIds;
   final Map<String, int> classIds;
   final Map<String, int> contentIds;
+
+  /// Learning fixture ids, filled by [loadLearningFixtures].
+  final Map<String, int> exerciseIds;
+  final Map<String, int> assignmentIds;
+  final Map<String, int> submissionIds;
+  final Map<String, int> chatIds;
 }
 
 /// Writes a [FixtureSet] into the database. Used by the seed command and by

@@ -2,6 +2,8 @@ import '../contract/backend_config.dart';
 import '../contract/network_controller.dart';
 import '../data/cached_backend.dart';
 import '../data/client_edubox_api.dart';
+import '../data/content_cache_io.dart'
+    if (dart.library.js_interop) '../data/content_cache_web.dart';
 import '../local/local_store.dart';
 import '../local/local_store_platform_io.dart'
     if (dart.library.js_interop) '../local/local_store_platform_web.dart';
@@ -28,6 +30,7 @@ Future<AppServices> createProductionServices(
     api: ClientEduBoxApi.create(config),
     store: CachedDataStore(EduBoxDatabase.open(location)),
     network: seam,
+    contentCache: createContentCache(),
   );
   return AppServices(
     backend: backend,

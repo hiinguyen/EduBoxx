@@ -1,3 +1,4 @@
+import 'learning_repositories.dart';
 import 'repositories.dart';
 
 /// The single seam every contract test and feature screen depends on.
@@ -10,6 +11,9 @@ abstract interface class EduBoxBackend {
   ClassesRepository get classes;
   LibraryRepository get library;
   ParentRepository get parent;
+  ContentRepository get content;
+  AssignmentRepository get assignments;
+  TutorRepository get tutor;
   DiagnosticsRepository get diagnostics;
 
   Future<void> dispose();

@@ -43,6 +43,7 @@ class ContentRow extends StatelessWidget {
     super.key,
     required this.item,
     this.subject,
+    this.onTap,
   });
 
   final LibraryItem item;
@@ -50,6 +51,10 @@ class ContentRow extends StatelessWidget {
   /// Shown after the type word on the home ("Sách · Toán"); null in the
   /// library, where the subject is the group heading.
   final String? subject;
+
+  /// Opens the content detail. Null keeps the row non-interactive (tests of
+  /// the phase 1 home still use this shape).
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -61,56 +66,73 @@ class ContentRow extends StatelessWidget {
     final hasSubject = subject != null && subject!.trim().isNotEmpty;
     return Semantics(
       container: true,
+      button: onTap != null,
       label: contentRowLabel(l10n, item, subject: subject),
+      onTap: onTap,
       excludeSemantics: true,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          minHeight: EduDensity.of(context).rowHeight,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: EduSpace.s4),
-          child: Row(
-            children: [
-              Container(
-                width: 48,
-                height: 64,
-                decoration: BoxDecoration(
-                  color: palette.sheet,
-                  border: Border.all(color: palette.rule),
-                  borderRadius: BorderRadius.circular(EduRadius.small),
+      child: InkWell(
+        onTap: onTap,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: EduDensity.of(context).rowHeight,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: EduSpace.s4),
+            child: Row(
+              children: [
+                Container(
+                  width: 48,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    color: palette.sheet,
+                    border: Border.all(color: palette.rule),
+                    borderRadius: BorderRadius.circular(EduRadius.small),
+                  ),
+                  child: Icon(
+                    _typeGlyph(item.type),
+                    size: 24,
+                    color: palette.muted,
+                  ),
                 ),
-                child: Icon(
-                  _typeGlyph(item.type),
-                  size: 24,
-                  color: palette.muted,
-                ),
-              ),
-              const SizedBox(width: EduSpace.s16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      item.title,
-                      maxLines: scale >= 1.5 ? 3 : 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: text.titleMedium,
-                    ),
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        Text(contentTypeLabel(l10n, item.type), style: meta),
-                        if (hasSubject) ...[
-                          const MetaDot(),
-                          Text(subject!.trim(), style: meta),
+                const SizedBox(width: EduSpace.s16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        item.title,
+                        maxLines: scale >= 1.5 ? 3 : 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: text.titleMedium,
+                      ),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(contentTypeLabel(l10n, item.type), style: meta),
+                          if (hasSubject) ...[
+                            const MetaDot(),
+                            Text(subject!.trim(), style: meta),
+                          ],
                         ],
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                if (item.hasFile && item.type != ContentType.exercise)
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                      start: EduSpace.s8,
+                    ),
+                    child: Icon(
+                      Icons.download_outlined,
+                      size: 18,
+                      color: palette.muted,
+                      semanticLabel: l10n.contentDownload,
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

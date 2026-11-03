@@ -353,4 +353,873 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get parentHomeOfflineNoData =>
       'Chưa có thông tin học sinh trên máy này. Hãy kết nối mạng để tải.';
+
+  @override
+  String get navAssignments => 'Bài tập';
+
+  @override
+  String get navTutor => 'Gia sư AI';
+
+  @override
+  String get navTeacherContent => 'Nội dung';
+
+  @override
+  String get navTeacherAssignments => 'Bài tập';
+
+  @override
+  String get navTeacherResults => 'Kết quả';
+
+  @override
+  String get navTeacherChats => 'Trò chuyện AI';
+
+  @override
+  String get save => 'Lưu';
+
+  @override
+  String get delete => 'Xóa';
+
+  @override
+  String get confirm => 'Đồng ý';
+
+  @override
+  String get back => 'Quay lại';
+
+  @override
+  String get contentStatusDraft => 'Bản nháp';
+
+  @override
+  String get contentStatusApproved => 'Đã duyệt';
+
+  @override
+  String get contentIngestProcessing => 'Đang xử lý';
+
+  @override
+  String get contentIngestReady => 'Chờ duyệt';
+
+  @override
+  String get contentIngestRejected => 'Bị từ chối';
+
+  @override
+  String get teacherContentTitle => 'Nội dung';
+
+  @override
+  String get teacherContentUpload => 'Tải lên';
+
+  @override
+  String get teacherContentEmpty =>
+      'Chưa có tài liệu. Tải lên tài liệu đầu tiên.';
+
+  @override
+  String get teacherContentLoading => 'Đang tải nội dung';
+
+  @override
+  String get teacherContentError => 'Không tải được nội dung.';
+
+  @override
+  String get teacherContentClassLabel => 'Lớp';
+
+  @override
+  String get teacherContentApprove => 'Duyệt';
+
+  @override
+  String get teacherContentApprovedSnack => 'Đã duyệt tài liệu.';
+
+  @override
+  String get teacherContentOfflineNoData =>
+      'Chưa có danh sách tài liệu trên máy. Kết nối mạng để tải.';
+
+  @override
+  String get contentUploadTitle => 'Tải tài liệu lên';
+
+  @override
+  String get contentUploadPickFile => 'Chọn tệp';
+
+  @override
+  String get contentUploadNoFile => 'Chưa chọn tệp';
+
+  @override
+  String get contentUploadFormTitle => 'Tên tài liệu';
+
+  @override
+  String get contentUploadSubject => 'Môn học';
+
+  @override
+  String get contentUploadGrade => 'Khối';
+
+  @override
+  String get contentUploadClass => 'Lớp';
+
+  @override
+  String get contentUploadSubmit => 'Tải lên';
+
+  @override
+  String contentUploading(String percent) {
+    return 'Đang tải lên… $percent%';
+  }
+
+  @override
+  String get contentUploadFailed => 'Tải lên thất bại';
+
+  @override
+  String get contentUploadSuccess => 'Đã tải lên';
+
+  @override
+  String get contentUploadHint => 'PDF tối đa 20 MB, MP4 tối đa 120 MB.';
+
+  @override
+  String get contentUploadFileRequired => 'Chọn một tệp PDF hoặc MP4.';
+
+  @override
+  String get contentUploadTitleRequired => 'Nhập tên tài liệu.';
+
+  @override
+  String get contentUploadSubjectRequired => 'Nhập môn học.';
+
+  @override
+  String get contentUploadGradeRequired => 'Chọn khối.';
+
+  @override
+  String get contentUploadClassRequired => 'Chọn lớp.';
+
+  @override
+  String contentUploadRejected(String reason) {
+    return 'Tệp bị từ chối: $reason';
+  }
+
+  @override
+  String get contentReplaceFile => 'Thay tệp khác';
+
+  @override
+  String get contentPreview => 'Xem trước';
+
+  @override
+  String get contentFileInfo => 'Thông tin tệp';
+
+  @override
+  String contentPageCount(int count) {
+    return '$count trang';
+  }
+
+  @override
+  String get contentOpen => 'Mở';
+
+  @override
+  String get contentDownload => 'Tải về máy';
+
+  @override
+  String contentDownloading(String percent) {
+    return 'Đang tải về… $percent%';
+  }
+
+  @override
+  String get contentDownloaded => 'Đã tải về máy';
+
+  @override
+  String get contentAvailableOffline => 'Đã tải về máy';
+
+  @override
+  String get contentNeedsInternet => 'Cần kết nối mạng để mở';
+
+  @override
+  String get contentDownloadFailed => 'Không tải về được tài liệu.';
+
+  @override
+  String get contentFileUnavailable => 'Tài liệu này chưa có tệp.';
+
+  @override
+  String get contentDetailLoading => 'Đang mở tài liệu';
+
+  @override
+  String get contentDetailError => 'Không mở được tài liệu.';
+
+  @override
+  String get contentDetailOffline => 'Tài liệu này chưa được tải về máy.';
+
+  @override
+  String get contentNotFound => 'Không tìm thấy tài liệu.';
+
+  @override
+  String ebookPageIndicator(int page, int total) {
+    return 'Trang $page / $total';
+  }
+
+  @override
+  String get ebookPrevious => 'Trang trước';
+
+  @override
+  String get ebookNext => 'Trang sau';
+
+  @override
+  String get ebookLoading => 'Đang mở trang';
+
+  @override
+  String get ebookError => 'Không đọc được tệp PDF.';
+
+  @override
+  String get videoPlay => 'Phát';
+
+  @override
+  String get videoPause => 'Tạm dừng';
+
+  @override
+  String get videoLoading => 'Đang mở video';
+
+  @override
+  String get videoError => 'Không phát được video.';
+
+  @override
+  String videoDuration(String time) {
+    return 'Thời lượng $time';
+  }
+
+  @override
+  String videoPosition(String position, String duration) {
+    return '$position / $duration';
+  }
+
+  @override
+  String get exerciseEditorTitle => 'Soạn bài tập';
+
+  @override
+  String get exerciseNew => 'Bài tập mới';
+
+  @override
+  String get exerciseTitleField => 'Tên bài tập';
+
+  @override
+  String get exerciseSubjectField => 'Môn học';
+
+  @override
+  String get exerciseGradeField => 'Khối';
+
+  @override
+  String get exerciseClassField => 'Lớp';
+
+  @override
+  String get exerciseLessonField => 'Bài học liên kết';
+
+  @override
+  String exerciseQuestion(int number) {
+    return 'Câu $number';
+  }
+
+  @override
+  String get exerciseStem => 'Đề bài';
+
+  @override
+  String exerciseOption(String letter) {
+    return 'Lựa chọn $letter';
+  }
+
+  @override
+  String get exerciseCorrect => 'Đáp án đúng';
+
+  @override
+  String get exerciseMulti => 'Cho phép chọn nhiều đáp án';
+
+  @override
+  String get exerciseAddQuestion => 'Thêm câu hỏi';
+
+  @override
+  String get exerciseRemoveQuestion => 'Xóa câu';
+
+  @override
+  String get exerciseSave => 'Lưu';
+
+  @override
+  String get exerciseSaved => 'Đã lưu bài tập.';
+
+  @override
+  String get exerciseValidation => 'Kiểm tra lại đề bài và đáp án.';
+
+  @override
+  String get exerciseEmpty => 'Chưa có bài tập nào.';
+
+  @override
+  String get exerciseLoading => 'Đang tải bài tập';
+
+  @override
+  String get exerciseError => 'Không tải được bài tập.';
+
+  @override
+  String exerciseQuestionsCount(int count) {
+    return '$count câu';
+  }
+
+  @override
+  String get exercisePick => 'Chọn bài tập';
+
+  @override
+  String get exerciseEdit => 'Sửa bài tập';
+
+  @override
+  String get exerciseAnswerKeyHint => 'Chọn vị trí đáp án đúng.';
+
+  @override
+  String get exerciseNoneLesson => 'Không liên kết bài học';
+
+  @override
+  String get assignmentEditorTitle => 'Giao bài';
+
+  @override
+  String get assignmentType => 'Loại bài';
+
+  @override
+  String get assignmentTypePractice => 'Luyện tập';
+
+  @override
+  String get assignmentTypeTest => 'Kiểm tra';
+
+  @override
+  String get assignmentDue => 'Hạn nộp';
+
+  @override
+  String get assignmentNoDue => 'Không đặt hạn';
+
+  @override
+  String get assignmentTimeLimit => 'Thời gian làm bài (phút)';
+
+  @override
+  String get assignmentClass => 'Lớp';
+
+  @override
+  String get assignmentExercise => 'Bài tập';
+
+  @override
+  String get assignmentAssign => 'Giao bài';
+
+  @override
+  String get assignmentSaved => 'Đã giao bài.';
+
+  @override
+  String get assignmentDelete => 'Xóa bài giao';
+
+  @override
+  String get assignmentDeleted => 'Đã xóa bài giao.';
+
+  @override
+  String get assignmentDeleteConfirmTitle => 'Xóa bài giao?';
+
+  @override
+  String get assignmentDeleteConfirmBody =>
+      'Kết quả đã nộp của học sinh cũng sẽ bị xóa.';
+
+  @override
+  String get assignmentEmpty => 'Chưa có bài tập nào được giao.';
+
+  @override
+  String get assignmentLoading => 'Đang tải bài tập';
+
+  @override
+  String get assignmentError => 'Không tải được danh sách bài tập.';
+
+  @override
+  String get assignmentTeacherTitle => 'Bài đã giao';
+
+  @override
+  String get assignmentNew => 'Giao bài mới';
+
+  @override
+  String assignmentSubmissions(int count) {
+    return '$count bài nộp';
+  }
+
+  @override
+  String assignmentGradedCount(int count) {
+    return '$count đã chấm';
+  }
+
+  @override
+  String assignmentDueAt(String date) {
+    return 'Hạn $date';
+  }
+
+  @override
+  String get assignmentNoDueAt => 'Không hạn';
+
+  @override
+  String get assignmentPickExercise => 'Chọn bài tập';
+
+  @override
+  String get assignmentTimeLimitInvalid => 'Thời gian phải lớn hơn 0.';
+
+  @override
+  String get assignmentTypeRequired => 'Chọn loại bài.';
+
+  @override
+  String get assignmentOfflineNoData =>
+      'Chưa có danh sách bài giao trên máy. Kết nối mạng để tải.';
+
+  @override
+  String get assignmentsTitle => 'Bài tập';
+
+  @override
+  String get assignmentsNeedsAction => 'Cần làm';
+
+  @override
+  String get assignmentsDone => 'Đã nộp';
+
+  @override
+  String get assignmentsEmpty => 'Chưa có bài tập nào được giao.';
+
+  @override
+  String get assignmentsLoading => 'Đang tải bài tập';
+
+  @override
+  String get assignmentsError => 'Không tải được danh sách bài tập.';
+
+  @override
+  String get assignmentsOfflineNoData =>
+      'Chưa có danh sách bài tập trên máy. Kết nối mạng để tải.';
+
+  @override
+  String assignmentsDue(String date) {
+    return 'Hạn $date';
+  }
+
+  @override
+  String get assignmentsNoDue => 'Không hạn';
+
+  @override
+  String get assignmentsOpen => 'Mở bài';
+
+  @override
+  String get assignmentsStart => 'Bắt đầu';
+
+  @override
+  String get assignmentsContinue => 'Tiếp tục';
+
+  @override
+  String assignmentsScore(String score, String max) {
+    return 'Điểm $score/$max';
+  }
+
+  @override
+  String get assignmentsPendingSync => 'Bài nộp đang chờ đồng bộ';
+
+  @override
+  String get lessonTitle => 'Bài học';
+
+  @override
+  String get lessonCompleted => 'Đã học xong';
+
+  @override
+  String get lessonMarkComplete => 'Đánh dấu đã học xong';
+
+  @override
+  String get lessonOpen => 'Mở bài học';
+
+  @override
+  String get lessonCompletedSnack => 'Đã đánh dấu bài học hoàn thành.';
+
+  @override
+  String get lessonNeedsInternet => 'Cần kết nối mạng để mở bài học.';
+
+  @override
+  String get lessonLoading => 'Đang tải bài học';
+
+  @override
+  String get lessonError => 'Không tải được bài học.';
+
+  @override
+  String get exerciseStart => 'Bắt đầu làm bài';
+
+  @override
+  String get exerciseSubmit => 'Nộp bài';
+
+  @override
+  String get exerciseSubmitting => 'Đang nộp…';
+
+  @override
+  String get exerciseConfirmTitle => 'Nộp bài?';
+
+  @override
+  String exerciseConfirmBody(int count) {
+    return 'Em còn $count câu chưa trả lời. Vẫn nộp?';
+  }
+
+  @override
+  String get exerciseConfirmSubmit => 'Nộp';
+
+  @override
+  String exerciseQuestionOf(int current, int total) {
+    return 'Câu $current / $total';
+  }
+
+  @override
+  String get exerciseUnanswered => 'Chưa trả lời';
+
+  @override
+  String get exerciseAnswered => 'Đã trả lời';
+
+  @override
+  String exerciseOptionsSemantics(int number, String letter) {
+    return 'Câu $number, lựa chọn $letter';
+  }
+
+  @override
+  String get exerciseSavedOffline => 'Bài làm đã lưu trên máy.';
+
+  @override
+  String get exerciseScreenLoading => 'Đang mở bài tập';
+
+  @override
+  String get exerciseScreenError => 'Không mở được bài tập.';
+
+  @override
+  String get exerciseOfflineNoData => 'Bài tập này chưa được tải về máy.';
+
+  @override
+  String get exerciseOptionsHint => 'Chọn một đáp án';
+
+  @override
+  String get exerciseQuestionMultiHint => 'Có thể chọn nhiều đáp án.';
+
+  @override
+  String get resultTitle => 'Kết quả';
+
+  @override
+  String get resultScore => 'Điểm';
+
+  @override
+  String resultScoreValue(String score, String max) {
+    return '$score/$max';
+  }
+
+  @override
+  String get resultPending => 'Bài nộp đang chờ đồng bộ';
+
+  @override
+  String get resultSubmitted => 'Đã nộp, đang chờ chấm';
+
+  @override
+  String get resultGradingFailed => 'Chưa chấm được';
+
+  @override
+  String get resultBack => 'Về danh sách bài tập';
+
+  @override
+  String resultCorrectCount(int correct, int total) {
+    return '$correct/$total câu đúng';
+  }
+
+  @override
+  String get resultLate => 'Nộp muộn';
+
+  @override
+  String get resultLoading => 'Đang tải kết quả';
+
+  @override
+  String get resultError => 'Không tải được kết quả.';
+
+  @override
+  String get statusToDo => 'Chưa làm';
+
+  @override
+  String get statusInProgress => 'Đang làm bài';
+
+  @override
+  String get statusSubmittedAwaitingGrade => 'Đã nộp, đang chờ chấm';
+
+  @override
+  String get statusPendingSync => 'Chờ đồng bộ';
+
+  @override
+  String get statusGraded => 'Đã chấm';
+
+  @override
+  String get statusLate => 'Nộp muộn';
+
+  @override
+  String get statusGradingFailed => 'Chưa chấm được';
+
+  @override
+  String get statusLessonDone => 'Đã học xong';
+
+  @override
+  String get statusDraft => 'Bản nháp';
+
+  @override
+  String get statusProcessing => 'Đang xử lý';
+
+  @override
+  String get statusAwaitingApproval => 'Chờ duyệt';
+
+  @override
+  String get statusApproved => 'Đã duyệt';
+
+  @override
+  String get statusRejected => 'Bị từ chối';
+
+  @override
+  String get resultsTitle => 'Kết quả';
+
+  @override
+  String get resultsClass => 'Lớp';
+
+  @override
+  String get resultsEmpty => 'Chưa có bài nộp nào.';
+
+  @override
+  String get resultsLoading => 'Đang tải kết quả';
+
+  @override
+  String get resultsError => 'Không tải được kết quả.';
+
+  @override
+  String resultsSummary(int submitted, int total, int late) {
+    return '$submitted trên $total em đã nộp · $late bài nộp muộn';
+  }
+
+  @override
+  String get resultsRegrade => 'Chấm lại';
+
+  @override
+  String get resultsRegraded => 'Đã chấm lại.';
+
+  @override
+  String get resultsCellNoSubmission => '–';
+
+  @override
+  String get tutorTitle => 'Gia sư AI';
+
+  @override
+  String get tutorNewChat => 'Cuộc trò chuyện mới';
+
+  @override
+  String get tutorConversations => 'Cuộc trò chuyện';
+
+  @override
+  String get tutorNoConversations => 'Chưa có cuộc trò chuyện nào.';
+
+  @override
+  String get tutorSubject => 'Môn học';
+
+  @override
+  String get tutorMessageHint => 'Hỏi gia sư về bài học…';
+
+  @override
+  String get tutorSend => 'Gửi';
+
+  @override
+  String get tutorTutorLabel => 'Gia sư';
+
+  @override
+  String get tutorStudentLabel => 'Em';
+
+  @override
+  String get tutorThinking => 'Gia sư đang trả lời…';
+
+  @override
+  String get tutorNeedsInternet => 'Gia sư AI cần kết nối mạng';
+
+  @override
+  String get tutorDailyLimit => 'Bạn đã dùng hết lượt hỏi hôm nay';
+
+  @override
+  String get tutorDailyLimitHint => 'Lượt hỏi mới từ 0:00.';
+
+  @override
+  String get tutorPaused => 'Gia sư AI tạm dừng trong lúc làm bài kiểm tra';
+
+  @override
+  String get tutorPausedHint => 'Sẽ mở lại khi em nộp bài kiểm tra.';
+
+  @override
+  String get tutorError => 'Gia sư chưa trả lời được. Thử lại nhé.';
+
+  @override
+  String get tutorSubjectNotAllowed => 'Môn này ngoài phạm vi của gia sư.';
+
+  @override
+  String get tutorEmptySubject => 'Chọn môn học trước khi hỏi.';
+
+  @override
+  String get tutorLoading => 'Đang mở gia sư';
+
+  @override
+  String get tutorLoadError => 'Không mở được gia sư.';
+
+  @override
+  String get tutorChatLoading => 'Đang tải cuộc trò chuyện';
+
+  @override
+  String get tutorChatError => 'Không tải được cuộc trò chuyện.';
+
+  @override
+  String get tutorOfflineNoData => 'Chưa có cuộc trò chuyện nào trên máy.';
+
+  @override
+  String get tutorReadOnly => 'Chỉ xem';
+
+  @override
+  String get tutorClassChatsTitle => 'Trò chuyện AI của học sinh';
+
+  @override
+  String get tutorPickStudent => 'Chọn học sinh';
+
+  @override
+  String get tutorNoChatsForStudent =>
+      'Học sinh này chưa trò chuyện với gia sư.';
+
+  @override
+  String get tutorStudentPicker => 'Học sinh';
+
+  @override
+  String get testLobbyTitle => 'Bài kiểm tra';
+
+  @override
+  String get testRules => 'Quy định';
+
+  @override
+  String get testRulesBody =>
+      'Bài kiểm tra bắt đầu tính giờ ngay khi em bấm Bắt đầu. Hết giờ, bài sẽ tự nộp.';
+
+  @override
+  String testTimeLimit(int minutes) {
+    return '$minutes phút';
+  }
+
+  @override
+  String get testStart => 'Bắt đầu';
+
+  @override
+  String get testNeedsInternet => 'Cần kết nối mạng để bắt đầu bài kiểm tra';
+
+  @override
+  String get testStarting => 'Đang bắt đầu…';
+
+  @override
+  String get testStartFailed => 'Không bắt đầu được bài kiểm tra.';
+
+  @override
+  String get testRoomTitle => 'Đang làm bài';
+
+  @override
+  String get testRemaining => 'Thời gian còn lại';
+
+  @override
+  String get testUnderMinute => 'Còn dưới 1 phút';
+
+  @override
+  String get testAutoSubmitted => 'Hết giờ, bài đã được nộp.';
+
+  @override
+  String get testSubmittedTitle => 'Đã nộp bài';
+
+  @override
+  String get testSubmittedBody => 'Bài làm đã được ghi nhận.';
+
+  @override
+  String get testScoreLabel => 'Điểm';
+
+  @override
+  String get testSubmittedGraded => 'Bài của em đã được chấm.';
+
+  @override
+  String get testSubmittedPending => 'Bài của em đang chờ đồng bộ.';
+
+  @override
+  String get testSubmittedLate => 'Bài nộp muộn';
+
+  @override
+  String get testBackToAssignments => 'Về danh sách bài tập';
+
+  @override
+  String get testConfirmSubmit => 'Nộp bài kiểm tra?';
+
+  @override
+  String get testSubmittedState => 'Đã nộp';
+
+  @override
+  String get parentSummaryTitle => 'Sổ liên lạc';
+
+  @override
+  String get parentResults => 'Kết quả học tập';
+
+  @override
+  String get parentNoResults => 'Chưa có kết quả nào.';
+
+  @override
+  String get parentAiChats => 'Trò chuyện với gia sư AI';
+
+  @override
+  String get parentNoChats => 'Chưa có cuộc trò chuyện nào.';
+
+  @override
+  String get parentSummaryLoading => 'Đang tải sổ liên lạc';
+
+  @override
+  String get parentSummaryError => 'Không tải được sổ liên lạc.';
+
+  @override
+  String get parentSummaryOfflineNoData =>
+      'Chưa có sổ liên lạc trên máy. Kết nối mạng để tải.';
+
+  @override
+  String get parentReadOnly => 'Chỉ xem';
+
+  @override
+  String get parentChatTitle => 'Trò chuyện của con';
+
+  @override
+  String get teacherChatReviewTitle => 'Trò chuyện AI';
+
+  @override
+  String get teacherChatReviewEmpty => 'Chưa có học sinh nào trong lớp.';
+
+  @override
+  String get teacherChatReviewPick => 'Chọn học sinh để xem trò chuyện.';
+
+  @override
+  String get teacherChatReviewLoading => 'Đang tải trò chuyện';
+
+  @override
+  String get teacherChatReviewError => 'Không tải được trò chuyện.';
+
+  @override
+  String get teacherChatReviewHint => 'Chỉ xem, không thể thay đổi.';
+
+  @override
+  String aiChatMessageCount(int count) {
+    return '$count tin nhắn';
+  }
+
+  @override
+  String get contentUploadingSimple => 'Đang tải lên…';
+
+  @override
+  String statusSemantics(String word) {
+    return 'Trạng thái: $word';
+  }
+
+  @override
+  String get contentDownloadingSimple => 'Đang tải về…';
+
+  @override
+  String get exercisesTitle => 'Bài tập';
+
+  @override
+  String exerciseRowMeta(String subject, String count) {
+    return '$subject · $count';
+  }
+
+  @override
+  String assignmentCounts(String submissions, String graded) {
+    return '$submissions · $graded';
+  }
+
+  @override
+  String chatRowMeta(String subject, String date) {
+    return '$subject · $date';
+  }
+
+  @override
+  String get assignmentDefaultMinutes => '15';
+
+  @override
+  String get contentPunctuation => '·';
+
+  @override
+  String get exerciseRetry => 'Làm lại';
 }

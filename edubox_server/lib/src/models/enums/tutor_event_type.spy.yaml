@@ -1,0 +1,6 @@
+enum: TutorEventType
+serialized: byName
+values:
+  - delta
+  - done
+  - error

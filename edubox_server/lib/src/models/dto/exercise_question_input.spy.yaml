@@ -1,0 +1,11 @@
+# One question, as the teacher edits and reads it (includes the answer key).
+class: ExerciseQuestionInput
+fields:
+  id: int?
+  position: int
+  stem: String
+  multiSelect: bool
+  # Optional storage path of an image shown with the question.
+  imagePath: String?
+  options: List<String>
+  correctPositions: List<int>

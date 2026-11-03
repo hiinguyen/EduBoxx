@@ -1,0 +1,3 @@
+class: StudentAssignmentList
+fields:
+  assignments: List<StudentAssignmentItem>

@@ -1,0 +1,10 @@
+class: TutorChatSummary
+fields:
+  id: int
+  subject: String
+  title: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  messageCount: int
+  # Present on teacher and parent reads, null for the student's own list.
+  studentName: String?

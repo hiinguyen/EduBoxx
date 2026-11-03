@@ -1,0 +1,12 @@
+# The answer key is a separate table, resolved on the server only. It is
+# never embedded in a student-facing DTO.
+class: ExerciseAnswerKey
+serverOnly: true
+table: exercise_answer_keys
+fields:
+  questionId: int, relation(parent=exercise_questions, onDelete=Cascade)
+  correctPosition: int
+indexes:
+  exercise_answer_keys_question_position_idx:
+    fields: questionId, correctPosition
+    unique: true

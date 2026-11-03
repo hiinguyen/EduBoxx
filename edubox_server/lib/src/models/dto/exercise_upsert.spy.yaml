@@ -1,0 +1,10 @@
+class: ExerciseUpsert
+fields:
+  # Null creates a new exercise; set updates that exercise (and its content).
+  contentId: int?
+  classId: int
+  title: String
+  subject: String
+  gradeLevel: int
+  lessonContentId: int?
+  questions: List<ExerciseQuestionInput>

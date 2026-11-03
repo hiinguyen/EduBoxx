@@ -1,0 +1,4 @@
+class: ResultStudent
+fields:
+  id: int
+  name: String

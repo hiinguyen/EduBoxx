@@ -1,0 +1,33 @@
+class: Submission
+serverOnly: true
+table: submissions
+fields:
+  assignmentId: int, relation(parent=assignments, onDelete=Cascade)
+  studentId: int, relation(parent=users, onDelete=Cascade)
+  # Client-generated UUID; the idempotency key for outbox replays.
+  clientSubmissionId: String
+  status: SubmissionStatus
+  # JSON map of questionId -> list of selected option positions.
+  answersJson: String
+  # Answer key snapshot taken when the attempt starts (tests) or when the
+  # practice submission arrives; regrade explicitly uses the live key.
+  answerKeySnapshotJson: String?
+  answerKeyVersion: int
+  score: double?
+  maxScore: double?
+  late: bool
+  startedAt: DateTime?
+  submittedAt: DateTime?
+  gradedAt: DateTime?
+  gradedBy: GradedBy?
+  failureReason: String?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  submissions_client_id_idx:
+    fields: clientSubmissionId
+    unique: true
+  submissions_assignment_student_idx:
+    fields: assignmentId, studentId
+  submissions_student_status_idx:
+    fields: studentId, status

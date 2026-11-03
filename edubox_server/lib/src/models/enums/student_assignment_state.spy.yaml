@@ -1,0 +1,10 @@
+# The student-facing state of one assignment. Pending-sync is a client-only
+# state (driven by the outbox), so the server never returns it.
+enum: StudentAssignmentState
+serialized: byName
+values:
+  - toDo
+  - inProgress
+  - submitted
+  - graded
+  - gradingFailed

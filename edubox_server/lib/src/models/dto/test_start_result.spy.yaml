@@ -1,0 +1,7 @@
+class: TestStartResult
+fields:
+  assignmentId: int
+  submissionId: int
+  clientSubmissionId: String
+  startedAt: DateTime
+  deadline: DateTime

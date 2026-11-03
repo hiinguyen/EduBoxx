@@ -1,0 +1,13 @@
+# Lesson completion. One row per student and content item.
+class: ProgressEntry
+serverOnly: true
+table: progress
+fields:
+  studentId: int, relation(parent=users, onDelete=Cascade)
+  contentId: int, relation(parent=content, onDelete=Cascade)
+  status: String
+  updatedAt: DateTime
+indexes:
+  progress_student_content_idx:
+    fields: studentId, contentId
+    unique: true

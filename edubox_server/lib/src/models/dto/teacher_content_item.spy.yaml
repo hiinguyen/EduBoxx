@@ -1,0 +1,19 @@
+# One row of the teacher's content table.
+class: TeacherContentItem
+fields:
+  id: int
+  type: ContentType
+  title: String
+  subject: String
+  gradeLevel: int
+  status: ContentStatus
+  ingestStatus: IngestStatus
+  ingestReason: String?
+  originalFileName: String?
+  mimeType: String?
+  sizeBytes: int?
+  pageCount: int?
+  durationSeconds: int?
+  createdAt: DateTime
+  classNames: List<String>
+  exerciseId: int?

@@ -1,0 +1,9 @@
+class: TutorChatDetail
+fields:
+  id: int
+  subject: String
+  title: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  studentName: String?
+  messages: List<TutorMessage>

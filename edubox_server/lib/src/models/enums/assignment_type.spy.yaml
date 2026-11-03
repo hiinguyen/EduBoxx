@@ -1,0 +1,5 @@
+enum: AssignmentType
+serialized: byName
+values:
+  - practice
+  - test

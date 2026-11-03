@@ -1,0 +1,8 @@
+# Upload/ingest lifecycle of a content file. `ready` means the file is
+# validated; approval is still a separate teacher decision.
+enum: IngestStatus
+serialized: byName
+values:
+  - processing
+  - ready
+  - rejected

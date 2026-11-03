@@ -1,0 +1,11 @@
+class: ExerciseOption
+serverOnly: true
+table: exercise_options
+fields:
+  questionId: int, relation(parent=exercise_questions, onDelete=Cascade)
+  position: int
+  text: String
+indexes:
+  exercise_options_question_position_idx:
+    fields: questionId, position
+    unique: true

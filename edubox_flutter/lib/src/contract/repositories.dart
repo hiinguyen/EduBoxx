@@ -48,11 +48,6 @@ abstract interface class LibraryRepository {
   Future<BackendResult<StudentLibrary>> library();
 }
 
-/// Phase 1 parent home data (derived from `profile.me` on the server binding).
-abstract interface class ParentRepository {
-  Future<BackendResult<ParentHomeData>> home();
-}
-
 /// `diagnostics.pingStream`: three role-carrying messages, then close.
 abstract interface class DiagnosticsRepository {
   Stream<PingMessage> pingStream();

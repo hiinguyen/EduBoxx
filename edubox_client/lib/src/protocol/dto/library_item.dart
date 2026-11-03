@@ -22,6 +22,11 @@ abstract class LibraryItem
     required this.subject,
     required this.gradeLevel,
     required this.createdAt,
+    required this.hasFile,
+    this.mimeType,
+    this.sizeBytes,
+    this.pageCount,
+    this.durationSeconds,
   });
 
   factory LibraryItem({
@@ -31,6 +36,11 @@ abstract class LibraryItem
     required String subject,
     required int gradeLevel,
     required DateTime createdAt,
+    required bool hasFile,
+    String? mimeType,
+    int? sizeBytes,
+    int? pageCount,
+    int? durationSeconds,
   }) = _LibraryItemImpl;
 
   factory LibraryItem.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -45,6 +55,11 @@ abstract class LibraryItem
       createdAt: _isc.DateTimeJsonExtension.fromJson(
         jsonSerialization['createdAt'],
       ),
+      hasFile: _isc.BoolJsonExtension.fromJson(jsonSerialization['hasFile']),
+      mimeType: jsonSerialization['mimeType'] as String?,
+      sizeBytes: jsonSerialization['sizeBytes'] as int?,
+      pageCount: jsonSerialization['pageCount'] as int?,
+      durationSeconds: jsonSerialization['durationSeconds'] as int?,
     );
   }
 
@@ -60,6 +75,16 @@ abstract class LibraryItem
 
   DateTime createdAt;
 
+  bool hasFile;
+
+  String? mimeType;
+
+  int? sizeBytes;
+
+  int? pageCount;
+
+  int? durationSeconds;
+
   /// Returns a shallow copy of this [LibraryItem]
   /// with some or all fields replaced by the given arguments.
   @_isc.useResult
@@ -70,6 +95,11 @@ abstract class LibraryItem
     String? subject,
     int? gradeLevel,
     DateTime? createdAt,
+    bool? hasFile,
+    String? mimeType,
+    int? sizeBytes,
+    int? pageCount,
+    int? durationSeconds,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -81,6 +111,11 @@ abstract class LibraryItem
       'subject': subject,
       'gradeLevel': gradeLevel,
       'createdAt': createdAt.toJson(),
+      'hasFile': hasFile,
+      if (mimeType != null) 'mimeType': mimeType,
+      if (sizeBytes != null) 'sizeBytes': sizeBytes,
+      if (pageCount != null) 'pageCount': pageCount,
+      if (durationSeconds != null) 'durationSeconds': durationSeconds,
     };
   }
 
@@ -94,6 +129,11 @@ abstract class LibraryItem
       'subject': subject,
       'gradeLevel': gradeLevel,
       'createdAt': createdAt.toJson(),
+      'hasFile': hasFile,
+      if (mimeType != null) 'mimeType': mimeType,
+      if (sizeBytes != null) 'sizeBytes': sizeBytes,
+      if (pageCount != null) 'pageCount': pageCount,
+      if (durationSeconds != null) 'durationSeconds': durationSeconds,
     };
   }
 
@@ -103,6 +143,8 @@ abstract class LibraryItem
   }
 }
 
+class _Undefined {}
+
 class _LibraryItemImpl extends LibraryItem {
   _LibraryItemImpl({
     required int id,
@@ -111,6 +153,11 @@ class _LibraryItemImpl extends LibraryItem {
     required String subject,
     required int gradeLevel,
     required DateTime createdAt,
+    required bool hasFile,
+    String? mimeType,
+    int? sizeBytes,
+    int? pageCount,
+    int? durationSeconds,
   }) : super._(
          id: id,
          type: type,
@@ -118,6 +165,11 @@ class _LibraryItemImpl extends LibraryItem {
          subject: subject,
          gradeLevel: gradeLevel,
          createdAt: createdAt,
+         hasFile: hasFile,
+         mimeType: mimeType,
+         sizeBytes: sizeBytes,
+         pageCount: pageCount,
+         durationSeconds: durationSeconds,
        );
 
   /// Returns a shallow copy of this [LibraryItem]
@@ -131,6 +183,11 @@ class _LibraryItemImpl extends LibraryItem {
     String? subject,
     int? gradeLevel,
     DateTime? createdAt,
+    bool? hasFile,
+    Object? mimeType = _Undefined,
+    Object? sizeBytes = _Undefined,
+    Object? pageCount = _Undefined,
+    Object? durationSeconds = _Undefined,
   }) {
     return LibraryItem(
       id: id ?? this.id,
@@ -139,6 +196,13 @@ class _LibraryItemImpl extends LibraryItem {
       subject: subject ?? this.subject,
       gradeLevel: gradeLevel ?? this.gradeLevel,
       createdAt: createdAt ?? this.createdAt,
+      hasFile: hasFile ?? this.hasFile,
+      mimeType: mimeType is String? ? mimeType : this.mimeType,
+      sizeBytes: sizeBytes is int? ? sizeBytes : this.sizeBytes,
+      pageCount: pageCount is int? ? pageCount : this.pageCount,
+      durationSeconds: durationSeconds is int?
+          ? durationSeconds
+          : this.durationSeconds,
     );
   }
 }

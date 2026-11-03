@@ -1,0 +1,7 @@
+# `parent.summary`: read-only view of the linked child.
+class: ParentSummary
+fields:
+  linkedStudentName: String?
+  className: String?
+  results: List<ParentResultEntry>
+  chats: List<TutorChatSummary>

@@ -112,6 +112,7 @@ class FixtureEduBoxApi implements EduBoxApi {
             subject: item.subject,
             gradeLevel: item.gradeLevel,
             createdAt: item.createdAt,
+            hasFile: item.type != FixtureContentType.exercise,
           ),
       ],
     );
@@ -197,4 +198,141 @@ class FixtureEduBoxApi implements EduBoxApi {
       ),
     );
   }
+
+  @override
+  Future<ContentDetail> contentDetail(int contentId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<List<TeacherContentItem>> contentTeacherList() async =>
+      throw UnimplementedError();
+
+  @override
+  Future<UploadTicket> contentCreateUpload({
+    required int classId,
+    required ContentType type,
+    required String title,
+    required String subject,
+    required int gradeLevel,
+    required String fileName,
+    required int sizeBytes,
+  }) async => throw UnimplementedError();
+
+  @override
+  Future<TeacherContentItem> contentCompleteUpload(int contentId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<TeacherContentItem> contentApprove(int contentId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<SignedFileUrl> contentFileUrl(int contentId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<TeacherExerciseDetail> exerciseSave(ExerciseUpsert input) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<TeacherExerciseDetail> exerciseDetail(int exerciseId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<List<TeacherExerciseSummary>> exercisesMine() async =>
+      throw UnimplementedError();
+
+  @override
+  Future<TeacherAssignmentItem> assignmentSave(AssignmentUpsert input) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<void> assignmentDelete(int assignmentId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<List<TeacherAssignmentItem>> assignmentsMine() async =>
+      throw UnimplementedError();
+
+  @override
+  Future<StudentAssignmentList> studentAssignments() async =>
+      throw UnimplementedError();
+
+  @override
+  Future<StudentAssignmentDetail> studentAssignmentDetail(
+    int assignmentId,
+  ) async => throw UnimplementedError();
+
+  @override
+  Future<ProgressResult> progressMarkComplete(int contentId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<List<ProgressResult>> progressMine() async =>
+      throw UnimplementedError();
+
+  @override
+  Future<ClassResults> classResults(int classId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<SubmissionResult> submissionSubmit({
+    required int assignmentId,
+    required String clientSubmissionId,
+    required List<SubmittedAnswer> answers,
+  }) async => throw UnimplementedError();
+
+  @override
+  Future<SubmissionResult?> submissionForAssignment(int assignmentId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<SubmissionResult> submissionRegrade(int submissionId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<TestStartResult> testStart({
+    required int assignmentId,
+    required String clientSubmissionId,
+  }) async => throw UnimplementedError();
+
+  @override
+  Future<TestStartResult?> testActive() async => throw UnimplementedError();
+
+  @override
+  Future<TutorState> tutorState() async => throw UnimplementedError();
+
+  @override
+  Future<List<TutorChatSummary>> tutorChats() async =>
+      throw UnimplementedError();
+
+  @override
+  Future<TutorChatDetail> tutorChat(int chatId) async =>
+      throw UnimplementedError();
+
+  @override
+  Stream<TutorEvent> tutorAsk({
+    required String subject,
+    required String message,
+    int? chatId,
+  }) => throw UnimplementedError();
+
+  @override
+  Future<List<TutorChatSummary>> tutorClassChats(int studentId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<TutorChatDetail> tutorClassChat(int chatId) async =>
+      throw UnimplementedError();
+
+  @override
+  Future<ParentSummary> parentSummary() async => throw UnimplementedError();
+
+  @override
+  Future<List<TutorChatSummary>> parentChats() async =>
+      throw UnimplementedError();
+
+  @override
+  Future<TutorChatDetail> parentChat(int chatId) async =>
+      throw UnimplementedError();
 }

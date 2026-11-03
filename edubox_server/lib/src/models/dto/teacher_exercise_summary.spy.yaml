@@ -1,0 +1,10 @@
+# One row of the teacher's exercise picker.
+class: TeacherExerciseSummary
+fields:
+  id: int
+  contentId: int
+  title: String
+  subject: String
+  gradeLevel: int
+  questionCount: int
+  updatedAt: DateTime

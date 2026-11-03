@@ -10,6 +10,8 @@ import '../app/formatters.dart';
 import '../app/loadable.dart';
 import '../contract/backend_result.dart';
 import '../screens/student_home/student_home_screen.dart';
+import '../screens/student_assignments/student_assignments_screen.dart';
+import '../screens/student_tutor/student_tutor_screen.dart';
 import '../theme/theme_extensions.dart';
 import 'account_menu.dart';
 import 'offline_strip.dart';
@@ -38,8 +40,8 @@ class StudentLibraryScope extends InheritedNotifier<Loadable<StudentLibrary>> {
   Loadable<StudentLibrary> get library => notifier!;
 }
 
-/// Student destinations, in their fixed order. Phase 1 ships two.
-enum StudentDestination { home, library }
+/// Student destinations, in their fixed order.
+enum StudentDestination { home, library, assignments, tutor }
 
 /// The student shell: generous density, rail or bottom bar by width,
 /// sign-out with confirmation.
@@ -159,6 +161,20 @@ class _StudentShellState extends State<StudentShell> {
                     label: l10n.navLibrary,
                     body: Builder(builder: widget.libraryBuilder!),
                   ),
+                ShellDestination(
+                  key: const Key('destination.studentAssignments'),
+                  icon: Icons.assignment_outlined,
+                  selectedIcon: Icons.assignment_outlined,
+                  label: l10n.navAssignments,
+                  body: const StudentAssignmentsScreen(),
+                ),
+                ShellDestination(
+                  key: const Key('destination.studentTutor'),
+                  icon: Icons.auto_awesome_outlined,
+                  selectedIcon: Icons.auto_awesome_outlined,
+                  label: l10n.navTutor,
+                  body: const StudentTutorScreen(),
+                ),
               ],
             );
           },

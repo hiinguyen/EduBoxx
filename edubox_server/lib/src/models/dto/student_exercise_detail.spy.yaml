@@ -1,0 +1,11 @@
+# The student's view of an exercise. Answer-key fields never appear here.
+class: StudentExerciseDetail
+fields:
+  id: int
+  contentId: int
+  title: String
+  subject: String
+  gradeLevel: int
+  lessonContentId: int?
+  lessonTitle: String?
+  questions: List<StudentQuestion>

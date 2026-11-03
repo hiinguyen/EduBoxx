@@ -1,0 +1,9 @@
+# The tutor screen's preflight state.
+class: TutorState
+fields:
+  subjects: List<TutorSubject>
+  usedToday: int
+  dailyLimit: int
+  remainingToday: int
+  pausedForTest: bool
+  activeTestAssignmentId: int?

@@ -1,0 +1,8 @@
+# The teacher's Sổ điểm grid for one class.
+class: ClassResults
+fields:
+  classId: int
+  className: String
+  students: List<ResultStudent>
+  assignments: List<ResultAssignment>
+  cells: List<ResultCell>

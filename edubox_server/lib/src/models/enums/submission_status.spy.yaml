@@ -1,0 +1,10 @@
+# Lifecycle of a student's submission. `inProgress` exists only for timed
+# tests (created by `tests.start`); practice submissions are created
+# `graded` or `gradingFailed` by `submissions.submit`.
+enum: SubmissionStatus
+serialized: byName
+values:
+  - inProgress
+  - submitted
+  - graded
+  - gradingFailed

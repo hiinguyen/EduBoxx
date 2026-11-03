@@ -1,0 +1,10 @@
+class: ResultCell
+fields:
+  studentId: int
+  assignmentId: int
+  submissionId: int?
+  status: SubmissionStatus?
+  score: double?
+  maxScore: double?
+  late: bool
+  clientSubmissionId: String?

@@ -30,6 +30,16 @@ abstract final class EduColors {
   static const neutralFill = Color(0xFFE7EBF3);
   static const neutralInk = Color(0xFF2A3242);
   static const neutralBorder = Color(0xFFC9D0DE);
+
+  // Positive and notice families used by status stamps.
+  static const positive = Color(0xFF1E6F45);
+  static const positiveFill = Color(0xFFE2F2E8);
+  static const positiveInk = Color(0xFF0E4026);
+  static const positiveBorder = Color(0xFFA9D5BA);
+  static const notice = Color(0xFF8A5300);
+  static const noticeFill = Color(0xFFFDF3D7);
+  static const noticeInk = Color(0xFF5E3800);
+  static const noticeBorder = Color(0xFFE9CF8A);
 }
 
 /// Font family names; they must match `flutter: fonts:` in pubspec.yaml.

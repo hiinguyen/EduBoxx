@@ -56,7 +56,7 @@ void main() {
         in eduboxMethodMatrix.entries) {
       group(methodKey, () {
         late SeededFixtures seeded;
-        setUp(() async => seeded = await seedPhase1(sessionBuilder));
+        setUp(() async => seeded = await seedLearning(sessionBuilder));
 
         TestSessionBuilder as(MatrixCaller caller) => caller.fixtureKey == null
             ? anonymous(sessionBuilder)
@@ -65,12 +65,15 @@ void main() {
         for (final caller in MatrixCaller.values) {
           if (rule.allowed.contains(caller)) {
             test('allows ${caller.name}', () async {
-              await expectLater(rule.invoke(endpoints, as(caller)), completes);
+              await expectLater(
+                rule.invoke(endpoints, as(caller), seeded),
+                completes,
+              );
             });
           } else {
             test('denies ${caller.name}', () async {
               await expectLater(
-                rule.invoke(endpoints, as(caller)),
+                rule.invoke(endpoints, as(caller), seeded),
                 throwsA(_expectedDenial(caller)),
               );
             });

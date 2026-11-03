@@ -1,0 +1,11 @@
+# The teacher's view of an exercise, including answer keys.
+class: TeacherExerciseDetail
+fields:
+  id: int
+  contentId: int
+  title: String
+  subject: String
+  gradeLevel: int
+  lessonContentId: int?
+  questions: List<ExerciseQuestionInput>
+  updatedAt: DateTime

@@ -1,3 +1,5 @@
+import 'package:edubox_client/edubox_client.dart' show SubmissionRejectReason;
+
 /// The typed error shapes shared by every app repository.
 ///
 /// Screens map these to l10n keys; they never inspect server exception text.
@@ -46,6 +48,20 @@ final class SessionExpiredError extends BackendError {
 /// The caller is offline and the local store has no cached value.
 final class OfflineNoCacheError extends BackendError {
   const OfflineNoCacheError();
+}
+
+/// The server refused a submission for a business reason (for example a test
+/// that was never started, or one already submitted).
+final class SubmissionRejectedError extends BackendError {
+  const SubmissionRejectedError(this.reason);
+
+  final SubmissionRejectReason reason;
+}
+
+/// The AI provider failed after the student's message was accepted. The
+/// transcript keeps the student's message and shows a retry.
+final class TutorUnavailableError extends BackendError {
+  const TutorUnavailableError();
 }
 
 /// Any other failure. [cause] is for logs, never for the UI.

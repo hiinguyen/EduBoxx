@@ -41,6 +41,15 @@ abstract interface class ObjectStore {
     Duration expiresIn = const Duration(minutes: 5),
   });
 
+  /// A short-lived presigned PUT URL for a direct client upload of [path],
+  /// signed for the configured public endpoint. The caller must send the
+  /// bytes with an HTTP PUT.
+  Future<Uri> signedPutUrl(
+    Session session,
+    String path, {
+    Duration expiresIn = const Duration(minutes: 15),
+  });
+
   /// Deletes every object whose path starts with [prefix] (an empty prefix
   /// empties the bucket; used by the seed `reset` step on the e2e bucket).
   Future<void> deletePrefix(Session session, String prefix);
@@ -154,6 +163,28 @@ class S3ObjectStore implements ObjectStore {
     return _publicSigner.buildPresignedUri(
       key: path,
       method: 'GET',
+      expiration: expiresIn,
+    );
+  }
+
+  @override
+  Future<Uri> signedPutUrl(
+    Session session,
+    String path, {
+    Duration expiresIn = const Duration(minutes: 15),
+  }) async {
+    _checkPath(path);
+    if (expiresIn < const Duration(seconds: 1) ||
+        expiresIn > maxSignedUrlLifetime) {
+      throw ArgumentError.value(
+        expiresIn,
+        'expiresIn',
+        'Must be between 1 second and 7 days',
+      );
+    }
+    return _publicSigner.buildPresignedUri(
+      key: path,
+      method: 'PUT',
       expiration: expiresIn,
     );
   }

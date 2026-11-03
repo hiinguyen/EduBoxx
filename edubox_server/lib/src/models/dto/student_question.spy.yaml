@@ -1,0 +1,8 @@
+class: StudentQuestion
+fields:
+  id: int
+  position: int
+  stem: String
+  multiSelect: bool
+  imageUrl: String?
+  options: List<StudentOption>

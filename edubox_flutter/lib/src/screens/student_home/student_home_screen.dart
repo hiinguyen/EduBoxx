@@ -13,6 +13,7 @@ import '../../shell/student_shell.dart';
 import '../../theme/breakpoints.dart';
 import '../../theme/theme_extensions.dart';
 import '../../theme/tokens.dart';
+import '../student_content/student_content_detail_screen.dart';
 
 /// Stable keys for widget and E2E tests.
 abstract final class StudentHomeKeys {
@@ -194,7 +195,11 @@ class _LibraryPanel extends StatelessWidget {
             ),
           for (final (index, item) in newest.indexed) ...[
             if (index > 0) const Divider(),
-            ContentRow(item: item, subject: item.subject),
+            ContentRow(
+              item: item,
+              subject: item.subject,
+              onTap: () => openStudentContent(context, item.id),
+            ),
           ],
         ],
       );

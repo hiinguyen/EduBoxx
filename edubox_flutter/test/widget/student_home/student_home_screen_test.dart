@@ -271,7 +271,7 @@ void main() {
     expect(find.text(vi.studentHomeLibraryCount(6)), findsOneWidget);
   });
 
-  testWidgets('rows are not tappable; the nav holds only built destinations', (
+  testWidgets('rows open content; the nav holds every built destination', (
     tester,
   ) async {
     final semantics = tester.ensureSemantics();
@@ -286,22 +286,18 @@ void main() {
           .getSemantics(row)
           .getSemanticsData()
           .hasAction(SemanticsAction.tap),
-      isFalse,
+      isTrue,
     );
     expect(
       find.descendant(of: row, matching: find.byType(InkWell)),
-      findsNothing,
-    );
-    expect(
-      find.descendant(of: row, matching: find.byType(GestureDetector)),
-      findsNothing,
+      findsOneWidget,
     );
 
     final shell = tester.widget<RoleShell>(find.byType(RoleShell));
     final labels = [
       for (final destination in shell.destinations) destination.label,
     ];
-    expect(labels, [vi.navHome, vi.navLibrary]);
+    expect(labels, [vi.navHome, vi.navLibrary, vi.navAssignments, vi.navTutor]);
     semantics.dispose();
   });
   testWidgets('sign-out asks first; confirm returns to sign-in', (

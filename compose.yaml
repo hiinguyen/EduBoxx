@@ -29,6 +29,9 @@ services:
   # Throwaway database for Serverpod's test tools; data lives in memory.
   postgres_test:
     image: ghcr.io/serverpod/postgres:16
+    # The full suite starts many ephemeral databases in parallel; the stock
+    # 100-connection limit is not enough for that fan-out.
+    command: ["postgres", "-c", "max_connections=500"]
     ports:
       - "9090:5432"
     environment:
@@ -76,9 +79,10 @@ services:
       SERVERPOD_DATABASE_HOST: postgres
       SERVERPOD_DATABASE_PORT: "5432"
       EDUBOX_STORAGE_ENDPOINT: http://minio:9000
-      EDUBOX_STORAGE_PUBLIC_ENDPOINT: http://10.0.2.2:9000
+      EDUBOX_STORAGE_PUBLIC_ENDPOINT: ${EDUBOX_STORAGE_PUBLIC_ENDPOINT:-http://localhost:9000}
       EDUBOX_STORAGE_BUCKET: edubox-e2e
       EDUBOX_E2E_CONTROL: "true"
+      EDUBOX_AI_API_KEY: ${OPENCODE_API_KEY:-}
     volumes:
       - ./edubox_server/config:/app/config:ro
     depends_on:
@@ -124,8 +128,9 @@ services:
       SERVERPOD_DATABASE_HOST: postgres
       SERVERPOD_DATABASE_PORT: "5432"
       EDUBOX_STORAGE_ENDPOINT: http://minio:9000
-      EDUBOX_STORAGE_PUBLIC_ENDPOINT: http://10.0.2.2:9000
+      EDUBOX_STORAGE_PUBLIC_ENDPOINT: ${EDUBOX_STORAGE_PUBLIC_ENDPOINT:-http://localhost:9000}
       EDUBOX_STORAGE_BUCKET: edubox-e2e
+      EDUBOX_AI_API_KEY: ${OPENCODE_API_KEY:-}
     volumes:
       - ./edubox_server/config:/app/config:ro
     depends_on:

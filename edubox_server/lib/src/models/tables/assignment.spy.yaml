@@ -1,0 +1,19 @@
+class: Assignment
+serverOnly: true
+table: assignments
+fields:
+  classId: int, relation(parent=classes, onDelete=Cascade)
+  teacherId: int, relation(parent=users, onDelete=Restrict)
+  exerciseId: int, relation(parent=exercises, onDelete=Cascade)
+  type: AssignmentType
+  title: String
+  dueAt: DateTime?
+  # Timed tests only; null for practice.
+  timeLimitSec: int?
+  createdAt: DateTime
+  updatedAt: DateTime
+indexes:
+  assignments_class_idx:
+    fields: classId
+  assignments_teacher_idx:
+    fields: teacherId

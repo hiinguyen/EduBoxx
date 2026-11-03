@@ -4,6 +4,7 @@ import 'package:serverpod/serverpod.dart';
 import '../generated/protocol.dart';
 import '../storage/object_store.dart';
 import 'fixture_loader.dart';
+import 'learning_fixtures.dart';
 
 /// The steps of the seed command.
 ///
@@ -51,7 +52,17 @@ enum SeedStep {
 /// Serverpod system table is missing from this list, so a new phase that
 /// adds a table must add it here.
 const List<String> seedResetTables = [
-  // EduBox data.
+  // EduBox data (children before parents).
+  'ai_messages',
+  'ai_chats',
+  'ai_usage',
+  'submissions',
+  'assignments',
+  'progress',
+  'exercise_answer_keys',
+  'exercise_options',
+  'exercise_questions',
+  'exercises',
   'content_classes',
   'content',
   'class_members',
@@ -111,7 +122,8 @@ Future<void> _reset(Session session, ObjectStore e2eStore) async {
     'TRUNCATE TABLE $tables RESTART IDENTITY CASCADE',
   );
   await e2eStore.deletePrefix(session, '');
-  await const FixtureLoader().load(session, FixtureSet.phase1());
+  final seeded = await const FixtureLoader().load(session, FixtureSet.phase1());
+  await loadLearningFixtures(session, seeded, store: e2eStore);
 }
 
 Future<void> _insertReconnectContent(Session session) async {

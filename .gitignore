@@ -16,3 +16,4 @@
 
 # Secrets: created from passwords.example.yaml by tool/bootstrap.sh
 edubox_server/config/passwords.yaml
+.env

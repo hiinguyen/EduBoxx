@@ -1,0 +1,15 @@
+# One row of the teacher's assignment table.
+class: TeacherAssignmentItem
+fields:
+  id: int
+  classId: int
+  className: String
+  exerciseId: int
+  exerciseTitle: String
+  type: AssignmentType
+  title: String
+  dueAt: DateTime?
+  timeLimitSec: int?
+  submissionCount: int
+  gradedCount: int
+  createdAt: DateTime

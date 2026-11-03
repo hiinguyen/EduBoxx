@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 /// Where the app finds the EduBox server.
 ///
 /// The default is the Android emulator's alias for the host machine. Tests
@@ -8,6 +10,9 @@ class BackendConfig {
 
   /// The Android emulator reaches the local compose stack at 10.0.2.2.
   static const defaultServerUrl = 'http://10.0.2.2:8080';
+
+  /// The browser build talks to the host stack through localhost.
+  static const defaultWebServerUrl = 'http://localhost:8080';
 
   /// Compile-time override used by `flutter run` and `flutter test`.
   static const serverUrlDefine = 'EDUBOX_SERVER_URL';
@@ -23,7 +28,9 @@ class BackendConfig {
     final defined = const String.fromEnvironment(serverUrlDefine);
     final value = (override != null && override.isNotEmpty)
         ? override
-        : (defined.isNotEmpty ? defined : defaultServerUrl);
+        : (defined.isNotEmpty
+              ? defined
+              : (kIsWeb ? defaultWebServerUrl : defaultServerUrl));
     return BackendConfig(serverUrl: value);
   }
 

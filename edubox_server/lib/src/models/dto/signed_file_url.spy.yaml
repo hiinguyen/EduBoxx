@@ -1,0 +1,4 @@
+class: SignedFileUrl
+fields:
+  url: String
+  expiresAt: DateTime

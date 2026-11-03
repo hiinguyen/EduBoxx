@@ -1,0 +1,7 @@
+# The student lesson-and-exercise screen: the assignment, the exercise
+# (without answer keys), and the linked lesson's completion state.
+class: StudentAssignmentDetail
+fields:
+  assignment: StudentAssignmentItem
+  exercise: StudentExerciseDetail
+  lessonCompleted: bool

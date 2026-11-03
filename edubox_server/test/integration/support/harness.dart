@@ -1,6 +1,8 @@
 import 'package:edubox_fixtures/edubox_fixtures.dart';
 import 'package:edubox_server/src/auth/auth_setup.dart';
 import 'package:edubox_server/src/seed/fixture_loader.dart';
+import 'package:edubox_server/src/seed/learning_fixtures.dart';
+import 'package:edubox_server/src/storage/object_store.dart';
 import 'package:serverpod/serverpod.dart';
 import 'package:serverpod_auth_idp_server/core.dart';
 
@@ -31,6 +33,24 @@ Future<SeededFixtures> seedPhase1(
     fixtures ?? FixtureSet.phase1(),
     credentialsFor: credentialsFor,
   );
+}
+
+/// Loads the phase 1 fixtures plus the phase 2-6 learning demo data. Pass a
+/// real [ObjectStore] when the test needs content files.
+Future<SeededFixtures> seedLearning(
+  TestSessionBuilder sessionBuilder, {
+  Set<String> credentialsFor = const {},
+  ObjectStore? store,
+  FixtureSet? fixtures,
+}) async {
+  final session = sessionBuilder.build();
+  final seeded = await const FixtureLoader().load(
+    session,
+    fixtures ?? FixtureSet.phase1(),
+    credentialsFor: credentialsFor,
+  );
+  await loadLearningFixtures(session, seeded, store: store);
+  return seeded;
 }
 
 /// A session builder authenticated as the fixture account [key].

@@ -10,6 +10,7 @@ LibraryItem item(String title, String subject, ContentType type, int day) =>
       subject: subject,
       gradeLevel: 7,
       createdAt: DateTime.utc(2026, 10, day),
+      hasFile: false,
     );
 
 void main() {

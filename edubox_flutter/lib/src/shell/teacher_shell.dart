@@ -9,6 +9,9 @@ import '../app/connectivity_state.dart';
 import '../app/loadable.dart';
 import '../contract/backend_result.dart';
 import '../screens/teacher_home/teacher_home_screen.dart';
+import '../screens/teacher_content/teacher_content_screen.dart';
+import '../screens/teacher_assignments/teacher_assignments_screen.dart';
+import '../screens/teacher_assignments/teacher_results_screen.dart';
 import '../theme/theme_extensions.dart';
 import 'account_menu.dart';
 import 'offline_strip.dart';
@@ -29,6 +32,7 @@ class _TeacherShellState extends State<TeacherShell> {
   Loadable<List<ClassSummary>>? _classes;
   late AppScope _scope;
   bool _signingOut = false;
+  int _index = 0;
 
   @override
   void didChangeDependencies() {
@@ -95,9 +99,9 @@ class _TeacherShellState extends State<TeacherShell> {
               refreshedAt != null &&
               classes.cachedAt!.isBefore(refreshedAt);
           return RoleShell(
-            title: l10n.navTeacherOverview,
-            selectedIndex: 0,
-            onSelected: (_) {},
+            title: _index == 0 ? l10n.navTeacherOverview : null,
+            selectedIndex: _index,
+            onSelected: (value) => setState(() => _index = value),
             strip: OfflineStrip(
               state: _scope.connectivity.strip,
               staleWording:
@@ -135,6 +139,34 @@ class _TeacherShellState extends State<TeacherShell> {
                 selectedIcon: Icons.dashboard_outlined,
                 label: l10n.navTeacherOverview,
                 body: TeacherHomeScreen(classes: classes),
+              ),
+              ShellDestination(
+                key: const Key('destination.teacherContent'),
+                icon: Icons.folder_outlined,
+                selectedIcon: Icons.folder_outlined,
+                label: l10n.navTeacherContent,
+                body: const TeacherContentScreen(),
+              ),
+              ShellDestination(
+                key: const Key('destination.teacherAssignments'),
+                icon: Icons.assignment_outlined,
+                selectedIcon: Icons.assignment_outlined,
+                label: l10n.navTeacherAssignments,
+                body: const TeacherAssignmentsScreen(),
+              ),
+              ShellDestination(
+                key: const Key('destination.teacherResults'),
+                icon: Icons.table_chart_outlined,
+                selectedIcon: Icons.table_chart_outlined,
+                label: l10n.navTeacherResults,
+                body: const TeacherResultsScreen(),
+              ),
+              ShellDestination(
+                key: const Key('destination.teacherChatReview'),
+                icon: Icons.forum_outlined,
+                selectedIcon: Icons.forum_outlined,
+                label: l10n.navTeacherChats,
+                body: const TeacherChatReviewScreen(),
               ),
             ],
           );

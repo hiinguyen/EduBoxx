@@ -563,6 +563,13 @@ class _RecordingStore implements ObjectStore {
   }) async => Uri.parse('http://localhost:9000/unused');
 
   @override
+  Future<Uri> signedPutUrl(
+    Session session,
+    String path, {
+    Duration expiresIn = const Duration(minutes: 15),
+  }) async => Uri.parse('http://localhost:9000/unused-put');
+
+  @override
   Future<void> deletePrefix(Session session, String prefix) async {
     deletedPrefixes.add(prefix);
   }

@@ -1,0 +1,12 @@
+# One dated entry of the parent's Sổ liên lạc.
+class: ParentResultEntry
+fields:
+  assignmentId: int
+  title: String
+  type: AssignmentType
+  dueAt: DateTime?
+  submittedAt: DateTime?
+  status: SubmissionStatus?
+  score: double?
+  maxScore: double?
+  late: bool

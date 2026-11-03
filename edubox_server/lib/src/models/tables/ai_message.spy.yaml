@@ -1,0 +1,13 @@
+class: AiMessage
+serverOnly: true
+table: ai_messages
+fields:
+  chatId: int, relation(parent=ai_chats, onDelete=Cascade)
+  role: ChatRole
+  content: String
+  position: int
+  createdAt: DateTime
+indexes:
+  ai_messages_chat_position_idx:
+    fields: chatId, position
+    unique: true

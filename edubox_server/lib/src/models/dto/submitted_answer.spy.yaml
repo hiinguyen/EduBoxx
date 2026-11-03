@@ -1,0 +1,4 @@
+class: SubmittedAnswer
+fields:
+  questionId: int
+  selectedPositions: List<int>

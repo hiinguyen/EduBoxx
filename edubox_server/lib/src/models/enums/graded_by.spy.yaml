@@ -1,0 +1,6 @@
+# Who produced a score. Only the server writes this field.
+enum: GradedBy
+serialized: byName
+values:
+  - auto
+  - teacher

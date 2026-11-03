@@ -19,6 +19,15 @@ class EduPalette extends ThemeExtension<EduPalette> {
     this.negative = EduColors.negative,
     this.neutralFill = EduColors.neutralFill,
     this.neutralInk = EduColors.neutralInk,
+    this.positive = EduColors.positive,
+    this.positiveFill = EduColors.positiveFill,
+    this.positiveInk = EduColors.positiveInk,
+    this.positiveBorder = EduColors.positiveBorder,
+    this.notice = EduColors.notice,
+    this.noticeFill = EduColors.noticeFill,
+    this.noticeInk = EduColors.noticeInk,
+    this.noticeBorder = EduColors.noticeBorder,
+    this.neutralBorder = EduColors.neutralBorder,
   });
 
   final Color paper;
@@ -33,6 +42,15 @@ class EduPalette extends ThemeExtension<EduPalette> {
   final Color negative;
   final Color neutralFill;
   final Color neutralInk;
+  final Color positive;
+  final Color positiveFill;
+  final Color positiveInk;
+  final Color positiveBorder;
+  final Color notice;
+  final Color noticeFill;
+  final Color noticeInk;
+  final Color noticeBorder;
+  final Color neutralBorder;
 
   static EduPalette of(BuildContext context) =>
       Theme.of(context).extension<EduPalette>() ?? const EduPalette();

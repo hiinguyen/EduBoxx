@@ -1,0 +1,23 @@
+# One assignment as the student sees it, with the student's own attempt
+# state. `pendingSync` never comes from the server; the app overlays it from
+# the outbox.
+class: StudentAssignmentItem
+fields:
+  id: int
+  classId: int
+  className: String
+  exerciseId: int
+  contentId: int
+  title: String
+  subject: String
+  type: AssignmentType
+  dueAt: DateTime?
+  timeLimitSec: int?
+  state: StudentAssignmentState
+  score: double?
+  maxScore: double?
+  late: bool
+  submissionId: int?
+  clientSubmissionId: String?
+  lessonContentId: int?
+  lessonTitle: String?

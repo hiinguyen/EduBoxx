@@ -13,6 +13,7 @@
 import 'package:serverpod/serverpod.dart' as _is;
 import '../enums/content_status.dart' as _inhfue1l;
 import '../enums/content_type.dart' as _iqkq9d0y;
+import '../enums/ingest_status.dart' as _ixfes7ab;
 
 abstract class ContentRecord
     implements _is.TableRow<int?>, _is.ProtocolSerialization {
@@ -24,6 +25,13 @@ abstract class ContentRecord
     required this.gradeLevel,
     required this.title,
     this.storagePath,
+    this.originalFileName,
+    this.mimeType,
+    this.sizeBytes,
+    this.pageCount,
+    this.durationSeconds,
+    this.ingestStatus,
+    this.ingestReason,
     required this.status,
     this.approvedBy,
     required this.createdAt,
@@ -37,6 +45,13 @@ abstract class ContentRecord
     required int gradeLevel,
     required String title,
     String? storagePath,
+    String? originalFileName,
+    String? mimeType,
+    int? sizeBytes,
+    int? pageCount,
+    int? durationSeconds,
+    _ixfes7ab.IngestStatus? ingestStatus,
+    String? ingestReason,
     required _inhfue1l.ContentStatus status,
     int? approvedBy,
     required DateTime createdAt,
@@ -53,6 +68,17 @@ abstract class ContentRecord
       gradeLevel: jsonSerialization['gradeLevel'] as int,
       title: jsonSerialization['title'] as String,
       storagePath: jsonSerialization['storagePath'] as String?,
+      originalFileName: jsonSerialization['originalFileName'] as String?,
+      mimeType: jsonSerialization['mimeType'] as String?,
+      sizeBytes: jsonSerialization['sizeBytes'] as int?,
+      pageCount: jsonSerialization['pageCount'] as int?,
+      durationSeconds: jsonSerialization['durationSeconds'] as int?,
+      ingestStatus: jsonSerialization['ingestStatus'] == null
+          ? null
+          : _ixfes7ab.IngestStatus.fromJson(
+              (jsonSerialization['ingestStatus'] as String),
+            ),
+      ingestReason: jsonSerialization['ingestReason'] as String?,
       status: _inhfue1l.ContentStatus.fromJson(
         (jsonSerialization['status'] as String),
       ),
@@ -82,6 +108,20 @@ abstract class ContentRecord
 
   String? storagePath;
 
+  String? originalFileName;
+
+  String? mimeType;
+
+  int? sizeBytes;
+
+  int? pageCount;
+
+  int? durationSeconds;
+
+  _ixfes7ab.IngestStatus? ingestStatus;
+
+  String? ingestReason;
+
   _inhfue1l.ContentStatus status;
 
   int? approvedBy;
@@ -102,6 +142,13 @@ abstract class ContentRecord
     int? gradeLevel,
     String? title,
     String? storagePath,
+    String? originalFileName,
+    String? mimeType,
+    int? sizeBytes,
+    int? pageCount,
+    int? durationSeconds,
+    _ixfes7ab.IngestStatus? ingestStatus,
+    String? ingestReason,
     _inhfue1l.ContentStatus? status,
     int? approvedBy,
     DateTime? createdAt,
@@ -117,6 +164,13 @@ abstract class ContentRecord
       'gradeLevel': gradeLevel,
       'title': title,
       if (storagePath != null) 'storagePath': storagePath,
+      if (originalFileName != null) 'originalFileName': originalFileName,
+      if (mimeType != null) 'mimeType': mimeType,
+      if (sizeBytes != null) 'sizeBytes': sizeBytes,
+      if (pageCount != null) 'pageCount': pageCount,
+      if (durationSeconds != null) 'durationSeconds': durationSeconds,
+      if (ingestStatus != null) 'ingestStatus': ingestStatus?.toJson(),
+      if (ingestReason != null) 'ingestReason': ingestReason,
       'status': status.toJson(),
       if (approvedBy != null) 'approvedBy': approvedBy,
       'createdAt': createdAt.toJson(),
@@ -167,6 +221,13 @@ class _ContentRecordImpl extends ContentRecord {
     required int gradeLevel,
     required String title,
     String? storagePath,
+    String? originalFileName,
+    String? mimeType,
+    int? sizeBytes,
+    int? pageCount,
+    int? durationSeconds,
+    _ixfes7ab.IngestStatus? ingestStatus,
+    String? ingestReason,
     required _inhfue1l.ContentStatus status,
     int? approvedBy,
     required DateTime createdAt,
@@ -178,6 +239,13 @@ class _ContentRecordImpl extends ContentRecord {
          gradeLevel: gradeLevel,
          title: title,
          storagePath: storagePath,
+         originalFileName: originalFileName,
+         mimeType: mimeType,
+         sizeBytes: sizeBytes,
+         pageCount: pageCount,
+         durationSeconds: durationSeconds,
+         ingestStatus: ingestStatus,
+         ingestReason: ingestReason,
          status: status,
          approvedBy: approvedBy,
          createdAt: createdAt,
@@ -195,6 +263,13 @@ class _ContentRecordImpl extends ContentRecord {
     int? gradeLevel,
     String? title,
     Object? storagePath = _Undefined,
+    Object? originalFileName = _Undefined,
+    Object? mimeType = _Undefined,
+    Object? sizeBytes = _Undefined,
+    Object? pageCount = _Undefined,
+    Object? durationSeconds = _Undefined,
+    Object? ingestStatus = _Undefined,
+    Object? ingestReason = _Undefined,
     _inhfue1l.ContentStatus? status,
     Object? approvedBy = _Undefined,
     DateTime? createdAt,
@@ -207,6 +282,19 @@ class _ContentRecordImpl extends ContentRecord {
       gradeLevel: gradeLevel ?? this.gradeLevel,
       title: title ?? this.title,
       storagePath: storagePath is String? ? storagePath : this.storagePath,
+      originalFileName: originalFileName is String?
+          ? originalFileName
+          : this.originalFileName,
+      mimeType: mimeType is String? ? mimeType : this.mimeType,
+      sizeBytes: sizeBytes is int? ? sizeBytes : this.sizeBytes,
+      pageCount: pageCount is int? ? pageCount : this.pageCount,
+      durationSeconds: durationSeconds is int?
+          ? durationSeconds
+          : this.durationSeconds,
+      ingestStatus: ingestStatus is _ixfes7ab.IngestStatus?
+          ? ingestStatus
+          : this.ingestStatus,
+      ingestReason: ingestReason is String? ? ingestReason : this.ingestReason,
       status: status ?? this.status,
       approvedBy: approvedBy is int? ? approvedBy : this.approvedBy,
       createdAt: createdAt ?? this.createdAt,
@@ -248,6 +336,45 @@ class ContentRecordUpdateTable extends _is.UpdateTable<ContentRecordTable> {
     table.storagePath,
     value,
   );
+
+  _is.ColumnValue<String, String> originalFileName(String? value) =>
+      _is.ColumnValue(
+        table.originalFileName,
+        value,
+      );
+
+  _is.ColumnValue<String, String> mimeType(String? value) => _is.ColumnValue(
+    table.mimeType,
+    value,
+  );
+
+  _is.ColumnValue<int, int> sizeBytes(int? value) => _is.ColumnValue(
+    table.sizeBytes,
+    value,
+  );
+
+  _is.ColumnValue<int, int> pageCount(int? value) => _is.ColumnValue(
+    table.pageCount,
+    value,
+  );
+
+  _is.ColumnValue<int, int> durationSeconds(int? value) => _is.ColumnValue(
+    table.durationSeconds,
+    value,
+  );
+
+  _is.ColumnValue<_ixfes7ab.IngestStatus, _ixfes7ab.IngestStatus> ingestStatus(
+    _ixfes7ab.IngestStatus? value,
+  ) => _is.ColumnValue(
+    table.ingestStatus,
+    value,
+  );
+
+  _is.ColumnValue<String, String> ingestReason(String? value) =>
+      _is.ColumnValue(
+        table.ingestReason,
+        value,
+      );
 
   _is.ColumnValue<_inhfue1l.ContentStatus, _inhfue1l.ContentStatus> status(
     _inhfue1l.ContentStatus value,
@@ -296,6 +423,35 @@ class ContentRecordTable extends _is.Table<int?> {
       'storagePath',
       this,
     );
+    originalFileName = _is.ColumnString(
+      'originalFileName',
+      this,
+    );
+    mimeType = _is.ColumnString(
+      'mimeType',
+      this,
+    );
+    sizeBytes = _is.ColumnInt(
+      'sizeBytes',
+      this,
+    );
+    pageCount = _is.ColumnInt(
+      'pageCount',
+      this,
+    );
+    durationSeconds = _is.ColumnInt(
+      'durationSeconds',
+      this,
+    );
+    ingestStatus = _is.ColumnEnum(
+      'ingestStatus',
+      this,
+      _is.EnumSerialization.byName,
+    );
+    ingestReason = _is.ColumnString(
+      'ingestReason',
+      this,
+    );
     status = _is.ColumnEnum(
       'status',
       this,
@@ -325,6 +481,20 @@ class ContentRecordTable extends _is.Table<int?> {
 
   late final _is.ColumnString storagePath;
 
+  late final _is.ColumnString originalFileName;
+
+  late final _is.ColumnString mimeType;
+
+  late final _is.ColumnInt sizeBytes;
+
+  late final _is.ColumnInt pageCount;
+
+  late final _is.ColumnInt durationSeconds;
+
+  late final _is.ColumnEnum<_ixfes7ab.IngestStatus> ingestStatus;
+
+  late final _is.ColumnString ingestReason;
+
   late final _is.ColumnEnum<_inhfue1l.ContentStatus> status;
 
   late final _is.ColumnInt approvedBy;
@@ -340,6 +510,13 @@ class ContentRecordTable extends _is.Table<int?> {
     gradeLevel,
     title,
     storagePath,
+    originalFileName,
+    mimeType,
+    sizeBytes,
+    pageCount,
+    durationSeconds,
+    ingestStatus,
+    ingestReason,
     status,
     approvedBy,
     createdAt,

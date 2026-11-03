@@ -91,7 +91,12 @@ void main() {
       );
       expect(mark, findsOneWidget);
       final markRect = tester.getRect(mark);
-      final titleRect = tester.getRect(find.text(vi.navTeacherOverview));
+      final titleRect = tester.getRect(
+        find.descendant(
+          of: find.byType(AppBar),
+          matching: find.text(vi.navTeacherOverview),
+        ),
+      );
       expect(markRect.left, EduSpace.s16);
       expect(titleRect.left - markRect.right, EduSpace.s8);
     },
@@ -302,7 +307,7 @@ void main() {
       (span) => span.text == 'Khối ',
     );
     expect(gradeLabel.style?.fontFamily, isNot(EduFonts.mono));
-    expect(find.byType(NavigationBar), findsNothing);
+    expect(find.byType(NavigationBar), findsOneWidget);
     await expectAccessibilityGuidelines(tester);
     await tester.tap(find.byKey(const Key('shell.accountMenu')));
     await tester.pumpAndSettle();
@@ -325,7 +330,7 @@ void main() {
     await expectAccessibilityGuidelines(tester);
   });
 
-  testWidgets('rows are inert and the nav lists only the built destination', (
+  testWidgets('rows are inert and the nav lists every built destination', (
     tester,
   ) async {
     await pumpEduApp(tester, signedInAs: FixtureKeys.teacherLan);
@@ -346,7 +351,13 @@ void main() {
     final shell = tester.widget<RoleShell>(find.byType(RoleShell));
     expect(
       [for (final destination in shell.destinations) destination.label],
-      [vi.navTeacherOverview],
+      [
+        vi.navTeacherOverview,
+        vi.navTeacherContent,
+        vi.navTeacherAssignments,
+        vi.navTeacherResults,
+        vi.navTeacherChats,
+      ],
     );
   });
 

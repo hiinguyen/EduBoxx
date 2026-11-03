@@ -210,6 +210,19 @@ void main() {
           region: 'us-east-1',
         ),
         e2eControl: true,
+        ai: AiConfig(
+          baseUrl: Uri.parse('https://example.test/v1'),
+          model: 'mock',
+          apiKey: '',
+          mock: true,
+          dailyLimit: 30,
+          requestTimeout: const Duration(seconds: 1),
+        ),
+        learning: const LearningConfig(
+          maxEbookBytes: 1024,
+          maxVideoBytes: 1024,
+          lateGrace: Duration(seconds: 60),
+        ),
       );
       for (final mode in ['production', 'staging', 'preview', '']) {
         expect(

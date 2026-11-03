@@ -1,0 +1,9 @@
+# A direct-to-storage upload ticket. The client PUTs the file bytes to
+# `url`, then calls `content.completeUpload`.
+class: UploadTicket
+fields:
+  contentId: int
+  url: String
+  method: String
+  headers: Map<String, String>
+  expiresAt: DateTime

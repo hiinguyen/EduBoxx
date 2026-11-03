@@ -1,0 +1,17 @@
+# The result of one submission. `answers` is the caller's own answer sheet;
+# correctness is never part of a student-facing answer.
+class: SubmissionResult
+fields:
+  id: int
+  assignmentId: int
+  clientSubmissionId: String
+  status: SubmissionStatus
+  score: double?
+  maxScore: double?
+  late: bool
+  startedAt: DateTime?
+  submittedAt: DateTime?
+  gradedAt: DateTime?
+  gradedBy: GradedBy?
+  failureReason: String?
+  answers: List<SubmittedAnswer>
