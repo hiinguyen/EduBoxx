@@ -1,6 +1,11 @@
 import 'package:edubox_client/edubox_client.dart';
 import 'package:serverpod_auth_idp_flutter/serverpod_auth_idp_flutter.dart'
-    show FlutterAuthSessionManager, FlutterAuthSessionManagerExtension;
+    show
+        AuthSuccess,
+        ClientAuthSuccessStorage,
+        FlutterAuthSessionManager,
+        FlutterAuthSessionManagerExtension,
+        SecureClientAuthSuccessStorage;
 import 'package:serverpod_flutter/serverpod_flutter.dart'
     show FlutterConnectivityMonitor;
 
@@ -23,7 +28,9 @@ class ClientEduBoxApi implements EduBoxApi {
       '${serverRootUrl(config)}/',
       connectionTimeout: connectionTimeout,
     )..connectivityMonitor = FlutterConnectivityMonitor();
-    final sessionManager = FlutterAuthSessionManager();
+    final sessionManager = FlutterAuthSessionManager(
+      storage: _FallbackAuthStorage(SecureClientAuthSuccessStorage()),
+    );
     client.authSessionManager = sessionManager;
     return ClientEduBoxApi._(client, sessionManager);
   }
@@ -218,4 +225,43 @@ class ClientEduBoxApi implements EduBoxApi {
 
   @override
   Future<void> close() async => client.close();
+}
+
+/// Keeps the session usable when a browser blocks WebCrypto/local storage.
+///
+/// Secure storage is still the first choice so a normal browser keeps the
+/// session across reloads. If the browser refuses the write, the auth info is
+/// retained for the lifetime of the tab instead of turning a successful
+/// 200 login into a generic sign-in error.
+class _FallbackAuthStorage implements ClientAuthSuccessStorage {
+  _FallbackAuthStorage(this._secure);
+
+  final ClientAuthSuccessStorage _secure;
+  AuthSuccess? _memory;
+  bool _secureUnavailable = false;
+
+  @override
+  Future<void> set(AuthSuccess? data) async {
+    _memory = data;
+    if (_secureUnavailable) return;
+    try {
+      await _secure.set(data);
+    } catch (_) {
+      _secureUnavailable = true;
+    }
+  }
+
+  @override
+  Future<AuthSuccess?> get() async {
+    if (!_secureUnavailable) {
+      try {
+        final value = await _secure.get();
+        if (value != null) _memory = value;
+        return value;
+      } catch (_) {
+        _secureUnavailable = true;
+      }
+    }
+    return _memory;
+  }
 }
